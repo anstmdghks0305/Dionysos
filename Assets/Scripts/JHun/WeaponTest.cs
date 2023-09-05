@@ -24,5 +24,6 @@ public class WeaponTest : MonoBehaviour
         angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
         weapon.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         weaponsp.transform.rotation = Quaternion.AngleAxis(angle - 180, Vector3.down);
+        //Debug.Log(angle);
     }
 }
