@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GrahpicTest.unity
+    guid: 1ff3cb97ead3e304b9f3eebaef933b37
   m_configObjects: {}
