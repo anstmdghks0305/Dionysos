@@ -10,11 +10,11 @@ public class BarUI: MonoBehaviour
     {
         Bar = this.GetComponent<Image>();
         Bar.type = Image.Type.Filled;
+        Bar.fillMethod = Image.FillMethod.Horizontal;
     }
 
     public void UIUpdate(Data data)
     {
         Bar.fillAmount = data.ShowFillAmount();
-        
     }
 }
