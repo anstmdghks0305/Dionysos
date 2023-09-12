@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    public GameObject aim;
+    //public GameObject aim;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +18,12 @@ public class PlayerTest : MonoBehaviour
         float verti = Input.GetAxisRaw("Vertical");
 
         Vector3 position = transform.position;
-        Vector3 aposition = aim.transform.position;
+        //Vector3 aposition = aim.transform.position;
         position.x += hori * Time.deltaTime * 10f;
-        position.z += verti * Time.deltaTime * 10f;
-        aposition.x += hori * Time.deltaTime * 10f;
-        aposition.y += verti * Time.deltaTime * 10f;
+        position.y += verti * Time.deltaTime * 10f;
+        //aposition.x += hori * Time.deltaTime * 10f;
+        //aposition.y += verti * Time.deltaTime * 10f;
         transform.position = position;
-        aim.transform.position = aposition;
+        //aim.transform.position = aposition;
     }
 }

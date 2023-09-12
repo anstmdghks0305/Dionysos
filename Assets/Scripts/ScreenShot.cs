@@ -7,17 +7,23 @@ public class ScreenShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScreenCapture.CaptureScreenshot("Title.png");
-    }
-
-    private void OnMouseDown()
-    {
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ScreenCapture.CaptureScreenshot("Gstar.png");
+            if (Time.timeScale > 0)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
     }
 }
