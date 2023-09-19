@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-
+    public List<int> GameClearData = new List<int>();
+    public bool GameStop = false;
+    private void Awake()
+    {
+        GameClearData.Add(0);
+    }
 }

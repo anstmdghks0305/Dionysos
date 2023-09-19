@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventController:MonoBehaviour
+public class EventController
 {
     private event EventHandler<EventData> Event;
-    public UIController PlayerHp;
-    public UIController PlayerFever;
+    public UIController Hp;
+    public UIController Fever;
 
     private void Start()
     {
-        Event = PlayerHp.doUIEvent;
-        if (PlayerFever !=null)
-            Event += PlayerFever.doUIEvent;
+        Event = Hp.doUIEvent;
+        if (Fever !=null)
+            Event += Fever.doUIEvent;
     }
 
     public void DoEvent(EventData data)

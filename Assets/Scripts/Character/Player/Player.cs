@@ -22,11 +22,14 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
-
     }
 
 
     public void Attack()
+    {
+
+    }
+    public void Move()
     {
 
     }

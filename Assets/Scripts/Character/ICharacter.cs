@@ -37,4 +37,5 @@ public interface ICharacterData
         get;set;
     }
     public void Attack();
+    public void Move();
 }
