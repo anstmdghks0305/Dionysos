@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, ICharacterData
     public int Damage{ set; get; }
     public int AttackSpeed{set; get;}
     public Animator animator{ set; get; }
+    public bool isFlip { get; set; }
     public bool Died;
     public State state{ set; get; }
     public EventController eventcontroller;
@@ -26,10 +27,10 @@ public class Player : MonoBehaviour, ICharacterData
     int index = 0;
     List<GameObject> enemies;
     public Transform testPos;
-    Vector3 target;
-    public bool isFlip = false;
+    public Vector3 target;
     ISkill SkillInterface;
-    Slash SlashSkill = new Slash();
+    public Slash SlashSkill;
+    Dash DashSkill = new Dash();
     float horizontal;
     float vartical;
     private void SkillManage()
@@ -101,11 +102,17 @@ public class Player : MonoBehaviour, ICharacterData
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SlashInit();
             SkillInterface = SlashSkill;
+            //SlashInit();
             if (SkillInterface.CanUse)
-                SkillInterface.Work(this, enemies);
+                SkillInterface.Work(this);
 
+        }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            SkillInterface = DashSkill;
+            if (SkillInterface.CanUse)
+                SkillInterface.Work(this);
         }
         if (Input.GetKeyDown(KeyCode.E) && !dash)
         {
@@ -115,19 +122,9 @@ public class Player : MonoBehaviour, ICharacterData
             e = GameObject.FindGameObjectsWithTag("enemy");
 
             //카메라 안에 있는 적군 가져오기
-            for (int i = 0; i < e.Length; i++)
-            {
-                Vector3 enemyPoints = cam.WorldToViewportPoint(e[i].transform.position);
-
-                if(enemyPoints.x > 0 && enemyPoints.x < 1
-                    && enemyPoints.y > 0 && enemyPoints.y < 1)
-                {
-                    enemies.Add(e[i]);
-                }
-            }
 
             //선택정렬
-            for(int i = 0; i < enemies.Count - 1; i++)
+            for (int i = 0; i < enemies.Count - 1; i++)
             {
                 for(int j = i + 1; j < enemies.Count; j++)
                 {
@@ -141,50 +138,51 @@ public class Player : MonoBehaviour, ICharacterData
                 }
             }
         }
-        if (slash)
-        {
-            slashTime += Time.deltaTime;
-            if (slashTime > 0.25f)
-            {
-                if(!Init)
-                {
-                    if(cam.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f)
-                    {
-                        transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
-                        isFlip = true;
-                    }
-                    else
-                    {
-                        transform.position = new Vector3(enemies[index].transform.position.x + 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
-                        isFlip = false;
-                    }
-                    Attack();
-                }
+        //if (slash)
+        //{
+        //    Debug.Log("check2");
+        //    slashTime += Time.deltaTime;
+        //    if (slashTime > 0.25f)
+        //    {
+        //        if(!Init)
+        //        {
+        //            if(cam.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f)
+        //            {
+        //                transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+        //                isFlip = true;
+        //            }
+        //            else
+        //            {
+        //                transform.position = new Vector3(enemies[index].transform.position.x + 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+        //                isFlip = false;
+        //            }
+        //            Attack();
+        //        }
 
-                if (index < enemies.Count - 1)
-                {
-                    index++;
-                }
-                else
-                {
-                    Init = false;
-                    slash = false;
-                    slashTime = 0;
-                    index = 0;
-                }
+        //        if (index < enemies.Count - 1)
+        //        {
+        //            index++;
+        //        }
+        //        else
+        //        {
+        //            Init = false;
+        //            slash = false;
+        //            slashTime = 0;
+        //            index = 0;
+        //        }
 
-                slashTime = 0;
-                Init = false;
-            }
-        }
+        //        slashTime = 0;
+        //        Init = false;
+        //    }
+        //}
 
-        else if (!slash)
-        {
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-                isFlip = false;
-            else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-                isFlip = true;
-        }
+        //else if (!slash)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        //        isFlip = false;
+        //    else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        //        isFlip = true;
+        //}
         
         if(Input.GetKeyDown(KeyCode.LeftShift) && !slash)
         {

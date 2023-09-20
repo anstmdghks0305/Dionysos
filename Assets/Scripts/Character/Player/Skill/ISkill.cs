@@ -9,6 +9,5 @@ public interface ISkill
     float RemainTime { get; set; }
 
     //인터페이스에서는 가상의 선언만 되고 초기화는 안되기때문에
-    void Work();
-    void Work(Player player, List<GameObject> enemies);
+    void Work(Player player);
 }
