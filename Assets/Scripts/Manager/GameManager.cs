@@ -11,4 +11,5 @@ public class GameManager : Singleton<GameManager>
         GameClearData.Add(0);
         GameClearData.Add(1);
     }
+  public  Camera Main = Camera.main;
 }
