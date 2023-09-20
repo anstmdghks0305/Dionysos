@@ -15,7 +15,7 @@ public class Stage : MonoBehaviour
     {
         StageController.StageSelect += this.ReceiveActive;
         StageController.StageUnlock += this.ReceiveUnlocked;
-        this.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+        this.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f); //락걸린 이미지
     }
     private void Start()
     {
@@ -58,12 +58,11 @@ public class Stage : MonoBehaviour
             return;
         if (active == true)
         {
-            this.GetComponent<Image>().color = new Color(1f, 0.5f, 0.5f);
+            this.GetComponent<Image>().color = new Color(1f, 0.5f, 0.5f); // 첫 선택시 애니메이션등 넣을것
         }
         else
         {
-            this.GetComponent<Image>().color = new Color(1f, 1f, 1f);
-            Debug.Log("뭐지");
+            this.GetComponent<Image>().color = new Color(1f, 1f, 1f); // 선택 안된 놈의 애니메이션등
         }
     }
 }

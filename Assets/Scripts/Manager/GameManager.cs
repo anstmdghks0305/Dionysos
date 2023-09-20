@@ -9,5 +9,6 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         GameClearData.Add(0);
+        GameClearData.Add(1);
     }
 }
