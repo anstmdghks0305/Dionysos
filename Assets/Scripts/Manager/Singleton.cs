@@ -31,4 +31,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    public void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }
