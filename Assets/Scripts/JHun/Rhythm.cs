@@ -24,21 +24,21 @@ public class Rhythm : MonoBehaviour
     void Update()
     {
         EffectTime = RhythmEffect.time;
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log(EffectTime);
             if (EffectTime < Per + Speed * Range && EffectTime > Per - Speed * Range)
             {
                 Debug.Log("Perfect!");
                 PerfectEffect.Play();
-                int i = Random.RandomRange(0, RythmMaterial.Length);
-                RhythmRenderer.material = RythmMaterial[i];
+                /*int i = Random.RandomRange(0, RythmMaterial.Length);
+                RhythmRenderer.material = RythmMaterial[i];*/
             }
             else
             {
                 Debug.Log("Bad!");
-                int i = Random.RandomRange(0, RythmMaterial.Length);
-                RhythmRenderer.material = RythmMaterial[i];
+                /*int i = Random.RandomRange(0, RythmMaterial.Length);
+                RhythmRenderer.material = RythmMaterial[i];*/
             }
         }
     }
