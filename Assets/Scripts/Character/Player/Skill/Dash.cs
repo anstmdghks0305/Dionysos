@@ -14,28 +14,46 @@ public class Dash : MonoBehaviour, ISkill
     }
     public void Work(Player player)
     {
-        if(CanUse)
+        Debug.Log("cc");
+        if (CanUse)
         {
             if (!player.Init)
-            {
-                if (player.isFlip)
-                {
-                    player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
-                }
-                else
-                {
-                    player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
-                }
-                player.Init = true;
-            }
+                StartCoroutine(StartCorotin(player));
+            player.Init = true;
+        }
 
-            transform.position = Vector3.Lerp(transform.position, player.target, Time.deltaTime * 7);
+    }
+    IEnumerator StartCorotin(Player player)
+    {
+        Debug.Log("h");
+        if (player.isFlip)
+        {
+            player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+        }
+
+        float elapseTime = 0;
+        while (elapseTime < 7)
+        {
+            elapseTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 7);
 
             if (Vector3.Distance(player.target, transform.position) < 0.1f)
             {
+                Debug.Log("?");
                 CanUse = false;
                 player.Init = false;
+                yield break;
             }
+
+
+            yield return null;
+
+
         }
+        yield return null;
     }
 }

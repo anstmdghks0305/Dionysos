@@ -21,7 +21,7 @@ public class Slash : MonoBehaviour, ISkill
     }
     void Update()
     {
-        CanUse = true;
+        
     }
     public void Work(Player player)
     {
