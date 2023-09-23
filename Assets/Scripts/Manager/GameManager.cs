@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public List<int> GameClearData = new List<int>();
-    public bool GameStop = false;
+    public Camera MainCam;
+
     private void Awake()
     {
-        GameClearData.Add(0);
-        GameClearData.Add(1);
+        MainCam = Camera.main;
     }
-  public  Camera Main = Camera.main;
+    public List<int> GameClearData = new List<int>();
+    public bool GameStop = false;
 }

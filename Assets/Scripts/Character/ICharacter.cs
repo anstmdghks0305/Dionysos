@@ -26,6 +26,8 @@ public interface ICharacterData
     {
         get;
     }
+    public bool isFlip
+    { get;set; }
 
     public State state
     {
