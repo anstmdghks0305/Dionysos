@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Player : MonoBehaviour, ICharacterData
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour, ICharacterData
     public bool isFlip { get; set; }
     public bool Died;
     public State state{ set; get; }
+    public IState IState { get; set; }
+
     public EventController eventcontroller;
 
 
@@ -135,5 +138,15 @@ public class Player : MonoBehaviour, ICharacterData
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             isFlip = true;
 
+    }
+
+    public void Idle()
+    {
+
+    }
+
+    public Transform where()
+    {
+        return this.transform;
     }
 }

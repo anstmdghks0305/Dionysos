@@ -43,7 +43,7 @@ public class Slash : MonoBehaviour, ISkill
         e  =  GameObject.FindGameObjectsWithTag("enemy");
         for (int i = 0; i < e.Length; i++)
         {
-            Vector3 enemyPoints = GameManager.Instance.Main.WorldToViewportPoint(e[i].transform.position);
+            Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(e[i].transform.position);
 
             if (enemyPoints.x > 0 && enemyPoints.x < 1
                 && enemyPoints.y > 0 && enemyPoints.y < 1)
@@ -53,7 +53,7 @@ public class Slash : MonoBehaviour, ISkill
         }
         while (true)
         {
-            if (GameManager.Instance.Main.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
+            if (GameManager.Instance.MainCam.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
             {
                 transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
                 player.isFlip = true;

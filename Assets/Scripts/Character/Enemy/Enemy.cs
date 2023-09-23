@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour, IEnemy
     public EventController eventcontroller;
     public NavMeshAgent navMeshAgent { get; set; }
     public IState IState { get; set; }
+    public bool isFlip { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     AttackState attackState;
     RunState runState;
     Stun stun;
@@ -85,6 +87,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         IState = attackState;
     }
+
     public void StateChange(Transform player)
     {
         if (state == State.Idle)
