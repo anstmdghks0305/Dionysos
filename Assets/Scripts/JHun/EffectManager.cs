@@ -10,22 +10,13 @@ public class EffectManager : MonoBehaviour
 
     private void Update()
     {
-        Lightning();
     }
-    public void Lightning()
+    public void LightningEffect()
     {
-        if (player.slashTime > 0.235f)
-        {
-            Effect[0].Play();
-        }
-
-        if (player.slash)
-        {
-            Night.SetActive(true);
-        }
-        else
-        {
-            Night.SetActive(false);
-        }
+        Effect[0].Play();
+    }
+    public void NightEffect(bool b)
+    {
+        Night.SetActive(b);
     }
 }

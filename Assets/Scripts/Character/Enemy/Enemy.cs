@@ -3,27 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
+    public EnemyType et;
     public EnemyType Type { get; set; }
     public int SerialNum;
     public Data Hp
     {
-        private set
-        {
-            if (Hp.ShowCurrentHp() == 0)
-            {
-                this.Die();
-            }
-        }
-        get
-        {
-            return this.Hp;
-        }
+        private set;
+        get;
     }
     public int Speed { set; get; }
     public int Damage { set; get; }
@@ -46,8 +39,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     private void Start()
     {
+        Type = et;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.stoppingDistance = attackState.AttackRange;
+        navMeshAgent.updateRotation = false;
         switch (Type)
         {
             case EnemyType.Near:
@@ -57,6 +51,7 @@ public class Enemy : MonoBehaviour, IEnemy
                 attackState = new FarAttackState(Projectile);
                 break;
         }
+        navMeshAgent.stoppingDistance = attackState.AttackRange;
         runState = new RunState();
     }
     void Update()
@@ -90,6 +85,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void StateChange(Transform player)
     {
+        navMeshAgent.SetDestination(player.position);
         if (state == State.Idle)
         {
             if (navMeshAgent.remainingDistance > attackState.AttackRange)

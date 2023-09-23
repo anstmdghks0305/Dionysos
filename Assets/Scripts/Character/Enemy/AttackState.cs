@@ -5,12 +5,20 @@ using UnityEngine;
 
 public class AttackState : IState
 {
-    public int AttackRange { get; set; }
+    public int AttackRange;
     public float AttackCoolTime;
     public float AnimationTime;
     private bool CanAttack;
 
 
+
+    public AttackState()
+    {
+        AttackRange = 3;
+        AttackCoolTime = 1;
+        AnimationTime = 0.1f;
+        CanAttack = false;
+    }
 
     public virtual void Work(IEnemy characterData,Transform target)
     {

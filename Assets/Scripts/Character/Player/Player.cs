@@ -17,7 +17,7 @@ public class Player : MonoBehaviour, ICharacterData
     public IState IState { get; set; }
 
     public EventController eventcontroller;
-
+    public EffectManager Effect;
 
     public GameObject fireball;
     public Camera cam;
