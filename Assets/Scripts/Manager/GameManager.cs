@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-  public  Camera Main;
+    public Camera MainCam;
+
+    private void Awake()
+    {
+        MainCam = Camera.main;
+    }
 }
