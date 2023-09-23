@@ -1,59 +1,121 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour,IEnemy
+public class Enemy : MonoBehaviour, IEnemy
 {
     public EnemyType Type { get; set; }
-    public Data Hp { private set; get; }
+    public int SerialNum;
+    public Data Hp
+    {
+        private set
+        {
+            if (Hp.ShowCurrentHp() == 0)
+            {
+                this.Die();
+            }
+        }
+        get
+        {
+            return this.Hp;
+        }
+    }
     public int Speed { set; get; }
     public int Damage { set; get; }
-    public int AttackSpeed { set; get; }
     public Animator animator { set; get; }
     public bool Died;
     public State state { set; get; }
     public EventController eventcontroller;
-    private NavMeshAgent navMeshAgent;
-    AttackState attackState = new AttackState();
-    public void Start()
+    public NavMeshAgent navMeshAgent { get; set; }
+    public IState IState { get; set; }
+    AttackState attackState;
+    RunState runState;
+    Stun stun;
+    public GameObject Projectile = null;
+    private void OnEnable()
     {
         Hp = new Data(100);
+    }
+
+    private void Start()
+    {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.stoppingDistance = attackState.AttackRange;
+        switch (Type)
+        {
+            case EnemyType.Near:
+                attackState = new AttackState();
+                break;
+            case EnemyType.Far:
+                attackState = new FarAttackState(Projectile);
+                break;
+        }
+        runState = new RunState();
     }
     void Update()
     {
-        if (GameManager.Instance.GameStop == true)
+        if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
+        switch (Type)
+        {
+
+        }
+    }
+
+    private void OnDisable()
+    {
+
+    }
+
+    public void Stun()
+    {
+        new Stun().Work(this);
     }
 
     public void Attack()
     {
-
+        IState = runState;
     }
     public void Move()
     {
-        
+        IState = attackState;
+    }
+    public void StateChange(Transform player)
+    {
+        if (state == State.Idle)
+        {
+            if (navMeshAgent.remainingDistance > attackState.AttackRange)
+            {
+                Attack();
+            }
+            else
+            {
+                Move();
+            }
+        }
+        IState.Work(this, player);
     }
 
 
     public void Die()
     {
         Died = true;
+        EnemyController.Instance.EnemyDiePooling(this);
+        animator.SetBool("Die", true);
     }
 
-
-    private void OnTriggerEnter(Collider collision)
+    public Transform where()
     {
-        Hp += (-5);
-        eventcontroller.DoEvent(new EventData("Hp", Hp));
+        return this.gameObject.transform;
     }
 
-    public void SetTheTarget(Transform transform)
+    public void Idle()
     {
-
+        throw new System.NotImplementedException();
     }
-
 }

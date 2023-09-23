@@ -22,11 +22,6 @@ public interface ICharacterData
         get;
     }
 
-    public int AttackSpeed
-    {
-        get;
-    }
-
     public Animator animator
     {
         get;
@@ -36,6 +31,12 @@ public interface ICharacterData
     {
         get;set;
     }
+    public IState IState
+    {
+        get;set;
+    }
     public void Attack();
     public void Move();
+    public void Idle();
+    public Transform where();
 }

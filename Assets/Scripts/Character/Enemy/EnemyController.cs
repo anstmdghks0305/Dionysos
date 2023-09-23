@@ -1,37 +1,77 @@
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class EnemyController : Singleton<EnemyController>
 {
-    Camera Cam;
-    List<IEnemy> CurrentEnemyPool = new List<IEnemy>();
+    List<IEnemy> AliveEnemyPool = new List<IEnemy>();
+    Transform EnemyPool;
     List<IEnemy> DieEnemyPool = new List<IEnemy>();
+    Transform DiedEnemy;
+    public Player player;
+
     async UniTask StartAttacking()
     {
         while (true)
         {
-            foreach (IEnemy enemy in EnemyPool);
+            if (player.Died == false)
             {
-                enemy.Attack();
+                foreach (IEnemy enemy in AliveEnemyPool)
+                {
+                    enemy.StateChange(player.transform);
+                }
+                await UniTask.Delay(500);
             }
-            await UniTask.Delay(500);
         }
     }
 
-    void EnemyPooling()
+    public void EnemyDiePooling(Enemy enemy)
     {
+        AliveEnemyPool.Remove(enemy);
+        DieEnemyPool.Add(enemy);
+        enemy.gameObject.transform.SetParent(DiedEnemy, transform);
     }
+
+    public void EnemyPooling(Transform Pos,Enemy enemy)
+    {
+        Enemy temp = null;
+        foreach (Enemy died in DiedEnemy)
+        {
+            if (died.SerialNum == enemy.SerialNum)
+            {
+                enemy.gameObject.transform.SetParent(EnemyPool);
+                enemy.animator.SetBool("Die", false);
+                temp = died;
+                break;
+            }
+        }
+        if (temp != null)
+        {
+            DieEnemyPool.Remove(temp);
+            AliveEnemyPool.Add(temp);
+        }
+        else
+        {
+            GameObject obj = GameObject.Instantiate(enemy.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), EnemyPool);
+            obj.transform.SetParent(EnemyPool);
+            AliveEnemyPool.Add(obj.GetComponent<Enemy>());
+        }
+    }
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager
+        StartAttacking().Forget();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
