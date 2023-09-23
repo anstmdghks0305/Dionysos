@@ -1,0 +1,79 @@
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class EnemyController : Singleton<EnemyController>
+{
+    public List<Enemy> AliveEnemyPool = new List<Enemy>();
+    public Transform EnemyPool;
+    public List<Enemy> DieEnemyPool = new List<Enemy>();
+    public Transform DiedEnemy;
+    public Player player;
+
+    async UniTask StartAttacking()
+    {
+        while (true)
+        {
+            if (player.Died == false)
+            {
+                foreach (IEnemy enemy in AliveEnemyPool)
+                {
+                    enemy.StateChange(player.transform);
+                }
+                await UniTask.Delay(500);
+            }
+        }
+    }
+
+    public void EnemyDiePooling(Enemy enemy)
+    {
+        AliveEnemyPool.Remove(enemy);
+        DieEnemyPool.Add(enemy);
+        enemy.gameObject.transform.SetParent(DiedEnemy, transform);
+    }
+
+    public void EnemyPooling(Transform Pos,Enemy enemy)
+    {
+        Enemy temp = null;
+        foreach (Enemy died in DiedEnemy)
+        {
+            if (died.SerialNum == enemy.SerialNum)
+            {
+                enemy.gameObject.transform.SetParent(EnemyPool);
+                enemy.animator.SetBool("Die", false);
+                temp = died;
+                break;
+            }
+        }
+        if (temp != null)
+        {
+            DieEnemyPool.Remove(temp);
+            AliveEnemyPool.Add(temp);
+        }
+        else
+        {
+            GameObject obj = GameObject.Instantiate(enemy.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), EnemyPool);
+            obj.transform.SetParent(EnemyPool);
+            AliveEnemyPool.Add(obj.GetComponent<Enemy>());
+        }
+    }
+
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartAttacking().Forget();
+        AliveEnemyPool.AddRange(GameObject.FindObjectsOfType<Enemy>());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+}

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Plugins.meta
+guid: e368bdc40bc611a468facf27fb1c7342
+========
+guid: 382dbdb362e1816408b06fa121a0c169
+>>>>>>>> 896d783768e512612c55d9a9e868acaed189b255:Assets/Shaders.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
