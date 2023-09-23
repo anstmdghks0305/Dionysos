@@ -9,72 +9,78 @@ public class Slash : MonoBehaviour, ISkill
     public float RemainTime { get; set; }
 
     int slashT;
+    int count = 5;
+    public int index = 0;
 
-    int index = 0;
-
+    public List<GameObject> enemies;
+    public GameObject[] e;
     public Slash()
     {
         CoolTime = 3;
 
     }
-    public void Work(Player player, List<GameObject> enemies)
+    void Update()
     {
+        
+    }
+    public void Work(Player player)
+    {
+        Debug.Log("check");
         if (CanUse)
         {
-
-            player.slashTime += Time.deltaTime;
-            if (player.slashTime > 0.25f)
-            {
-                if (!player.Init)
-                {
-                    if (GameManager.Instance.Main.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
-                    {
-                        transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
-                        player.isFlip = true;
-                    }
-                    else
-                    {
-                        transform.position = new Vector3(enemies[index].transform.position.x + 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
-                        player.isFlip = false;
-                    }
-                    player.Attack();
-                }
-
-                if (index < enemies.Count - 1)
-                {
-                    index++;
-                }
-                else
-                {
-                    player.Init = false;
-                    CanUse = false;
-                    player.slashTime = 0;
-                    index = 0;
-                }
-
-                player.slashTime = 0;
-                player.Init = false;
-            }
+            if (!player.Init)
+                StartCoroutine(StartCorotin(player));
+            player.Init = true;
         }
         //GameObject[] Enemys;
         //Player.position;
-
     }
 
+
+    IEnumerator StartCorotin(Player player)
+    {
+        Debug.Log("정수는 바보");
+        e  =  GameObject.FindGameObjectsWithTag("enemy");
+        for (int i = 0; i < e.Length; i++)
+        {
+            Vector3 enemyPoints = GameManager.Instance.Main.WorldToViewportPoint(e[i].transform.position);
+
+            if (enemyPoints.x > 0 && enemyPoints.x < 1
+                && enemyPoints.y > 0 && enemyPoints.y < 1)
+            {
+                enemies.Add(e[i]);
+            }
+        }
+        while (true)
+        {
+            if (GameManager.Instance.Main.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
+            {
+                transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+                player.isFlip = true;
+            }
+            else
+            {
+                transform.position = new Vector3(enemies[index].transform.position.x + 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+                player.isFlip = false;
+            }
+            player.Attack();
+
+            if (index < count)
+            {
+                index++;
+            }
+            else
+            {
+                player.Init = false;
+                CanUse = false;
+                index = 0;
+                yield break;
+            }
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
     private void OnEnable()
     {
         RemainTime = 0;
-    }
-    public void Update()
-    {
-        RemainTime += Time.deltaTime;
-        if (!CanUse && CoolTime < RemainTime)
-            CanUse = true;
-
-    }
-
-    public void Work()
-    {
-        throw new System.NotImplementedException();
     }
 }
