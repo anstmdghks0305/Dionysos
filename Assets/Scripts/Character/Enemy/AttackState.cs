@@ -10,6 +10,10 @@ public class AttackState : IState
     public float AnimationTime;
     private bool CanAttack;
 
+    public AttackState()
+    {
+        AttackRange = 30;
+    }
 
 
     public AttackState()

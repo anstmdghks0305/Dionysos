@@ -20,7 +20,6 @@ public class Player : MonoBehaviour, ICharacterData
     public EffectManager Effect;
 
     public GameObject fireball;
-    public Camera cam;
     public Animator anim;
     public bool Init = false;
     public Vector3 target;
@@ -29,7 +28,8 @@ public class Player : MonoBehaviour, ICharacterData
     public Dash DashSkill;
     float horizontal;
     float vertical;
-    float colTime = 0;
+    Collider attackCollider;
+    public bool dash = false;
     private void SkillManage()
     {
         //if (Input.GetKeyDown(KeyCode.K))
@@ -37,12 +37,16 @@ public class Player : MonoBehaviour, ICharacterData
     }
     private void OnTriggerEnter(Collider collision)
     {
-
+        if(dash && collision.CompareTag("enemy"))
+        {
+            collision.GetComponent<Enemy>().Stun();
+        }
     }
 
     public void Start()
     {
         Hp = new Data(100);
+        attackCollider = transform.GetChild(0).GetComponent<Collider>();
     }
 
     public void Attack()
@@ -50,38 +54,29 @@ public class Player : MonoBehaviour, ICharacterData
         anim.SetTrigger("IdleToAttack");
         anim.SetTrigger("AttackToIdle");
 
-        //StartCoroutine(ColEnable());
+        StartCoroutine(ColEnable(attackCollider));
     }
     public void Move()
     {
 
     }
 
-    IEnumerator ColEnable()
+    IEnumerator ColEnable(Collider col)
     {
         float t = 0;
 
-        while(t < 3)
+        while(true)
         {
-            Debug.Log("¤Ó");
             t += Time.deltaTime;
-            GetComponent<Collider>().enabled = true;
+            col.enabled = true;
 
-            if(t >= 3)
+            if(t >= 0.25f)
             {
-                Debug.Log("¤Ó¤Ó");
-                GetComponent<Collider>().enabled = false;
+                col.enabled = false;
                 yield break;
-
             }
             yield return null;
-
         }
-
-        yield return null;
-
-
-
     }
 
     public void Die()
@@ -93,9 +88,9 @@ public class Player : MonoBehaviour, ICharacterData
         SkillManage();
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        transform.position += new Vector3(horizontal, 0, vertical) * Time.deltaTime * 10;
+        transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * 10;
 
-        if(Input.GetKeyDown(KeyCode.Q)) //ÆÄÀÌ¾îº¼
+        if(Input.GetKeyDown(KeyCode.Q)) //ï¿½ï¿½ï¿½Ì¾îº¼
         {
             GameObject ball = Instantiate(fireball);
 
@@ -110,7 +105,7 @@ public class Player : MonoBehaviour, ICharacterData
                 ball.GetComponent<FireBall>().dir = Vector3.left;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
         }
@@ -123,6 +118,7 @@ public class Player : MonoBehaviour, ICharacterData
         }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
+            dash = true;
             SkillInterface = DashSkill;
             SkillInterface.CanUse = true;
             if (SkillInterface.CanUse)
@@ -133,9 +129,9 @@ public class Player : MonoBehaviour, ICharacterData
         else
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (horizontal < 0)
             isFlip = false;
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (horizontal > 0)
             isFlip = true;
 
     }
