@@ -14,18 +14,18 @@ public class EffectManager : MonoBehaviour
     }
     public void Lightning()
     {
-        if (player.slashTime > 0.235f)
-        {
-            Effect[0].Play();
-        }
+        //if (player.slashTime > 0.235f)
+        //{
+        //    Effect[0].Play();
+        //}
 
-        if (player.slash)
-        {
-            Night.SetActive(true);
-        }
-        else
-        {
-            Night.SetActive(false);
-        }
+        //if (player.slash)
+        //{
+        //    Night.SetActive(true);
+        //}
+        //else
+        //{
+        //    Night.SetActive(false);
+        //}
     }
 }
