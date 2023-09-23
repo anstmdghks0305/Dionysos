@@ -43,6 +43,11 @@ public struct Data
     {
         return (float)Current / Max;
     }
+    public int ShowCurrentHp()
+    {
+        return Current;
+    }
+
 
     public string ShowText()
     {

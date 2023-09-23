@@ -10,4 +10,6 @@ public class GameManager : Singleton<GameManager>
     {
         MainCam = Camera.main;
     }
+    public List<int> GameClearData = new List<int>();
+    public bool GameStop = false;
 }
