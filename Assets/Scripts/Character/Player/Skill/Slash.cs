@@ -39,7 +39,6 @@ public class Slash : MonoBehaviour, ISkill
 
     IEnumerator StartCorotin(Player player)
     {
-        Debug.Log("정수는 바보");
         e  =  GameObject.FindGameObjectsWithTag("enemy");
         for (int i = 0; i < e.Length; i++)
         {

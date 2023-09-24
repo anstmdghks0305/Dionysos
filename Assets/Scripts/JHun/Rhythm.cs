@@ -12,7 +12,7 @@ public class Rhythm : MonoBehaviour
     private float EffectTime; // 현재 이펙트의 시간
     private float Per; // 리듬 싱크
     [SerializeField] float Range; // 퍼펙트 체크 범위
-    // Start is called before the first frame update
+
     void Awake()
     {
         RhythmEffect.playbackSpeed = Speed;
@@ -20,7 +20,7 @@ public class Rhythm : MonoBehaviour
         Per = RhythmManager.Instance.RhythmSync;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         EffectTime = RhythmEffect.time;

@@ -12,12 +12,6 @@ public class AttackState : IState
 
     public AttackState()
     {
-        AttackRange = 30;
-    }
-
-
-    public AttackState()
-    {
         AttackRange = 3;
         AttackCoolTime = 1;
         AnimationTime = 0.1f;
