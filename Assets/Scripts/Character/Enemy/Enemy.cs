@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     private void Start()
     {
+        this.gameObject.tag = "Enemy";
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         switch (Type)
@@ -50,10 +51,6 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
-        switch (Type)
-        {
-
-        }
     }
 
     private void OnDisable()

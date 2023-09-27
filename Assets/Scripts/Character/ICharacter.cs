@@ -17,10 +17,7 @@ public interface ICharacterData
         get;
         set;
     }
-    public int Damage
-    {
-        get;
-    }
+
 
     public Animator animator
     {
