@@ -11,7 +11,10 @@ public class Enemy : MonoBehaviour, IEnemy
 {
     public EnemyType Type { get; set; }
     public int SerialNum;
-    public Data Hp{private set;get;}
+    public Data Hp
+    {
+        private set;get;
+    }
     public int Speed { set; get; }
     public int Damage { set; get; }
     public Animator animator { set; get; }
@@ -27,13 +30,12 @@ public class Enemy : MonoBehaviour, IEnemy
     public GameObject Projectile = null;
     private void OnEnable()
     {
-        Hp = new Data(100);
     }
 
     private void Start()
     {
+        Hp = new Data(100);
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
         switch (Type)
         {
             case EnemyType.Near:
