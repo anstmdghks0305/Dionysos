@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     public List<int> GameClearData = new List<int>();
     public bool GameStop = false;
 
-    private void Awake()
+    private void Start()
     {
         MainCam = Camera.main;
         GameClearData.Add(2);
