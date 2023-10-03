@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     public Camera MainCam;
     public List<int> GameClearData = new List<int>();
     public bool GameStop = false;
-
+    public Dictionary<string, StageData> Stages = new Dictionary<string, StageData>();
     private void Start()
     {
         MainCam = Camera.main;

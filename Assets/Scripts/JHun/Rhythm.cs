@@ -28,8 +28,7 @@ public class Rhythm : MonoBehaviour
         {
             if (EffectTime < Sync + Speed * Range && EffectTime > Sync - Speed * Range)
             {
-                Debug.Log("Perfect!");
-                PerfectEffect.Play();
+                Perfect();
                 /*int i = Random.RandomRange(0, RythmMaterial.Length);
                 RhythmRenderer.material = RythmMaterial[i];*/
             }
@@ -40,5 +39,11 @@ public class Rhythm : MonoBehaviour
                 RhythmRenderer.material = RythmMaterial[i];*/
             }
         }
+    }
+
+    void Perfect()
+    {
+        Debug.Log("Perfect!");
+        PerfectEffect.Play();
     }
 }
