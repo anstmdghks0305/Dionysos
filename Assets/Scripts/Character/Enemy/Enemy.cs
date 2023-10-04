@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         private set;get;
     }
+    public Data Hp{private set;get;}
     public int Speed { set; get; }
     public int Damage { set; get; }
     public Animator animator { set; get; }
@@ -35,7 +36,9 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Start()
     {
         Hp = new Data(100);
+        this.gameObject.tag = "Enemy";
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         switch (Type)
         {
             case EnemyType.Near:
@@ -52,10 +55,6 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
-        switch (Type)
-        {
-
-        }
     }
 
     private void OnDisable()
