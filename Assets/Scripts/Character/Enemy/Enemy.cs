@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
+    public EnemyType et;
     public EnemyType Type { get; set; }
     public int SerialNum;
     public Data Hp{private set;get;}
@@ -24,9 +26,11 @@ public class Enemy : MonoBehaviour, IEnemy
 
     AttackState attackState;
     RunState runState;
+    Stun stun;
     public GameObject Projectile = null;
     private void OnEnable()
     {
+        Hp = new Data(100);
     }
 
     private void Start()
@@ -35,6 +39,7 @@ public class Enemy : MonoBehaviour, IEnemy
         this.gameObject.tag = "enemy";
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        Type = et;
         switch (Type)
         {
             case EnemyType.Near:
@@ -74,6 +79,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void StateChange(Transform player)
     {
+        navMeshAgent.SetDestination(player.position);
         if (state == State.Idle)
         {
             if (navMeshAgent.remainingDistance > attackState.AttackRange)

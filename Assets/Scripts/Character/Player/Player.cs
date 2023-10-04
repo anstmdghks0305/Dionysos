@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, ICharacterData
     public IState IState { get; set; }
 
     public EventController eventcontroller;
+    public EffectManager Effect;
 
     public GameObject fireball;
     public Animator anim;
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour, ICharacterData
         vertical = Input.GetAxis("Vertical");
         transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * 10;
 
-        if(Input.GetKeyDown(KeyCode.Q)) //ÆÄÀÌ¾îº¼
+        if(Input.GetKeyDown(KeyCode.Q)) //ï¿½ï¿½ï¿½Ì¾îº¼
         {
             GameObject ball = Instantiate(fireball);
 
