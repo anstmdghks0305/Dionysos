@@ -11,10 +11,6 @@ public class Enemy : MonoBehaviour, IEnemy
 {
     public EnemyType Type { get; set; }
     public int SerialNum;
-    public Data Hp
-    {
-        private set;get;
-    }
     public Data Hp{private set;get;}
     public int Speed { set; get; }
     public int Damage { set; get; }
@@ -36,7 +32,7 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Start()
     {
         Hp = new Data(100);
-        this.gameObject.tag = "Enemy";
+        this.gameObject.tag = "enemy";
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         switch (Type)
