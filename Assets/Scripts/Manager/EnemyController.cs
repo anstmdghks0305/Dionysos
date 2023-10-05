@@ -5,11 +5,19 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EnemyController : Singleton<EnemyController>
 {
-    public List<Enemy> AliveEnemyPool = new List<Enemy>();
-    public Transform EnemyPool;
-    public List<Enemy> DieEnemyPool = new List<Enemy>();
-    public Transform DiedEnemy;
+    List<Enemy> AliveEnemyPool = new List<Enemy>();
+    Transform EnemyPool;
+    List<Enemy> DieEnemyPool = new List<Enemy>();
+    Transform DiedEnemy;
     public Player player;
+
+    private void Awake()
+    {
+        EnemyPool = this.transform.GetChild(0);
+        DiedEnemy = this.transform.GetChild(1);
+    }
+
+
 
     async UniTask StartAttacking()
     {
@@ -67,8 +75,11 @@ public class EnemyController : Singleton<EnemyController>
     {
         StartAttacking().Forget();
         AliveEnemyPool.AddRange(GameObject.FindObjectsOfType<Enemy>());
+        foreach (Enemy enemy in AliveEnemyPool)
+        {
+            enemy.gameObject.transform.SetParent(EnemyPool);
+        }
     }
-
     // Update is called once per frame
     void Update()
     {

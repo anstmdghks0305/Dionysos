@@ -17,10 +17,7 @@ public interface ICharacterData
         get;
         set;
     }
-    public int Damage
-    {
-        get;
-    }
+
 
     public Animator animator
     {
@@ -41,4 +38,5 @@ public interface ICharacterData
     public void Move();
     public void Idle();
     public Transform where();
+    public void Damaged(int Damage);
 }
