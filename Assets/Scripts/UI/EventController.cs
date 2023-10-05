@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventController
+public class EventController:MonoBehaviour
 {
     private event EventHandler<EventData> Event;
     public UIController Hp;

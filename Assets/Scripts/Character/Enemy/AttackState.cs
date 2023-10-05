@@ -10,10 +10,6 @@ public class AttackState : IState
     public float AnimationTime;
     private bool CanAttack;
 
-    public AttackState()
-    {
-        AttackRange = 30;
-    }
 
 
     public AttackState()
@@ -21,7 +17,7 @@ public class AttackState : IState
         AttackRange = 3;
         AttackCoolTime = 1;
         AnimationTime = 0.1f;
-        CanAttack = false;
+        CanAttack = true;
     }
 
     public virtual void Work(IEnemy characterData,Transform target)
@@ -29,10 +25,11 @@ public class AttackState : IState
         characterData.navMeshAgent.isStopped = true;
         if (CanAttack==true)
         {
+            Debug.Log("Attack");
             CanAttack = false;
-            characterData.animator.SetBool("Attack", true);
+            characterData.animator.SetTrigger("Attack");
             StartAttacking().Forget();
-            EndAnimation(characterData).Forget();
+            //EndAnimation(characterData).Forget();
         }
     }
 

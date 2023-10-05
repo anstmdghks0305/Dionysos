@@ -10,20 +10,32 @@ public class ProjectileController : Singleton<ProjectileController>
     Transform projectileParent;
     Dictionary<int, Queue<Projectile>> Usedprojectiles = new Dictionary<int, Queue<Projectile>>();
     Transform usedprojectileParent;
+    public Player Target;
 
     public void ProjectilePooling(Transform Pos, Projectile projectile)
     {
+        if (!Usedprojectiles.ContainsKey(projectile.SerialNum))
+        {
+            Usedprojectiles.Add(projectile.SerialNum, new Queue<Projectile>());
+        }
+        if (!projectiles.ContainsKey(projectile.SerialNum))
+        {
+            projectiles.Add(projectile.SerialNum, new Queue<Projectile>());
+        }
         if (Usedprojectiles[projectile.SerialNum].Count != 0)
         {
             Projectile temp = Usedprojectiles[projectile.SerialNum].Dequeue();
             temp.transform.SetParent(projectileParent);
+            temp.DirectionControll(Target.transform);
             projectiles[projectile.SerialNum].Enqueue(temp);
         }
         else
         {
-            GameObject obj = GameObject.Instantiate(projectile.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), projectileParent);
+            Debug.Log("¹ÙºÎ");
+            Projectile obj = GameObject.Instantiate(projectile.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), projectileParent).transform.GetComponent<Projectile>();
             obj.transform.SetParent(projectileParent);
-            projectiles[projectile.SerialNum].Enqueue(obj.GetComponent<Projectile>());
+            obj.DirectionControll(Target.transform);
+            projectiles[projectile.SerialNum].Enqueue(obj);
         }
     }
 
@@ -38,7 +50,8 @@ public class ProjectileController : Singleton<ProjectileController>
     // Start is called before the first frame update
     void Start()
     {
-
+        projectileParent = this.transform.GetChild(0).transform;
+        usedprojectileParent = this.transform.GetChild(1).transform;
     }
 
     // Update is called once per frame

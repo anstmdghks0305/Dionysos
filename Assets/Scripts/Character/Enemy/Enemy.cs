@@ -30,15 +30,14 @@ public class Enemy : MonoBehaviour, IEnemy
     public GameObject Projectile = null;
     private void OnEnable()
     {
-        Hp = new Data(100);
     }
 
     private void Start()
     {
         Hp = new Data(100);
         this.gameObject.tag = "enemy";
+        animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
         Type = et;
         switch (Type)
         {
@@ -80,6 +79,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void StateChange(Transform player)
     {
         navMeshAgent.SetDestination(player.position);
+        Filp(player);
         if (state == State.Idle)
         {
             if (navMeshAgent.remainingDistance > attackState.AttackRange)
@@ -110,5 +110,18 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Idle()
     {
         throw new System.NotImplementedException();
+    }
+    public void Filp(Transform player)
+    {
+        isFlip = this.gameObject.GetComponent<RectTransform>().position.x - player.GetComponent<RectTransform>().position.x > 0 ? true : false;
+        if (isFlip)
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            this.gameObject.transform.rotation = Quaternion.Euler(0,180, 0);
+    }
+
+    public void Damaged(int Damage)
+    {
+        Hp -= Damage;
     }
 }

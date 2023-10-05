@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832956025756775660, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
       propertyPath: m_Name
-      value: Unit001
+      value: Unit001 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8832956025756775660, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
       propertyPath: m_TagString
@@ -112,6 +112,11 @@ PrefabInstance:
 --- !u!1 &2867704681869376037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8832956025756775660, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
+  m_PrefabInstance: {fileID: 6726359699168202441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7525655639674238506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3830499966457886947, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
   m_PrefabInstance: {fileID: 6726359699168202441}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &451050492
@@ -140,7 +145,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -161,6 +166,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5da5ee38590a43a66c2fdb9f5f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SerialNum: 1
+  et: 1
+  SerialNum: 2
   Died: 0
-  Projectile: {fileID: 0}
+  eventcontroller: {fileID: 0}
+  Projectile: {fileID: 3791680643911087221, guid: 84b6d78e32825df4e919d3714dbab0be, type: 3}
+--- !u!65 &8347694504644876633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525655639674238506}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.65, z: 0.2}
+  m_Center: {x: 0.015625462, y: 0.26562455, z: -0.0000004768517}
+--- !u!114 &2732687217830867768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525655639674238506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85472c42d02cf394786f157d8fbe5d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: Player
+  Damage: 5

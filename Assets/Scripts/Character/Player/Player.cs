@@ -30,6 +30,9 @@ public class Player : MonoBehaviour, ICharacterData
     float vertical;
     Collider attackCollider;
     public bool dash = false;
+    private void Awake()
+    {
+    }
     private void SkillManage()
     {
         //if (Input.GetKeyDown(KeyCode.K))
@@ -144,5 +147,12 @@ public class Player : MonoBehaviour, ICharacterData
     public Transform where()
     {
         return this.transform;
+    }
+
+    public void Damaged(int Damage)
+    {
+        Debug.Log(Damage);
+        Hp -= Damage;
+        eventcontroller.DoEvent(new EventData("Hp",Hp));
     }
 }

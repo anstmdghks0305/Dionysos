@@ -38,4 +38,5 @@ public interface ICharacterData
     public void Move();
     public void Idle();
     public Transform where();
+    public void Damaged(int Damage);
 }
