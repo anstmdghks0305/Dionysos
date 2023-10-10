@@ -64,6 +64,8 @@ public class Slash : MonoBehaviour, ISkill
                 player.isFlip = false;
             }
             player.Attack();
+            player.Effect.LightningEffect();
+            player.Effect.NightEffect(true);
 
             if (index < count)
             {
@@ -74,6 +76,7 @@ public class Slash : MonoBehaviour, ISkill
                 player.Init = false;
                 CanUse = false;
                 index = 0;
+                player.Effect.NightEffect(false);
                 yield break;
             }
             yield return new WaitForSeconds(0.25f);

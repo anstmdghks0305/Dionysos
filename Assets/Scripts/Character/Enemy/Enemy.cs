@@ -1,20 +1,18 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
+    public EnemyType et;
     public EnemyType Type { get; set; }
     public int SerialNum;
-    public Data Hp
-    {
-        private set;get;
-    }
+    public Data Hp{private set;get;}
     public int Speed { set; get; }
     public int Damage { set; get; }
     public Animator animator { set; get; }
@@ -23,7 +21,8 @@ public class Enemy : MonoBehaviour, IEnemy
     public EventController eventcontroller;
     public NavMeshAgent navMeshAgent { get; set; }
     public IState IState { get; set; }
-    public bool isFlip { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public bool isFlip { get; set; }
+    public bool Attacking { get; set; }
 
     AttackState attackState;
     RunState runState;
@@ -36,7 +35,10 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Start()
     {
         Hp = new Data(100);
+        this.gameObject.tag = "enemy";
+        animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        Type = et;
         switch (Type)
         {
             case EnemyType.Near:
@@ -53,15 +55,11 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
-        switch (Type)
-        {
-
-        }
     }
 
     private void OnDisable()
     {
-
+        
     }
 
     public void Stun()
@@ -80,6 +78,8 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void StateChange(Transform player)
     {
+        navMeshAgent.SetDestination(player.position);
+        Filp(player);
         if (state == State.Idle)
         {
             if (navMeshAgent.remainingDistance > attackState.AttackRange)
@@ -110,5 +110,20 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Idle()
     {
         throw new System.NotImplementedException();
+    }
+    public void Filp(Transform player)
+    {
+        isFlip = this.gameObject.GetComponent<RectTransform>().position.x - player.GetComponent<RectTransform>().position.x > 0 ? true : false;
+        if (isFlip)
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            this.gameObject.transform.rotation = Quaternion.Euler(0,180, 0);
+    }
+
+    public void Damaged(int Damage)
+    {
+        Debug.Log(Damage);
+        Hp -= Damage;
+        eventcontroller.DoEvent(new EventData("Hp", Hp));
     }
 }

@@ -17,10 +17,7 @@ public interface ICharacterData
         get;
         set;
     }
-    public int Damage
-    {
-        get;
-    }
+
 
     public Animator animator
     {
@@ -37,8 +34,13 @@ public interface ICharacterData
     {
         get;set;
     }
+    public bool Attacking
+    {
+        get;set;
+    }
     public void Attack();
     public void Move();
     public void Idle();
     public Transform where();
+    public void Damaged(int Damage);
 }

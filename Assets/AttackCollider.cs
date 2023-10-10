@@ -8,10 +8,10 @@ public class AttackCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.CompareTag("enemy"))
-        {
-            Debug.Log("wow");
-            collision.GetComponent<Enemy>().Stun();
-        }
+        //if(collision.CompareTag("enemy"))
+        //{
+        //    Debug.Log("wow");
+        //    collision.GetComponent<Enemy>().Damaged(30);
+        //}
     }
 }

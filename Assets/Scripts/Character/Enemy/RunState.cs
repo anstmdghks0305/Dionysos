@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class RunState : IState
 {
-    float RunSpeed;
-    float AnimationTime;
+    float RunSpeed=3;
+    float AnimationTime=0.1f;
 
     public void Work(IEnemy characterData, Transform target)
     {
         characterData.state = State.Move;
-        characterData.navMeshAgent.SetDestination(target.position);
         characterData.navMeshAgent.isStopped = false;
         characterData.navMeshAgent.speed = RunSpeed;
-        characterData.animator.SetBool("Run", true);
+        //characterData.animator.SetBool("Run", true);
         EndAnimation(characterData).Forget();
     }
 
@@ -23,7 +22,7 @@ public class RunState : IState
         while (true)
         {
             await UniTask.Delay((int)(AnimationTime * 1000));
-            characterData.animator.SetBool("Run", false);
+            //characterData.animator.SetBool("Run", false);
             characterData.state = State.Idle;
         }
     }

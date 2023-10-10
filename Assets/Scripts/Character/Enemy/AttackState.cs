@@ -5,26 +5,31 @@ using UnityEngine;
 
 public class AttackState : IState
 {
-    public int AttackRange { get; set; }
+    public int AttackRange;
     public float AttackCoolTime;
     public float AnimationTime;
     private bool CanAttack;
 
+
+
     public AttackState()
     {
-        AttackRange = 30;
+        AttackRange = 3;
+        AttackCoolTime = 1;
+        AnimationTime = 0.1f;
+        CanAttack = true;
     }
-
 
     public virtual void Work(IEnemy characterData,Transform target)
     {
         characterData.navMeshAgent.isStopped = true;
         if (CanAttack==true)
         {
+            Debug.Log("Attack");
             CanAttack = false;
-            characterData.animator.SetBool("Attack", true);
+            characterData.animator.SetTrigger("Attack");
             StartAttacking().Forget();
-            EndAnimation(characterData).Forget();
+            //EndAnimation(characterData).Forget();
         }
     }
 

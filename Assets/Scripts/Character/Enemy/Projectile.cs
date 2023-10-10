@@ -5,13 +5,25 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int SerialNum;
-    public Vector3 Direction;
+    private Vector3 Direction;
     private float Speed;
+    private int Damage;
+
+    public void OnEnable()
+    {
+        Speed = 3;
+        Damage = 5;
+    }
+
+    public void DirectionControll(Transform targetpos)
+    {
+        Direction = targetpos.position - this.transform.position;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.position += Direction * Speed;   
+        this.gameObject.transform.position += Direction * Speed*Time.deltaTime;   
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,6 +32,7 @@ public class Projectile : MonoBehaviour
         {
             ProjectileController.Instance.UsedProjectilePooling(this);
             this.gameObject.SetActive(false);
+            other.GetComponent<ICharacterData>().Damaged(Damage);
         }
     }
 }
