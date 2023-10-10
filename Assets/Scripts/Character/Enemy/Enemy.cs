@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System;
 using UnityEditorInternal;
@@ -23,6 +22,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public NavMeshAgent navMeshAgent { get; set; }
     public IState IState { get; set; }
     public bool isFlip { get; set; }
+    public bool Attacking { get; set; }
 
     AttackState attackState;
     RunState runState;
@@ -122,6 +122,8 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void Damaged(int Damage)
     {
+        Debug.Log(Damage);
         Hp -= Damage;
+        eventcontroller.DoEvent(new EventData("Hp", Hp));
     }
 }

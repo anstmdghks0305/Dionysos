@@ -34,6 +34,10 @@ public interface ICharacterData
     {
         get;set;
     }
+    public bool Attacking
+    {
+        get;set;
+    }
     public void Attack();
     public void Move();
     public void Idle();
