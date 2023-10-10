@@ -12,12 +12,13 @@ public class StageDataRead : MonoBehaviour
         StageDataCsv = CSVReader.Read("StageData");
         for (int i = 0; i < StageDataCsv.Count; i++)
         {
+            int bpm = Convert.ToInt32(StageDataCsv[i]["bpm"]);
             int progress = Convert.ToInt32(StageDataCsv[i]["progress"]);
             int maxScore = Convert.ToInt32(StageDataCsv[i]["maxScore"]);
             string StageName = StageDataCsv[i]["StageName"].ToString();
             string Difficult = StageDataCsv[i]["Difficult"].ToString();
 
-            GameManager.Instance.Stages.Add(StageName, new StageData(progress, maxScore, StageName, Difficult));
+            GameManager.Instance.Stages.Add(StageName, new StageData(bpm, progress, maxScore, StageName, Difficult));
             Debug.Log($"로드 성공!{Difficult}");
         }
     }
