@@ -10,27 +10,25 @@ public class Rhythm : MonoBehaviour
     [SerializeField] private Material[] RythmMaterial; // ¿Ã∆Â∆Æ ∏≈≈◊∏ÆæÛ
     public float Speed; // ¿Ã∆Â∆Æ º”µµ
     private float EffectTime; // «ˆ¿Á ¿Ã∆Â∆Æ¿« Ω√∞£
-    private float Per; // ∏ÆµÎ ΩÃ≈©
+    [SerializeField] private float Sync; // ∏ÆµÎ ΩÃ≈©
     [SerializeField] float Range; // ∆€∆Â∆Æ √º≈© π¸¿ß
-    // Start is called before the first frame update
+
     void Awake()
     {
         RhythmEffect.playbackSpeed = Speed;
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
-        Per = RhythmManager.Instance.RhythmSync;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         EffectTime = RhythmEffect.time;
+        Sync = RhythmManager.Instance.RhythmSyncValue;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log(EffectTime);
-            if (EffectTime < Per + Speed * Range && EffectTime > Per - Speed * Range)
+            if (EffectTime < Sync + Speed * Range && EffectTime > Sync - Speed * Range)
             {
-                Debug.Log("Perfect!");
-                PerfectEffect.Play();
+                Perfect();
                 /*int i = Random.RandomRange(0, RythmMaterial.Length);
                 RhythmRenderer.material = RythmMaterial[i];*/
             }
@@ -41,5 +39,11 @@ public class Rhythm : MonoBehaviour
                 RhythmRenderer.material = RythmMaterial[i];*/
             }
         }
+    }
+
+    void Perfect()
+    {
+        Debug.Log("Perfect!");
+        PerfectEffect.Play();
     }
 }
