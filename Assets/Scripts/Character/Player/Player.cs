@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, ICharacterData
     public bool Died;
     public State state{ set; get; }
     public IState IState { get; set; }
+    public bool Attacking { get; set; }
 
     public EventController eventcontroller;
     public EffectManager Effect;
@@ -28,8 +29,13 @@ public class Player : MonoBehaviour, ICharacterData
     public Dash DashSkill;
     float horizontal;
     float vertical;
-    Collider attackCollider;
     public bool dash = false;
+    bool attack;
+    float attackT;
+    private void Awake()
+    {
+        //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
+    }
     private void SkillManage()
     {
         //if (Input.GetKeyDown(KeyCode.K))
@@ -46,7 +52,6 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
-        attackCollider = transform.GetChild(0).GetComponent<Collider>();
     }
 
     public void Attack()
@@ -54,30 +59,13 @@ public class Player : MonoBehaviour, ICharacterData
         anim.SetTrigger("IdleToAttack");
         anim.SetTrigger("AttackToIdle");
 
-        StartCoroutine(ColEnable(attackCollider));
+        
     }
     public void Move()
     {
 
     }
 
-    IEnumerator ColEnable(Collider col)
-    {
-        float t = 0;
-
-        while(true)
-        {
-            t += Time.deltaTime;
-            col.enabled = true;
-
-            if(t >= 0.25f)
-            {
-                col.enabled = false;
-                yield break;
-            }
-            yield return null;
-        }
-    }
 
     public void Die()
     {
@@ -108,6 +96,7 @@ public class Player : MonoBehaviour, ICharacterData
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
+            attack = true;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -125,14 +114,27 @@ public class Player : MonoBehaviour, ICharacterData
                 SkillInterface.Work(this);
         }
         if(isFlip)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
         else
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
 
         if (horizontal < 0)
             isFlip = false;
         else if (horizontal > 0)
             isFlip = true;
+        if(attack)
+        {
+            attackT += Time.deltaTime;
+
+            if(attackT < 0.3f)
+                GetComponent<ICharacterData>().Attacking = true;
+            else if(attackT >= 0.3f)
+            {
+                attack = false;
+                attackT = 0;
+                GetComponent<ICharacterData>().Attacking = false;
+            }
+        }
 
     }
 
@@ -144,5 +146,12 @@ public class Player : MonoBehaviour, ICharacterData
     public Transform where()
     {
         return this.transform;
+    }
+
+    public void Damaged(int Damage)
+    {
+        Debug.Log(Damage);
+        Hp -= Damage;
+        eventcontroller.DoEvent(new EventData("Hp",Hp));
     }
 }
