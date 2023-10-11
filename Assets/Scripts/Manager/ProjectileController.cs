@@ -54,9 +54,11 @@ public class ProjectileController : Singleton<ProjectileController>
         usedprojectileParent = this.transform.GetChild(1).transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Barrior(List<Projectile> projectiles)
     {
-
+        foreach (Projectile p in projectiles)
+        {
+            UsedProjectilePooling(p);
+        }
     }
 }

@@ -1,12 +1,13 @@
 using System;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Stage : MonoBehaviour
+public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
-
+    private static StageController stagecontroller;
     public int StageBuildIndex;
     private bool active = false;
     public bool Locked = true;
@@ -19,6 +20,8 @@ public class Stage : MonoBehaviour
     }
     private void Start()
     {
+        stagecontroller = this.transform.parent.GetComponent<StageController>();
+
     }
     public void Select()
     {
@@ -64,5 +67,20 @@ public class Stage : MonoBehaviour
         {
             this.GetComponent<Image>().color = new Color(1f, 1f, 1f); // 선택 안된 놈의 애니메이션등
         }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        stagecontroller.OnBeginDrag(eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        stagecontroller.OnEndDrag(eventData);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        stagecontroller.OnDrag(eventData);
     }
 }
