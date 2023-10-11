@@ -17,20 +17,12 @@ public class Slash : MonoBehaviour, ISkill
     public Slash()
     {
         CoolTime = 3;
-
-    }
-    void Update()
-    {
-        
     }
     public void Work(Player player)
     {
-        Debug.Log("check");
         if (CanUse)
         {
-            if (!player.Init)
-                StartCoroutine(StartCorotin(player));
-            player.Init = true;
+            StartCoroutine(StartCorotin(player));
         }
         //GameObject[] Enemys;
         //Player.position;
@@ -40,7 +32,8 @@ public class Slash : MonoBehaviour, ISkill
     IEnumerator StartCorotin(Player player)
     {
         List<Enemy> e = pool.AliveEnemyPool;
-        if(e.Count > 1)
+
+        if(e.Count > 0)
         {
             for (int i = 0; i < e.Count; i++)
             {
@@ -55,8 +48,6 @@ public class Slash : MonoBehaviour, ISkill
         }
         else
         {
-            Debug.Log("žs,");
-            player.Init = false;
             CanUse = false;
             index = 0;
             player.Effect.NightEffect(false);
@@ -77,24 +68,18 @@ public class Slash : MonoBehaviour, ISkill
             player.Attack();
             player.Effect.LightningEffect();
             player.Effect.NightEffect(true);
-
             
-            if(e.Count < 1 || (index == e.Count - 1))
+            if (index < e.Count - 1)
             {
-                if(e.Count == 1)
-                {
-                    Debug.Log("zz");
-                }
-                Debug.Log("žs,");
-                player.Init = false;
+                index++;
+            }
+            else
+            {
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
+
                 yield break;
-            }
-            else if (index < e.Count - 1)
-            {
-                index++;
             }
             yield return new WaitForSeconds(0.25f);
         }

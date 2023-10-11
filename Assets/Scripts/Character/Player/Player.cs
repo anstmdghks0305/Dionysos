@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, ICharacterData
 
     public EventController eventcontroller;
     public EffectManager Effect;
-
+    bool init = false;
     public GameObject fireball;
     public Animator anim;
     public bool Init = false;
@@ -27,11 +27,12 @@ public class Player : MonoBehaviour, ICharacterData
     ISkill SkillInterface;
     public Slash SlashSkill;
     public Dash DashSkill;
-    float horizontal;
-    float vertical;
+    public float horizontal;
+    public float vertical;
     public bool dash = false;
     bool attack;
     float attackT;
+    public bool move;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour, ICharacterData
         if(dash && collision.CompareTag("enemy"))
         {
             collision.GetComponent<Enemy>().Stun();
+            collision.GetComponent<ICharacterData>().Damaged(Damage);
         }
     }
 
@@ -56,10 +58,7 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void Attack()
     {
-        anim.SetTrigger("IdleToAttack");
-        anim.SetTrigger("AttackToIdle");
-
-        
+        attack = true;
     }
     public void Move()
     {
@@ -76,9 +75,22 @@ public class Player : MonoBehaviour, ICharacterData
         SkillManage();
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * 10;
+        if(!dash && !attack)
+            transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * 1;
+        if((horizontal != 0) || (vertical != 0))
+        {
+            anim.SetTrigger("IdleToRun");
+            anim.ResetTrigger("RunToIdle");
+            move = true;
+        }
+        else
+        {
+            anim.SetTrigger("RunToIdle");
+            anim.ResetTrigger("IdleToRun");
+            move = false;
+        }
 
-        if(Input.GetKeyDown(KeyCode.Q)) //���̾
+        if (Input.GetKeyDown(KeyCode.Q)) //���̾
         {
             GameObject ball = Instantiate(fireball);
 
@@ -96,7 +108,6 @@ public class Player : MonoBehaviour, ICharacterData
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
-            attack = true;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -124,18 +135,31 @@ public class Player : MonoBehaviour, ICharacterData
             isFlip = true;
         if(attack)
         {
+            if(!init)
+            {
+                Debug.Log("?");
+                init = true;
+            }
             attackT += Time.deltaTime;
 
             if(attackT < 0.3f)
+            {
+                anim.ResetTrigger("RunToIdle");
+                anim.ResetTrigger("IdleToRun");
+                anim.ResetTrigger("AttackToIdle");
+                anim.SetTrigger("IdleToAttack");
                 GetComponent<ICharacterData>().Attacking = true;
+            }
             else if(attackT >= 0.3f)
             {
+                anim.ResetTrigger("IdleToAttack");
+                anim.SetTrigger("AttackToIdle");
                 attack = false;
                 attackT = 0;
+                init = false;
                 GetComponent<ICharacterData>().Attacking = false;
             }
         }
-
     }
 
     public void Idle()
@@ -150,7 +174,6 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void Damaged(int Damage)
     {
-        Debug.Log(Damage);
         Hp -= Damage;
         eventcontroller.DoEvent(new EventData("Hp",Hp));
     }
