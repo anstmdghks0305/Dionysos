@@ -10,15 +10,15 @@ public class StageDataRead : MonoBehaviour
     void Awake()
     {
         StageDataCsv = CSVReader.Read("StageData");
-        for (int i = 0; i < StageDataCsv.Count; i++)
+        for (int index = 0; index < StageDataCsv.Count; index++)
         {
-            int bpm = Convert.ToInt32(StageDataCsv[i]["bpm"]);
-            int progress = Convert.ToInt32(StageDataCsv[i]["progress"]);
-            int maxScore = Convert.ToInt32(StageDataCsv[i]["maxScore"]);
-            string StageName = StageDataCsv[i]["StageName"].ToString();
-            string Difficult = StageDataCsv[i]["Difficult"].ToString();
+            int bpm = Convert.ToInt32(StageDataCsv[index]["bpm"]);
+            int progress = Convert.ToInt32(StageDataCsv[index]["progress"]);
+            int maxScore = Convert.ToInt32(StageDataCsv[index]["maxScore"]);
+            string StageName = StageDataCsv[index]["StageName"].ToString();
+            string Difficult = StageDataCsv[index]["Difficult"].ToString();
 
-            GameManager.Instance.Stages.Add(StageName, new StageData(bpm, progress, maxScore, StageName, Difficult));
+            GameManager.Instance.Stages.Add(StageName, new StageData(index, bpm, progress, maxScore, StageName, Difficult));
             Debug.Log($"로드 성공!{Difficult}");
         }
     }

@@ -29,6 +29,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             }
             return instance;
         }
+        set
+        {
+            if (instance != null)
+            {
+                Destroy(instance);
+            }
+        }
     }
 
     public void Awake()

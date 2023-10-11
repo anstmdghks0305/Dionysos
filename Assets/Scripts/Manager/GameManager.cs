@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
         GameClearData.Add(2);
     }
     private void Update()
-    {
+    { 
         if(SceneManager.GetActiveScene().name == "SampleScene")
         {
             if(Input.anyKeyDown)
