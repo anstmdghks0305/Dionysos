@@ -15,6 +15,8 @@ public class Rhythm : MonoBehaviour
 
     void Awake()
     {
+        //Speed = 60 / GameManager.Instance.Stages[UnityEngine.SceneManagement.SceneManager.GetActiveScene().name].bpm;
+        Speed = 128f / 60f;
         RhythmEffect.playbackSpeed = Speed;
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
     }

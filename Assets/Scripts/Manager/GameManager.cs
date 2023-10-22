@@ -6,6 +6,7 @@ using Boss;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool NotBuild;
     public Camera MainCam;
     public List<int> GameClearData = new List<int>();
     public bool GameStop = false;
@@ -13,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         BossData.Instance.Read();
+        Screen.SetResolution(1920, 1080, true);
     }
     private void Start()
     {

@@ -4,20 +4,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.IO;
 
 public class CSVReader
 {
     static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     static char[] TRIM_CHARS = { '\"' };
+    static string _path = Directory.GetCurrentDirectory() + "/" + "Data";
 
     public static List<Dictionary<string, object>> Read(string file)
     {
-        
         var list = new List<Dictionary<string, object>>();
-        TextAsset data = Resources.Load(file) as TextAsset;
+        string[] lines = null;
 
-        var lines = Regex.Split(data.text, LINE_SPLIT_RE);
+        if (!GameManager.Instance.NotBuild)
+        {
+            string path = _path + "/" + file + ".csv";
+            string data = File.ReadAllText(path);
+            lines = Regex.Split(data, LINE_SPLIT_RE);
+        }
+        else
+        {
+            TextAsset data = Resources.Load(file) as TextAsset;
+            lines = Regex.Split(data.text, LINE_SPLIT_RE);
+        }
+        
 
         if (lines.Length <= 1) return list;
 
