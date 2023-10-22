@@ -30,9 +30,8 @@ public class Player : MonoBehaviour, ICharacterData
     public float horizontal;
     public float vertical;
     public bool dash = false;
-    bool attack;
+    public bool attack;
     float attackT;
-    public bool move;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -54,6 +53,9 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
+        Speed = 3;
+        state = State.Idle;
+        Damage = 30;
     }
 
     public void Attack()
@@ -62,7 +64,24 @@ public class Player : MonoBehaviour, ICharacterData
     }
     public void Move()
     {
-
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+        if (!dash && state != State.Attack)
+        {
+            transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * Speed;
+        }
+        else
+        {
+            
+        }
+        if ((horizontal != 0) || (vertical != 0))
+        {
+            state = State.Move;
+        }
+        else
+        {
+            state = State.Idle;
+        }
     }
 
 
@@ -72,25 +91,13 @@ public class Player : MonoBehaviour, ICharacterData
     }
     private void Update()
     {
+        Debug.Log(state == State.Attack);
         SkillManage();
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        if(!dash && !attack)
-            transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * 1;
-        if((horizontal != 0) || (vertical != 0))
-        {
-            anim.SetTrigger("IdleToRun");
-            anim.ResetTrigger("RunToIdle");
-            move = true;
-        }
-        else
-        {
-            anim.SetTrigger("RunToIdle");
-            anim.ResetTrigger("IdleToRun");
-            move = false;
-        }
+        
+        PlayerAnim();
+        Move();
 
-        if (Input.GetKeyDown(KeyCode.Q)) //���̾
+        if (Input.GetKeyDown(KeyCode.Q)) 
         {
             GameObject ball = Instantiate(fireball);
 
@@ -133,30 +140,22 @@ public class Player : MonoBehaviour, ICharacterData
             isFlip = false;
         else if (horizontal > 0)
             isFlip = true;
-        if(attack)
+        if (attack)
         {
-            if(!init)
-            {
-                Debug.Log("?");
-                init = true;
-            }
+            anim.SetTrigger("RunToIdle");
             attackT += Time.deltaTime;
 
-            if(attackT < 0.3f)
+            if (attackT < 0.3f)
             {
-                anim.ResetTrigger("RunToIdle");
-                anim.ResetTrigger("IdleToRun");
-                anim.ResetTrigger("AttackToIdle");
-                anim.SetTrigger("IdleToAttack");
+                state = State.Attack;
                 GetComponent<ICharacterData>().Attacking = true;
             }
-            else if(attackT >= 0.3f)
+            else if (attackT >= 0.3f)
             {
-                anim.ResetTrigger("IdleToAttack");
                 anim.SetTrigger("AttackToIdle");
+                state = State.Idle;
                 attack = false;
                 attackT = 0;
-                init = false;
                 GetComponent<ICharacterData>().Attacking = false;
             }
         }
@@ -170,6 +169,25 @@ public class Player : MonoBehaviour, ICharacterData
     public Transform where()
     {
         return this.transform;
+    }
+
+    public void PlayerAnim()
+    {
+        if(state == State.Move) //뛰기
+        {
+            anim.SetTrigger("IdleToRun");
+        }
+        else if(state == State.Attack) //공격하기
+        {
+            anim.SetTrigger("IdleToAttack");
+        }
+        else if(state == State.Idle) //쉬기
+        {
+            anim.SetTrigger("RunToIdle");
+            anim.SetTrigger("AttackToIdle");
+            anim.ResetTrigger("IdleToRun");
+        }
+
     }
 
     public void Damaged(int Damage)

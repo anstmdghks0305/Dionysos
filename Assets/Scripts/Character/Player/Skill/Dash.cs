@@ -26,9 +26,7 @@ public class Dash : MonoBehaviour, ISkill
         }
         else
         {
-            if(player.vertical > 0f && player.horizontal < 0) //¢Ø
-                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z + 1.5f);
-            else if (player.vertical > 0f && player.horizontal == 0f)//¡è
+            if (player.vertical > 0f && player.horizontal == 0f)//¡è
                 player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.5f);
             else if (player.vertical > 0f && player.horizontal > 0)//¢Ö
                 player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z + 1.5f);
@@ -42,6 +40,9 @@ public class Dash : MonoBehaviour, ISkill
                 player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z - 1.5f);
             else if (player.vertical == 0f && player.horizontal < 0)//¡ç
                 player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+            else if(player.vertical > 0f && player.horizontal < 0) //¢Ø
+                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z + 1.5f);
+            
         }
 
         float elapseTime = 0;
@@ -53,7 +54,6 @@ public class Dash : MonoBehaviour, ISkill
             if (Vector3.Distance(player.target, transform.position) < 0.1f)
             {
                 CanUse = false;
-                player.Init = false;
                 player.dash = false;
                 yield break;
             }
