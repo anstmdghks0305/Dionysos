@@ -8,17 +8,19 @@ namespace Boss
     [System.Serializable]
     public class BossStatus
     {
-        [SerializeField] private string name;
-        [SerializeField] private int hp;
-        [SerializeField] private int speed;
-        [SerializeField] private int damage;
+        [SerializeField] public string Name;
+        [SerializeField] public int Hp;
+        [SerializeField] public float Speed;
+        [SerializeField] public int Damage;
+        [SerializeField] public float AttackRange;
 
-        public BossStatus(string _name, int _hp, int _speed, int _damage)
+        public BossStatus(string _name, int _hp, float _speed, int _damage, float _attackRange)
         {
-            name = _name;
-            hp = _hp;
-            speed = _speed;
-            damage = _damage;
+            Name = _name;
+            Hp = _hp;
+            Speed = _speed;
+            Damage = _damage;
+            AttackRange = _attackRange;
         }
     }    
 }
