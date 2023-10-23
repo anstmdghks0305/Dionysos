@@ -13,7 +13,7 @@ namespace Boss
         private NavMeshAgent navAgent;
         private BossState currentState = BossState.None;
         private int maxHp;
-        private Collider attackCol;
+        public BossAttackCol attackCol;
         [SerializeField] private Image hpBar;
         public BossDirection Direction;
         public BossStatus Status;
@@ -40,6 +40,7 @@ namespace Boss
             hpBar = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>();
             Direction = BossDirection.Left;
             State = BossState.Idle;
+            attackCol = transform.GetChild(1).GetChild(2).GetComponent<BossAttackCol>();
         }
 
         void Update()
@@ -65,7 +66,7 @@ namespace Boss
                     action = new BossMove(this, navAgent, Status.Speed);
                     break;
                 case BossState.Attack:
-                    action = new BossAttack(this, Status.Damage, Status.AttackRange);
+                    action = new BossAttack(this, Status.Damage, Status.AttackRange, attackCol, navAgent);
                     break;
             }
         }

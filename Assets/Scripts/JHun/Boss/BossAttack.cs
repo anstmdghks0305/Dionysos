@@ -8,37 +8,43 @@ namespace Boss
         private BossController controller;
         private int damage;
         private float attackRange;
-        private Player player;
+        private NavMeshAgent navAgent;
+        private BossAttackCol attackCol;
         private bool attacking;
         private float timer;
         public void Work()
         {
             timer += Time.deltaTime;
-            if(timer >= 0.26f && !attacking)
+            if (timer >= 1f && !attacking)
             {
                 Attack();
                 attacking = true;
             }
 
-            if (timer >= 0.56f)
+            if (timer >= 1.1f)
             {
                 controller.State = BossState.Idle;
+                navAgent.isStopped = false;
                 attacking = false;
                 timer = 0;
             }
         }
 
-        public BossAttack(BossController controller, int damage, float attackRange)
+        public BossAttack(BossController controller, int damage, float attackRange, BossAttackCol attackCol, NavMeshAgent navAgent)
         {
             this.controller = controller;
             this.damage = damage;
             this.attackRange = attackRange;
-            this.player = controller.Player;
+            this.navAgent = navAgent;
+            this.attackCol = attackCol;
         }
 
         void Attack()
         {
-            player.Damaged(damage);
+            if(attackCol.player != null)
+            {
+                attackCol.player.Damaged(damage);
+            }  
         }
     }
 }
