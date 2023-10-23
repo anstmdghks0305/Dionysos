@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Boss
 {
@@ -10,10 +11,10 @@ namespace Boss
         private Player player;
         private IBossAction action;
         private NavMeshAgent navAgent;
-        private Animator animator;
-        private SpriteRenderer spriteRenderer;
         private BossState currentState = BossState.None;
-
+        private int maxHp;
+        public BossAttackCol attackCol;
+        [SerializeField] private Image hpBar;
         public BossDirection Direction;
         public BossStatus Status;
         public BossState State;
@@ -34,17 +35,28 @@ namespace Boss
         {
             LoadData();
             navAgent = GetComponent<NavMeshAgent>();
-            animator = GetComponent<Animator>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
             action = null;
-            State = BossState.Idle;
+            maxHp = Status.Hp;
+            hpBar = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>();
             Direction = BossDirection.Left;
+            State = BossState.Idle;
+            attackCol = transform.GetChild(1).GetChild(2).GetComponent<BossAttackCol>();
         }
 
         void Update()
         {
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log(maxHp);
+                GetDamange(10);
+            }
             action?.Work();
-
+            
+            if (State == currentState)
+                return;
+            
+            currentState = State;
+            
             switch (State)
             {
                 case BossState.Idle:
@@ -53,12 +65,16 @@ namespace Boss
                 case BossState.Move:
                     action = new BossMove(this, navAgent, Status.Speed);
                     break;
+                case BossState.Attack:
+                    action = new BossAttack(this, Status.Damage, Status.AttackRange, attackCol, navAgent);
+                    break;
             }
         }
 
         public void GetDamange (int damage)
         {
             Status.Hp -= damage;
+            hpBar.fillAmount = Status.Hp * 1f / maxHp * 1f;
             if (Status.Hp <= 0)
             {
                 State = BossState.Die;

@@ -19,9 +19,10 @@ namespace Boss
                 int hp = Convert.ToInt32(BossDataCsv[index]["Hp"]);
                 float speed = Convert.ToSingle(BossDataCsv[index]["Speed"]);
                 int damage = Convert.ToInt32(BossDataCsv[index]["Damage"]);
-                float attackRanage = Convert.ToSingle(BossDataCsv[index]["AttackRange"]);
+                float attackSpeed = Convert.ToSingle(BossDataCsv[index]["AttackSpeed"]);
+                float attackRange = Convert.ToSingle(BossDataCsv[index]["AttackRange"]);
 
-                DataManager<BossStatus>._BossStatus.Add(name, new BossStatus(name, hp, speed, damage, attackRanage));
+                DataManager<BossStatus>._BossStatus.Add(name, new BossStatus(name, hp, speed, damage, attackSpeed, attackRange));
             }
         }
     }

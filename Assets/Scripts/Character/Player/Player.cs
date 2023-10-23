@@ -39,6 +39,10 @@ public class Player : MonoBehaviour, ICharacterData
     public float attackSpeed;
     public Weapon weapon;
     public int defaultDamage = 30;
+    public Rhythm PlayerRhythm;
+    private bool hurt;
+    public bool slash;
+    [SerializeField] private float maxHurtTime;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -96,12 +100,15 @@ public class Player : MonoBehaviour, ICharacterData
     }
     private void Update()
     {
-        Debug.Log(state == State.Attack);
         SkillManage();
         
         PlayerAnim();
         Move();
 
+        if(hurt)
+        {
+            HurtTime();
+        }
         if (Input.GetKeyDown(KeyCode.Q)) 
         {
             GameObject ball = Instantiate(fireball);
@@ -125,6 +132,7 @@ public class Player : MonoBehaviour, ICharacterData
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            slash = true;
             SkillInterface = SlashSkill;
             SkillInterface.CanUse = true;
             if (SkillInterface.CanUse)
@@ -159,15 +167,13 @@ public class Player : MonoBehaviour, ICharacterData
 
         if (attack)
         {
-            
             if (powerUp)
             {
-                if(!init)
+                if (!init)
                 {
                     Effect.AttackEffect("Perfect");
                     init = true;
                 }
-
                 attackScale.localScale = newScale;
                 weapon.Damage = 40;
             }
@@ -191,6 +197,7 @@ public class Player : MonoBehaviour, ICharacterData
             }
             else if (attackT >= attackSpeed)
             {
+                init = false;
                 anim.SetTrigger("AttackToIdle");
                 powerUp = false;
                 state = State.Idle;
@@ -230,12 +237,24 @@ public class Player : MonoBehaviour, ICharacterData
             anim.ResetTrigger("IdleToRun");
         }
     }
+    float hurtTime = 0;
+    private void HurtTime()
+    {
+        hurtTime += Time.deltaTime;
+
+        if(hurtTime >= maxHurtTime)
+        {
+            hurt = false;
+            hurtTime = 0;
+        }
+    }
 
     public void Damaged(int Damage)
     {
-        if(!(dash && powerUp))
+        if(!hurt)
         {
             Hp -= Damage;
+            hurt = true;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
         }
     }

@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        if (name == "°ø°ÝÆÇÁ¤")
+        if (name == "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
         {
             root = transform.parent.parent.GetComponent<ICharacterData>();
             //player = transform.parent.parent.GetComponent<Player>();
@@ -42,14 +42,14 @@ public class Weapon : MonoBehaviour
         }
         else if(other.tag == "?")
         {
-            if (name == "°ø°ÝÆÇÁ¤")
+            if (name == "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
             {
                 Destroy(other.gameObject);
             }
-        }
+        }*/
     }
 
-    //ÀÌ°Å ¾ÈµÊ
+    //ï¿½Ì°ï¿½ ï¿½Èµï¿½
     //private void OnTriggerEnter(Collider other)
     //{
     //    if (root.Attacking == true)
