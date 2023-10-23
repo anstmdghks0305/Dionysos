@@ -7,6 +7,7 @@ public class Dash : MonoBehaviour, ISkill
     public bool CanUse { get; set; }
     public float CoolTime { get; set; }
     public float RemainTime { get; set; }
+    public bool powerUp;
 
     public void Work(Player player)
     {
@@ -61,4 +62,5 @@ public class Dash : MonoBehaviour, ISkill
         }
         yield return null;
     }
+
 }

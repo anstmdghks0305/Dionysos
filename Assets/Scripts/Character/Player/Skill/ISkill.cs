@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ISkill
 {
+    //string RhythmState { get; set; }
     bool CanUse { get; set; }
     float CoolTime { get; set; }
     float RemainTime { get; set; }
