@@ -23,14 +23,11 @@ public class EnemyController : Singleton<EnemyController>
     {
         while (true)
         {
-            if (player.Died == false)
+            foreach (IEnemy enemy in AliveEnemyPool)
             {
-                foreach (IEnemy enemy in AliveEnemyPool)
-                {
-                    enemy.StateChange(player.transform);
-                }
-                await UniTask.Delay(500);
+                enemy.StateChange(player);
             }
+            await UniTask.Delay(300);
         }
     }
 
@@ -41,7 +38,7 @@ public class EnemyController : Singleton<EnemyController>
         enemy.gameObject.transform.SetParent(DiedEnemy, transform);
     }
 
-    public void EnemyPooling(Transform Pos,Enemy enemy)
+    public void EnemyPooling(Transform Pos, Enemy enemy)
     {
         Enemy temp = null;
         foreach (Enemy died in DiedEnemy)
