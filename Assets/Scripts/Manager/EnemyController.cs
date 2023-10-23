@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EnemyController : Singleton<EnemyController>
 {
-    List<Enemy> AliveEnemyPool = new List<Enemy>();
+    public List<Enemy> AliveEnemyPool = new List<Enemy>();
     Transform EnemyPool;
     List<Enemy> DieEnemyPool = new List<Enemy>();
     Transform DiedEnemy;

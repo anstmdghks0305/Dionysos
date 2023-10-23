@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class StageData
 {
-    [SerializeField]private int bpm;
+    [SerializeField]private int stageIndex;
     [SerializeField]private int progress;
     [SerializeField]private int maxScore;
     [SerializeField]private int currentProgress;
@@ -31,6 +31,7 @@ public class StageData
             currentProgress = Mathf.Clamp(value, 0, progress);
         }
     }
+    public int bpm;
     public int ResultScore;
     public string StageName;
     public string Difficult;
@@ -41,8 +42,9 @@ public class StageData
     }
 
 
-    public StageData(int _bpm, int _progress, int _maxScore, string _StageName, string _Difficult)
+    public StageData(int _stageIndex, int _bpm, int _progress, int _maxScore, string _StageName, string _Difficult)
     {
+        stageIndex = _stageIndex;
         bpm = _bpm;
         progress = _progress;
         maxScore = _maxScore;

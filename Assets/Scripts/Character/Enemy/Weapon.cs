@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public string Target = "Player";
     public int Damage = 5;
     public ICharacterData root;
+    Player player;
     Weapon(int _Damage)
     {
 
@@ -14,22 +15,49 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
+        if (name == "공격판정")
+        {
+            root = transform.parent.parent.GetComponent<ICharacterData>();
+            //player = transform.parent.parent.GetComponent<Player>();
+            //Damage = player.Damage;
+        }
+        else
+            root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
+
         root.Attacking = false;
     }
     private void Update()
     {
-        //Debug.Log(root.Attacking);
+        if (root.Attacking)
+            transform.GetComponent<Collider>().enabled = true;
+        else
+            transform.GetComponent<Collider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (root.Attacking == true)
+        if (other.CompareTag(Target))
         {
-            if (other.tag == Target)
+            other.GetComponent<ICharacterData>().Damaged(Damage);
+        }
+        else if(other.CompareTag(""))
+        {
+            if (name == "공격판정")
             {
-                other.GetComponent<ICharacterData>().Damaged(Damage);
+                Destroy(other.gameObject);
             }
         }
     }
+
+    //이거 안됨
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (root.Attacking == true)
+    //    {
+    //        if (other.tag == Target)
+    //        {
+    //            other.GetComponent<ICharacterData>().Damaged(Damage);
+    //        }
+    //    }
+    //}
 }

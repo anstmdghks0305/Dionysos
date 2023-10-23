@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Rhythm : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class Rhythm : MonoBehaviour
     private float EffectTime; // «ˆ¿Á ¿Ã∆Â∆Æ¿« Ω√∞£
     [SerializeField] private float Sync; // ∏ÆµÎ ΩÃ≈©
     [SerializeField] float Range; // ∆€∆Â∆Æ √º≈© π¸¿ß
-
+    [SerializeField] private Player player;
     void Awake()
     {
+        //Speed = 60 / GameManager.Instance.Stages[UnityEngine.SceneManagement.SceneManager.GetActiveScene().name].bpm;
+        Speed = 128f / 60f;
         RhythmEffect.playbackSpeed = Speed;
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
     }
@@ -24,26 +27,56 @@ public class Rhythm : MonoBehaviour
     {
         EffectTime = RhythmEffect.time;
         Sync = RhythmManager.Instance.RhythmSyncValue;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            if (EffectTime < Sync + Speed * Range && EffectTime > Sync - Speed * Range)
-            {
-                Perfect();
-                /*int i = Random.RandomRange(0, RythmMaterial.Length);
-                RhythmRenderer.material = RythmMaterial[i];*/
-            }
-            else
-            {
-                Debug.Log("Bad!");
-                /*int i = Random.RandomRange(0, RythmMaterial.Length);
-                RhythmRenderer.material = RythmMaterial[i];*/
-            }
+            InputAction("X");
         }
     }
-
-    void Perfect()
+    public void InputAction(string input)
+    {
+        if (EffectTime < Sync + Speed * Range && EffectTime > Sync - Speed * Range)
+        {
+            Perfect(input);
+        }
+        else
+        {
+            Bad(input);
+        }
+    }
+    void Perfect(string input)
     {
         Debug.Log("Perfect!");
         PerfectEffect.Play();
+        switch(input)
+        {
+            case "Attack":
+                break;
+            case "Dash":
+                break;
+            case "Slash":
+                break;
+            case "FireBall":
+                break;
+            default:
+                break;
+        }
     }
+
+    void Bad(string input)
+    {
+        Debug.Log("Bad!");
+        switch (input)
+        {
+            case "Attack":
+                break;
+            case "Dash":
+                break;
+            case "Slash":
+                break;
+            case "FireBall":
+                break;
+            default:
+                break;
+        }
+    }  
 }
