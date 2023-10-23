@@ -32,7 +32,7 @@ public class ProjectileController : Singleton<ProjectileController>
         }
         else
         {
-            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up*0.5f,Quaternion.Euler(90,0,0)).transform.GetComponent<Projectile>();
+            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
             obj.transform.SetParent(projectileParent);
             obj.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(obj);

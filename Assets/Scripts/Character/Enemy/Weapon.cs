@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        if (name == "��������")
+        if (name == "공격판정")
         {
             root = transform.parent.parent.GetComponent<ICharacterData>();
             //player = transform.parent.parent.GetComponent<Player>();
@@ -40,13 +40,14 @@ public class Weapon : MonoBehaviour
             other.GetComponent<ICharacterData>().Damaged(Damage);
             root.Attacking = false;
         }
-        else if(other.tag == "?")
+        else if(other.tag == "Projectile")
         {
-            if (name == "��������")
+            if (name == "공격판정")
             {
-                Destroy(other.gameObject);
+                ProjectileController.Instance.UsedProjectilePooling(other.GetComponent<Projectile>());
+                other.gameObject.SetActive(false);
             }
-        }*/
+        }
     }
 
     //�̰� �ȵ�

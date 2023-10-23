@@ -39,7 +39,6 @@ public class Player : MonoBehaviour, ICharacterData
     public float attackSpeed;
     public Weapon weapon;
     public int defaultDamage = 30;
-    public Rhythm PlayerRhythm;
     private bool hurt;
     public bool slash;
     [SerializeField] private float maxHurtTime;
