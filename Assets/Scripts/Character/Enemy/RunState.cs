@@ -5,25 +5,20 @@ using UnityEngine;
 
 public class RunState : IState
 {
-    float RunSpeed=3;
-    float AnimationTime=0.1f;
+    float RunSpeed;
+    float AnimationTime;
+
+    public RunState(int _RunSpeed)
+    {
+        RunSpeed = _RunSpeed;
+    }
 
     public void Work(IEnemy characterData, Transform target)
     {
         characterData.state = State.Move;
         characterData.navMeshAgent.isStopped = false;
         characterData.navMeshAgent.speed = RunSpeed;
-        //characterData.animator.SetBool("Run", true);
-        EndAnimation(characterData).Forget();
+        characterData.animator.SetBool("Run", true);
     }
 
-    async UniTaskVoid EndAnimation(ICharacterData characterData)
-    {
-        while (true)
-        {
-            await UniTask.Delay((int)(AnimationTime * 1000));
-            //characterData.animator.SetBool("Run", false);
-            characterData.state = State.Idle;
-        }
-    }
 }

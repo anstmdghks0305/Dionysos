@@ -9,13 +9,7 @@ public class Projectile : MonoBehaviour
     private float Speed;
     private int Damage;
 
-    public void OnEnable()
-    {
-        Speed = 3;
-        Damage = 5;
-    }
-
-    public void DirectionControll(Transform targetpos)
+    public void DirectionControl(Transform targetpos)
     {
         Direction = targetpos.position - this.transform.position;
     }
@@ -34,5 +28,12 @@ public class Projectile : MonoBehaviour
             this.gameObject.SetActive(false);
             other.GetComponent<ICharacterData>().Damaged(Damage);
         }
+    }
+
+    public void Initialize(int serialNum, float speed, int damage)
+    {
+        SerialNum = serialNum;
+        Speed = speed;
+        Damage = damage;
     }
 }

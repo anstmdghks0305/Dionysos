@@ -9,6 +9,6 @@ public interface IEnemy : ICharacterData
     {
         get; set;
     }
-    public void StateChange(Transform player);
+    public void StateChange(Player player);
     public NavMeshAgent navMeshAgent { get; set; }
 }
