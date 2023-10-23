@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     {
         MainCam = Camera.main;
         GameClearData.Add(2);
+        EnemyDataInputer.EnemyDataInput();
     }
     private void Update()
     { 
