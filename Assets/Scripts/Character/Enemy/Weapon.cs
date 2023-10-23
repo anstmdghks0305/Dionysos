@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public string Target = "Player";
     public int Damage = 5;
     public ICharacterData root;
+    Player player;
     Weapon(int _Damage)
     {
 
@@ -14,10 +15,15 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        if(name == "공격판정")
+        if (name == "공격판정")
+        {
             root = transform.parent.parent.GetComponent<ICharacterData>();
+            //player = transform.parent.parent.GetComponent<Player>();
+            //Damage = player.Damage;
+        }
         else
             root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
+
         root.Attacking = false;
     }
     private void Update()
@@ -30,8 +36,17 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == Target)
+        if (other.CompareTag(Target))
+        {
             other.GetComponent<ICharacterData>().Damaged(Damage);
+        }
+        else if(other.CompareTag(""))
+        {
+            if (name == "공격판정")
+            {
+                Destroy(other.gameObject);
+            }
+        }
     }
 
     //이거 안됨

@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour, ISkill
 {
+
     public bool CanUse { get; set; }
     public float CoolTime { get; set; }
     public float RemainTime { get; set; }
 
-    int slashT;
     public int index = 0;
 
     public List<GameObject> enemies;
     //public List<Enemy> e;
     public EnemyController pool;
+
+    public bool powerUp;
+
     public Slash()
     {
         CoolTime = 3;
@@ -22,7 +25,17 @@ public class Slash : MonoBehaviour, ISkill
     {
         if (CanUse)
         {
+            if(powerUp)
+            {
+                player.Damage = 60;
+            }
+            else
+            {
+                player.Damage = player.defaultDamage;
+            }
             StartCoroutine(StartCorotin(player));
+
+            Debug.Log(player.powerUp);
         }
         //GameObject[] Enemys;
         //Player.position;
@@ -51,6 +64,7 @@ public class Slash : MonoBehaviour, ISkill
             CanUse = false;
             index = 0;
             player.Effect.NightEffect(false);
+            player.Damage = player.defaultDamage;
             yield break;
         }
         while (true)
@@ -69,17 +83,18 @@ public class Slash : MonoBehaviour, ISkill
             player.Effect.LightningEffect();
             player.Effect.NightEffect(true);
             
-            if (index < e.Count - 1)
-            {
-                index++;
-            }
-            else
+            
+            if(index >= e.Count - 1)
             {
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
-
+                player.Damage = player.defaultDamage;
                 yield break;
+            }
+            else if (index < e.Count - 1)
+            {
+                index++;
             }
             yield return new WaitForSeconds(0.25f);
         }

@@ -273,7 +273,12 @@ MonoBehaviour:
   horizontal: 0
   vertical: 0
   dash: 0
-  move: 0
+  attack: 0
+  enemyCount: 0
+  powerUp: 0
+  attackSpeed: 0.5
+  weapon: {fileID: 0}
+  defaultDamage: 30
 --- !u!114 &108687463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e66d255976540041960b0477a7231f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUp: 0
 --- !u!114 &108687464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +307,7 @@ MonoBehaviour:
   index: 0
   enemies: []
   pool: {fileID: 561430346}
+  powerUp: 0
 --- !u!54 &108687466
 Rigidbody:
   m_ObjectHideFlags: 0

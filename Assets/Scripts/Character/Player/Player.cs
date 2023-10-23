@@ -32,6 +32,13 @@ public class Player : MonoBehaviour, ICharacterData
     public bool dash = false;
     public bool attack;
     float attackT;
+    Vector3 scale, newScale;
+    Transform attackScale;
+    public int enemyCount;
+    public bool powerUp;
+    public float attackSpeed;
+    public Weapon weapon;
+    public int defaultDamage = 30;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -41,26 +48,25 @@ public class Player : MonoBehaviour, ICharacterData
         //if (Input.GetKeyDown(KeyCode.K))
         //if(om[itget
     }
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(dash && collision.CompareTag("enemy"))
-        {
-            collision.GetComponent<Enemy>().Stun();
-            collision.GetComponent<ICharacterData>().Damaged(Damage);
-        }
-    }
+    
 
     public void Start()
     {
         Hp = new Data(100);
         Speed = 3;
         state = State.Idle;
-        Damage = 30;
+        attackScale = transform.GetChild(0).GetChild(3);
+        scale = transform.GetChild(0).GetChild(3).localScale;
+        newScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
+        
+
     }
 
     public void Attack()
     {
         attack = true;
+
+        //퍼펙트 == true => powerUp = true;
     }
     public void Move()
     {
@@ -114,7 +120,8 @@ public class Player : MonoBehaviour, ICharacterData
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Attack();
+            attack = true;
+            //if 퍼펙트 == true => powerUp = true;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -130,6 +137,15 @@ public class Player : MonoBehaviour, ICharacterData
             SkillInterface.CanUse = true;
             if (SkillInterface.CanUse)
                 SkillInterface.Work(this);
+
+            if(powerUp)
+            {
+                Damage = 50;
+            }
+            else if(powerUp)
+            {
+                Damage = defaultDamage;
+            }
         }
         if(isFlip)
             transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
@@ -140,22 +156,37 @@ public class Player : MonoBehaviour, ICharacterData
             isFlip = false;
         else if (horizontal > 0)
             isFlip = true;
+
         if (attack)
         {
+            
+            if (powerUp)
+            {
+                attackScale.localScale = newScale;
+                weapon.Damage = 40;
+            }
+            else
+            {
+                attackScale.localScale = scale;
+                weapon.Damage = defaultDamage;
+            }
             anim.SetTrigger("RunToIdle");
             attackT += Time.deltaTime;
 
-            if (attackT < 0.3f)
+            if (attackT < attackSpeed)
             {
                 state = State.Attack;
                 GetComponent<ICharacterData>().Attacking = true;
+
             }
-            else if (attackT >= 0.3f)
+            else if (attackT >= attackSpeed)
             {
                 anim.SetTrigger("AttackToIdle");
+                powerUp = false;
                 state = State.Idle;
                 attack = false;
                 attackT = 0;
+                attackScale.localScale = scale;
                 GetComponent<ICharacterData>().Attacking = false;
             }
         }
@@ -187,12 +218,33 @@ public class Player : MonoBehaviour, ICharacterData
             anim.SetTrigger("AttackToIdle");
             anim.ResetTrigger("IdleToRun");
         }
-
     }
 
     public void Damaged(int Damage)
     {
-        Hp -= Damage;
-        eventcontroller.DoEvent(new EventData("Hp",Hp));
+        if(!(dash && powerUp))
+        {
+            Hp -= Damage;
+            eventcontroller.DoEvent(new EventData("Hp", Hp));
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (dash)
+        {
+            if(powerUp)
+            {
+                if (collision.CompareTag("enemy"))
+                {
+                    collision.GetComponent<Enemy>().Stun();
+                    collision.GetComponent<ICharacterData>().Damaged(Damage);
+                }
+                else if (collision.CompareTag("?"))
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
+        }
     }
 }
