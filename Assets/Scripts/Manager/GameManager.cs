@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     public Dictionary<string, StageData> Stages = new Dictionary<string, StageData>();
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
     }

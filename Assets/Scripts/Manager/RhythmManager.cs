@@ -17,6 +17,7 @@ public class RhythmManager : Singleton<RhythmManager>
     }
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         RhythmSyncValue = 0.75f;
     }
 }
