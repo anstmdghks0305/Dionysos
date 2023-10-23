@@ -10,14 +10,14 @@ public class EffectManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+/*        if(Input.GetKeyDown(KeyCode.X))
         {
             AttackEffect("Perfect");
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             AttackEffect("Bad");
-        }
+        }*/
     }
     public void LightningEffect()
     {

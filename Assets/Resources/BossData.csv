@@ -1,2 +1,2 @@
-Name,Hp,Speed,Damage,AttackRange
-호날두,100,2,10,1
+Name,Hp,Speed,Damage,AttackSpeed,AttackRange
+호날두,100,2,10,1,1

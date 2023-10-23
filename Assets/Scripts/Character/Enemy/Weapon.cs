@@ -38,15 +38,16 @@ public class Weapon : MonoBehaviour
     {
         if (other.CompareTag(Target))
         {
-            other.GetComponent<ICharacterData>().Damaged(Damage);
+            //other.GetComponent<ICharacterData>().Damaged(Damage);
+            other.GetComponent<Boss.BossController>().GetDamange(Damage);
         }
-        else if(other.CompareTag(""))
+/*        else if(other.CompareTag(""))
         {
             if (name == "공격판정")
             {
                 Destroy(other.gameObject);
             }
-        }
+        }*/
     }
 
     //이거 안됨

@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5759bc70da4a0ac48be6bd4d1f12c3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Build: 0
+  NotBuild: 1
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0

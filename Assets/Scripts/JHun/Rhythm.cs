@@ -50,6 +50,7 @@ public class Rhythm : MonoBehaviour
         switch(input)
         {
             case "Attack":
+                player.powerUp = true;
                 break;
             case "Dash":
                 break;
@@ -68,6 +69,7 @@ public class Rhythm : MonoBehaviour
         switch (input)
         {
             case "Attack":
+                player.powerUp = false;
                 break;
             case "Dash":
                 break;
