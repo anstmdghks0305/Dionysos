@@ -10,13 +10,35 @@ public class EffectManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            AttackEffect("Perfect");
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            AttackEffect("Bad");
+        }
     }
     public void LightningEffect()
     {
-        Effect[0].Play();
+        Effect[2].Play();
     }
     public void NightEffect(bool b)
     {
         Night.SetActive(b);
+    }
+    public void AttackEffect(string str)
+    {
+        switch (str)
+        {
+            case "Bad":
+                Effect[0].Play();
+                break;
+            case "Perfect":
+                Effect[1].Play();
+                break;
+            default:
+                break;
+        }
     }
 }
