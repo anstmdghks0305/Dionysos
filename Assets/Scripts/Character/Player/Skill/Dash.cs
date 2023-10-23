@@ -8,49 +8,56 @@ public class Dash : MonoBehaviour, ISkill
     public float CoolTime { get; set; }
     public float RemainTime { get; set; }
 
-    public void Work(Player player, List<GameObject> enemies)
-    {
-
-    }
     public void Work(Player player)
     {
         if (CanUse)
         {
-            if (!player.Init)
-                StartCoroutine(StartCorotin(player));
-            player.Init = true;
+            StartCoroutine(StartCorotin(player));
         }
-
     }
     IEnumerator StartCorotin(Player player)
     {
-        if (player.isFlip)
+        if ((player.vertical == 0f) && (player.horizontal == 0f))
         {
-            player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+            if (player.isFlip)
+                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+            else
+                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
         }
         else
         {
-            player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+            if (player.vertical > 0f && player.horizontal == 0f)//¡è
+                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.5f);
+            else if (player.vertical > 0f && player.horizontal > 0)//¢Ö
+                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z + 1.5f);
+            else if (player.vertical == 0f && player.horizontal > 0)//¡æ
+                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+            else if (player.vertical < 0f && player.horizontal > 0)//¢Ù
+                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z - 1.5f);
+            else if (player.vertical < 0f && player.horizontal == 0f)//¡é
+                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.5f);
+            else if (player.vertical < 0f && player.horizontal < 0)//¢×
+                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z - 1.5f);
+            else if (player.vertical == 0f && player.horizontal < 0)//¡ç
+                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+            else if(player.vertical > 0f && player.horizontal < 0) //¢Ø
+                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z + 1.5f);
+            
         }
 
         float elapseTime = 0;
-        while (elapseTime < 3)
+        while (elapseTime < 1)
         {
             elapseTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 3);
+            transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 2);
 
             if (Vector3.Distance(player.target, transform.position) < 0.1f)
             {
                 CanUse = false;
-                player.Init = false;
                 player.dash = false;
                 yield break;
             }
-
-
             yield return null;
-
-
         }
         yield return null;
     }

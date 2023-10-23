@@ -9,28 +9,20 @@ public class Slash : MonoBehaviour, ISkill
     public float RemainTime { get; set; }
 
     int slashT;
-    int count = 5;
     public int index = 0;
 
     public List<GameObject> enemies;
-    public GameObject[] e;
+    //public List<Enemy> e;
+    public EnemyController pool;
     public Slash()
     {
         CoolTime = 3;
-
-    }
-    void Update()
-    {
-        
     }
     public void Work(Player player)
     {
-        Debug.Log("check");
         if (CanUse)
         {
-            if (!player.Init)
-                StartCoroutine(StartCorotin(player));
-            player.Init = true;
+            StartCoroutine(StartCorotin(player));
         }
         //GameObject[] Enemys;
         //Player.position;
@@ -39,43 +31,54 @@ public class Slash : MonoBehaviour, ISkill
 
     IEnumerator StartCorotin(Player player)
     {
-        e  =  GameObject.FindGameObjectsWithTag("enemy");
-        for (int i = 0; i < e.Length; i++)
-        {
-            Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(e[i].transform.position);
+        List<Enemy> e = pool.AliveEnemyPool;
 
-            if (enemyPoints.x > 0 && enemyPoints.x < 1
-                && enemyPoints.y > 0 && enemyPoints.y < 1)
+        if(e.Count > 0)
+        {
+            for (int i = 0; i < e.Count; i++)
             {
-                enemies.Add(e[i]);
+                Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(e[i].transform.position);
+
+                if (!(enemyPoints.x > 0 && enemyPoints.x < 1
+                    && enemyPoints.y > 0 && enemyPoints.y < 1))
+                {
+                    e.RemoveAt(i);
+                }
             }
+        }
+        else
+        {
+            CanUse = false;
+            index = 0;
+            player.Effect.NightEffect(false);
+            yield break;
         }
         while (true)
         {
-            if (GameManager.Instance.MainCam.WorldToViewportPoint(enemies[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
+            if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f는 카메라의 절반이다
             {
-                transform.position = new Vector3(enemies[index].transform.position.x - 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x - 1, e[index].transform.position.y, e[index].transform.position.z);
                 player.isFlip = true;
             }
             else
             {
-                transform.position = new Vector3(enemies[index].transform.position.x + 1, enemies[index].transform.position.y, enemies[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x + 1, e[index].transform.position.y, e[index].transform.position.z);
                 player.isFlip = false;
             }
             player.Attack();
             player.Effect.LightningEffect();
             player.Effect.NightEffect(true);
-
-            if (index < count)
+            
+            if (index < e.Count - 1)
             {
                 index++;
             }
             else
             {
-                player.Init = false;
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
+
                 yield break;
             }
             yield return new WaitForSeconds(0.25f);
