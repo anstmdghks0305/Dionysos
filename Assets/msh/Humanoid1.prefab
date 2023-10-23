@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832956025756775660, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
       propertyPath: m_Name
-      value: Unit001 Variant 1
+      value: Humanoid1
       objectReference: {fileID: 0}
     - target: {fileID: 8832956025756775660, guid: f4f152ef70e31334d9a10837c419ee68, type: 3}
       propertyPath: m_TagString
@@ -258,12 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5da5ee38590a43a66c2fdb9f5f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  et: 1
   SerialNum: 2
   Died: 0
   eventcontroller: {fileID: 0}
-  hpBar: {fileID: 387902183}
-  Projectile: {fileID: 3791680643911087221, guid: 84b6d78e32825df4e919d3714dbab0be, type: 3}
 --- !u!65 &8347694504644876633
 BoxCollider:
   m_ObjectHideFlags: 0

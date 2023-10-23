@@ -1,0 +1,2 @@
+EnemyName,SerialNum,Hp,Type,Speed,Damage,AttackRange,AttackCoolTime,Projectile_SerialNum
+Humanoid1,1,20,Near,10,10,1,5,

@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class FarAttackState : AttackState
 {
-    GameObject projectile;
+    int Projectile_SerialNum;
 
-    public FarAttackState(GameObject projectile)
+    public FarAttackState(int _AttackRange, float _AttackCoolTime,int? _Projectile_SerialNum) : base(_AttackRange, _AttackCoolTime)  
     {
-        this.projectile = projectile;
+        Projectile_SerialNum = (int)_Projectile_SerialNum;
     }
 
     public override void Work(IEnemy enemy, Transform target)
     {
         base.Work(enemy, target);
-        ProjectileController.Instance.ProjectilePooling(enemy.where(), projectile.GetComponent<Projectile>());
+        ProjectileController.Instance.ProjectilePooling(enemy.where(), Projectile_SerialNum);
     }
 
 }

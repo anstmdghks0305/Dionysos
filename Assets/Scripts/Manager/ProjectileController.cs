@@ -12,30 +12,30 @@ public class ProjectileController : Singleton<ProjectileController>
     Transform usedprojectileParent;
     public Player Target;
 
-    public void ProjectilePooling(Transform Pos, Projectile projectile)
+    public void ProjectilePooling(Transform Pos, int _Projectile_SerialNum)
     {
-        if (!Usedprojectiles.ContainsKey(projectile.SerialNum))
+        if (!Usedprojectiles.ContainsKey(_Projectile_SerialNum))
         {
-            Usedprojectiles.Add(projectile.SerialNum, new Queue<Projectile>());
+            Usedprojectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
         }
-        if (!projectiles.ContainsKey(projectile.SerialNum))
+        if (!projectiles.ContainsKey(_Projectile_SerialNum))
         {
-            projectiles.Add(projectile.SerialNum, new Queue<Projectile>());
+            projectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
         }
-        if (Usedprojectiles[projectile.SerialNum].Count != 0)
+        if (Usedprojectiles[_Projectile_SerialNum].Count != 0)
         {
-            Projectile temp = Usedprojectiles[projectile.SerialNum].Dequeue();
+            Projectile temp = Usedprojectiles[_Projectile_SerialNum].Dequeue();
             temp.transform.SetParent(projectileParent);
-            temp.DirectionControll(Target.transform);
-            projectiles[projectile.SerialNum].Enqueue(temp);
+            temp.DirectionControl(Target.transform);
+            projectiles[_Projectile_SerialNum].Enqueue(temp);
         }
         else
         {
             Debug.Log("¹ÙºÎ");
-            Projectile obj = GameObject.Instantiate(projectile.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), projectileParent).transform.GetComponent<Projectile>();
+            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), projectileParent).transform.GetComponent<Projectile>();
             obj.transform.SetParent(projectileParent);
-            obj.DirectionControll(Target.transform);
-            projectiles[projectile.SerialNum].Enqueue(obj);
+            obj.DirectionControl(Target.transform);
+            projectiles[_Projectile_SerialNum].Enqueue(obj);
         }
     }
 
@@ -54,9 +54,11 @@ public class ProjectileController : Singleton<ProjectileController>
         usedprojectileParent = this.transform.GetChild(1).transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Barrior(List<Projectile> projectiles)
     {
-
+        foreach (Projectile p in projectiles)
+        {
+            UsedProjectilePooling(p);
+        }
     }
 }
