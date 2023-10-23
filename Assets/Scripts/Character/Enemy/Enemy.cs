@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Cysharp.Threading.Tasks;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
@@ -19,32 +20,33 @@ public class Enemy : MonoBehaviour, IEnemy
     public int AttackRange;
     public int AttackCoolTime;
     public int Projectile_SerialNum;
-
+    public int HP;
+    private bool Hurt;
     AttackState attackState;
     RunState runState;
 
     public Enemy Copy(Enemy value)
     {
-
+        Hp = new Data(value.Hp.Max);
         Type = value.Type;
-        IState = value.IState;
         SerialNum = value.SerialNum;
         Speed = value.Speed;
         Damage = value.Damage;
         AttackCoolTime = value.AttackCoolTime;
         Projectile_SerialNum = value.Projectile_SerialNum;
-        
+
         return this;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         Copy(EnemyDataInputer.FindEnemy(this));
+
         navMeshAgent = this.GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
         EnemyDataInputer.CopyComponent<NavMeshAgent>(navMeshAgent, this.gameObject);
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         EnemyDataInputer.CopyComponent<Animator>(animator, this.gameObject);
-
         switch (this.Type)
         {
             case EnemyType.Near:
@@ -58,12 +60,22 @@ public class Enemy : MonoBehaviour, IEnemy
         IState = runState;
 
     }
+
+    public void Revive(Transform Pos)
+    {
+        this.transform.position = Pos.position;
+        this.gameObject.SetActive(true);
+        animator.SetBool("Die", false);
+        Hp = Hp.Reset();
+        Died = false;
+        eventcontroller.DoEvent(new EventData("Hp", Hp));
+        state = State.Idle;
+
+    }
     void Update()
     {
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
-        Debug.Log(IState.ToString());
-
     }
 
     public void Stun()
@@ -92,35 +104,38 @@ public class Enemy : MonoBehaviour, IEnemy
             Die();
             return;
         }
-        navMeshAgent.SetDestination(player.where().position);
-        Filp(player.gameObject.transform);
-        Debug.Log(navMeshAgent.remainingDistance);
-        Debug.Log(attackState.AttackRange);
-        if (navMeshAgent.remainingDistance < attackState.AttackRange)
+        if (navMeshAgent != null)
         {
-            Attack();
-            Attacking = true;
+            navMeshAgent.SetDestination(player.transform.position);
+            Filp(player.gameObject.transform);
+            if (Vector3.Distance(player.transform.position, this.transform.position) < attackState.AttackRange)
+            {
+                Attack();
+            }
+            else
+            {
+                Move();
+            }
+            IState.Work(this, player.transform);
         }
-        else
-        {
-            Move();
-        }
-
-        IState.Work(this, player.transform);
     }
 
 
     public void Die()
     {
-        Died = true;
-        navMeshAgent.isStopped = true;
-        animator.SetBool("Die", true);
-        Invoke("PoolingSkin", 0.5f);
+        if (!Died)
+        {
+            Died = true;
+            navMeshAgent.isStopped = true;
+            animator.SetBool("Die", true);
+            Invoke("PoolingSkin", 0.5f);
+        }
     }
 
     public void PoolingSkin()
     {
         EnemyController.Instance.EnemyDiePooling(this);
+        this.gameObject.SetActive(false);
     }
 
     public Transform where()
@@ -138,17 +153,27 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         isFlip = this.gameObject.transform.position.x - player.transform.position.x > 0 ? true : false;
         if (isFlip)
+        {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         else
+        {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        eventcontroller.Filp(isFlip);
     }
 
     public void Damaged(int Damage)
     {
-        Hp -= Damage;
-        eventcontroller.DoEvent(new EventData("Hp", Hp));
-        if (Hp.ShowCurrentHp() <= 0)
-            state = State.Die;
+        if (!Hurt)
+        {
+            Hurt = true;
+            HurtDelay().Forget();
+            Hp -= Damage;
+            eventcontroller.DoEvent(new EventData("Hp", Hp));
+            if (Hp.ShowCurrentHp() <= 0)
+                state = State.Die;
+        }
     }
     /// <summary>
     /// 
@@ -166,8 +191,8 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         this.gameObject.tag = "enemy";
         this.Type = _Type;
-        SerialNum = _SerialNum;
         Hp = new Data(_Hp);
+        SerialNum = _SerialNum;
         Damage = _Damage;
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         Died = false;
@@ -179,7 +204,13 @@ public class Enemy : MonoBehaviour, IEnemy
         AttackCoolTime = _AttackCoolTime;
         Projectile_SerialNum = _Projectile_SerialNum;
         Speed = _Speed;
-        navMeshAgent.stoppingDistance = _AttackRange-2;
+        navMeshAgent.stoppingDistance = _AttackRange - 3;
         navMeshAgent.speed = _Speed;
+    }
+
+    async UniTask HurtDelay()
+    {
+        await UniTask.Delay(300);
+        Hurt = false;
     }
 }

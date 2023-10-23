@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Weapon : MonoBehaviour
 {
     public string Target = "Player";
     public int Damage = 5;
     public ICharacterData root;
-    Player player;
     Weapon(int _Damage)
     {
 
@@ -23,24 +23,24 @@ public class Weapon : MonoBehaviour
         }
         else
             root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
-
         root.Attacking = false;
     }
     private void Update()
     {
-        if (root.Attacking)
-            transform.GetComponent<Collider>().enabled = true;
-        else
-            transform.GetComponent<Collider>().enabled = false;
+        if (root.Attacking && transform.GetComponent<BoxCollider>().enabled == false)
+            transform.GetComponent<BoxCollider>().enabled = true;
+        else if (!root.Attacking&& transform.GetComponent<BoxCollider>().enabled == true)
+            transform.GetComponent<BoxCollider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Target))
+        if (other.CompareTag(Target)&&root.Attacking)
         {
             other.GetComponent<ICharacterData>().Damaged(Damage);
+            root.Attacking = false;
         }
-        else if(other.CompareTag(""))
+        else if(other.tag == "?")
         {
             if (name == "공격판정")
             {

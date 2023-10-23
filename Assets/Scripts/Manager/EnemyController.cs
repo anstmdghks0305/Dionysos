@@ -7,7 +7,7 @@ public class EnemyController : Singleton<EnemyController>
 {
     public List<Enemy> AliveEnemyPool = new List<Enemy>();
     Transform EnemyPool;
-    List<Enemy> DieEnemyPool = new List<Enemy>();
+    public List<Enemy> DieEnemyPool = new List<Enemy>();
     Transform DiedEnemy;
     public Player player;
 
@@ -35,35 +35,32 @@ public class EnemyController : Singleton<EnemyController>
     {
         AliveEnemyPool.Remove(enemy);
         DieEnemyPool.Add(enemy);
-        enemy.gameObject.transform.SetParent(DiedEnemy, transform);
+        enemy.gameObject.transform.SetParent(DiedEnemy);
     }
 
     public void EnemyPooling(Transform Pos, int enemy)
     {
         Enemy temp = null;
-        foreach (Enemy died in DiedEnemy)
+        foreach (Enemy died in DieEnemyPool)
         {
             if (died.SerialNum == enemy)
             {
                 died.gameObject.transform.SetParent(EnemyPool);
-                died.animator.SetBool("Die", false);
+                died.Revive(Pos);
+                DieEnemyPool.Remove(died);
+                AliveEnemyPool.Add(died);
                 temp = died;
                 break;
             }
         }
-        if (temp != null)
-        {
-            DieEnemyPool.Remove(temp);
-            AliveEnemyPool.Add(temp);
-        }
-        else
+        if (temp == null)
         {
             GameObject obj = null;
             foreach (GameObject target in EnemyDataInputer.EnemyList)
             {
                 if (target.GetComponent<Enemy>().SerialNum == enemy)
                 {
-                    obj = GameObject.Instantiate(target, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), EnemyPool);
+                    obj=Instantiate(target, Pos.position, Quaternion.Euler(player.gameObject.transform.position - Pos.position));
                     obj.transform.SetParent(EnemyPool);
                     AliveEnemyPool.Add(obj.GetComponent<Enemy>());
                 } 

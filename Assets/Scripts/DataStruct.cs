@@ -18,8 +18,8 @@ public class EventData:EventArgs
 //Hp,Fever(Max,Current °ü¸®¿ë)
 public struct Data
 {
-    private int Current;
-    private int Max;
+    public int Current;
+    public int Max;
 
     public Data(int value)
     {
@@ -39,6 +39,11 @@ public struct Data
         return data;
     }
 
+    public Data Reset()
+    {
+        Current = Max;
+        return this;
+    }
     public float ShowFillAmount()
     {
         return (float)Current / Max;

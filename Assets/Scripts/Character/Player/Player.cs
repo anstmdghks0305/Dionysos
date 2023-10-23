@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, ICharacterData
     public State state{ set; get; }
     public IState IState { get; set; }
     public bool Attacking { get; set; }
-
+    public Rhythm PlayerRhythm;
     public EventController eventcontroller;
     public EffectManager Effect;
     bool init = false;
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour, ICharacterData
         attackScale = transform.GetChild(0).GetChild(3);
         scale = transform.GetChild(0).GetChild(3).localScale;
         newScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
-        
 
     }
 
@@ -121,6 +120,7 @@ public class Player : MonoBehaviour, ICharacterData
         if (Input.GetKeyDown(KeyCode.X))
         {
             attack = true;
+            PlayerRhythm.InputAction("Attack");
             //if 퍼펙트 == true => powerUp = true;
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -162,11 +162,22 @@ public class Player : MonoBehaviour, ICharacterData
             
             if (powerUp)
             {
+                if(!init)
+                {
+                    Effect.AttackEffect("Perfect");
+                    init = true;
+                }
+
                 attackScale.localScale = newScale;
                 weapon.Damage = 40;
             }
             else
             {
+                if (!init)
+                {
+                    Effect.AttackEffect("Bad");
+                    init = true;
+                }
                 attackScale.localScale = scale;
                 weapon.Damage = defaultDamage;
             }
@@ -177,7 +188,6 @@ public class Player : MonoBehaviour, ICharacterData
             {
                 state = State.Attack;
                 GetComponent<ICharacterData>().Attacking = true;
-
             }
             else if (attackT >= attackSpeed)
             {
@@ -186,6 +196,7 @@ public class Player : MonoBehaviour, ICharacterData
                 state = State.Idle;
                 attack = false;
                 attackT = 0;
+                init = false;
                 attackScale.localScale = scale;
                 GetComponent<ICharacterData>().Attacking = false;
             }

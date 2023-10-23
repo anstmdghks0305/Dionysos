@@ -7,29 +7,32 @@ public class AttackState : IState
 {
     public int AttackRange;
     public float AttackCoolTime;
-    private bool CanAttack;
+    protected bool CanAttack;
 
 
-    public AttackState(int _AttackRange,float _AttackCoolTime)
+    public AttackState(int _AttackRange, float _AttackCoolTime)
     {
         AttackRange = _AttackRange;
         AttackCoolTime = _AttackCoolTime;
         CanAttack = true;
     }
 
-    public virtual void Work(IEnemy characterData,Transform target)
+    public virtual void Work(IEnemy characterData, Transform target)
     {
-        if (CanAttack==true)
+        if (CanAttack == true)
         {
             characterData.navMeshAgent.isStopped = true;
             characterData.animator.SetTrigger("Attack");
             CanAttack = false;
-            StartAttacking().Forget();
-            AttackingDecision(characterData).Forget();
+            StartAttacking(characterData).Forget();
+            if (!characterData.Attacking)
+            {
+                AttackingDecision(characterData).Forget();
+            }
         }
     }
 
-    async UniTask StartAttacking()
+    async UniTask StartAttacking(IEnemy characterData)
     {
         await UniTask.Delay((int)(AttackCoolTime * 1000));
         CanAttack = true;
@@ -37,11 +40,11 @@ public class AttackState : IState
 
     async UniTask AttackingDecision(IEnemy characterData)
     {
+        
         await UniTask.Delay(5);
         characterData.Attacking = true;
-        await UniTask.Delay((int)(characterData.animator.GetCurrentAnimatorStateInfo(0).length*1000));
+        await UniTask.Delay((int)(characterData.animator.GetCurrentAnimatorStateInfo(0).length * 1000));
         characterData.Attacking = false;
-
     }
 
 }

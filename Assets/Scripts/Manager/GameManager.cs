@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
         MainCam = Camera.main;
         GameClearData.Add(2);
         EnemyDataInputer.EnemyDataInput();
+        ProjectileInputer.ProjectileDataInput();
     }
     private void Update()
     { 

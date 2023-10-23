@@ -33,6 +33,7 @@ public class Slash : MonoBehaviour, ISkill
             {
                 player.Damage = player.defaultDamage;
             }
+            player.attackSpeed = 0.3f;
             StartCoroutine(StartCorotin(player));
 
             Debug.Log(player.powerUp);
@@ -44,7 +45,8 @@ public class Slash : MonoBehaviour, ISkill
 
     IEnumerator StartCorotin(Player player)
     {
-        List<Enemy> e = pool.AliveEnemyPool;
+        List<Enemy> e = new List<Enemy>();
+            e = pool.AliveEnemyPool;
 
         if(e.Count > 0)
         {
@@ -86,6 +88,7 @@ public class Slash : MonoBehaviour, ISkill
             
             if(index >= e.Count - 1)
             {
+                player.attackSpeed = 0.5f;
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);

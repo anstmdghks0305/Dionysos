@@ -14,9 +14,9 @@ public class FarAttackState : AttackState
 
     public override void Work(IEnemy enemy, Transform target)
     {
+        if(CanAttack ==true)
+            ProjectileController.Instance.ProjectilePooling(enemy.where(), Projectile_SerialNum);
         base.Work(enemy, target);
-        Debug.Log("FarState");
-        ProjectileController.Instance.ProjectilePooling(enemy.where(), Projectile_SerialNum);
     }
 
 }
