@@ -86,6 +86,8 @@ public class Slash : MonoBehaviour, ISkill
             
             if(index >= e.Count - 1)
             {
+                player.slash = false;
+
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
