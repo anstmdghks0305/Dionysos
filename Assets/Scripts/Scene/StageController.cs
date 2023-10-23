@@ -1,15 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
-using Cysharp.Threading.Tasks.Triggers;
-using UnityEngine.UIElements;
 using System.Threading;
 using UnityEngine.UI;
-using JetBrains.Annotations;
-using UnityEditorInternal;
+
 
 public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {

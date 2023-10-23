@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3791680643911087218}
   - component: {fileID: 47507835649944637}
   m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
+  m_Name: Arrow
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,4 +127,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SerialNum: 1
-  Direction: {x: 0, y: 0, z: 0}

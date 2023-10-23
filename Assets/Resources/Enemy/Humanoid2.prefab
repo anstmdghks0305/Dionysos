@@ -7,13 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1222535147530769015, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: SerialNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222535147530769015, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: AttackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 451050490, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 451050490, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: m_Radius
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 451050490, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: m_Acceleration
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 451050490, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 451050490, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 451050491, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
       propertyPath: et
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2867704681869376037, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
       propertyPath: m_Name
-      value: Unit002 Variant
+      value: Humanoid2
       objectReference: {fileID: 0}
     - target: {fileID: 4409691494631620674, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
       propertyPath: m_Pivot.x

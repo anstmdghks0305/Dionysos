@@ -19,12 +19,11 @@ public class AttackState : IState
 
     public virtual void Work(IEnemy characterData,Transform target)
     {
-        characterData.navMeshAgent.isStopped = true;
         if (CanAttack==true)
         {
+            characterData.navMeshAgent.isStopped = true;
             characterData.animator.SetTrigger("Attack");
             CanAttack = false;
-            
             StartAttacking().Forget();
             AttackingDecision(characterData).Forget();
         }

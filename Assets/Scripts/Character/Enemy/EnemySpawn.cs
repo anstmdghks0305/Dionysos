@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public List<Enemy> enemies;
-    private int CoolTime = 2000;
+    public List<int> enemies;
+    public int CoolTime = 2000;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class EnemySpawn : MonoBehaviour
 
     async UniTask EnemySpawnCoolTime()
     {
-        foreach (Enemy enemy in enemies)
+        foreach (int enemy in enemies)
         {
             await UniTask.Delay(CoolTime);
             EnemyController.Instance.EnemyPooling(transform, enemy);
