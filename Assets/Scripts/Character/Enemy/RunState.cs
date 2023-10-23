@@ -16,8 +16,8 @@ public class RunState : IState
     public void Work(IEnemy characterData, Transform target)
     {
         characterData.state = State.Move;
+        characterData.navMeshAgent.avoidancePriority = 51;
         characterData.navMeshAgent.isStopped = false;
-        characterData.navMeshAgent.speed = RunSpeed;
         characterData.animator.SetBool("Run", true);
     }
 

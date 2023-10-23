@@ -8,10 +8,40 @@ public static class EnemyDataInputer
     public static List<GameObject> EnemyList
     { get; private set; }
 
+    public static Enemy FindEnemy(Enemy enemy)
+    {
+        foreach (GameObject target in EnemyDataInputer.EnemyList)
+        {
+            if (enemy.GetComponent<Enemy>().SerialNum == target.GetComponent<Enemy>().SerialNum)
+                return target.GetComponent<Enemy>();
+        }
+        return null;
+    }
+
+    public static T CopyComponent<T>(T original,GameObject destination) where T : Component
+    {
+        System.Type type = original.GetType();
+        Component copy=null;
+        System.Reflection.FieldInfo[] fields;
+        foreach (GameObject target in EnemyDataInputer.EnemyList)
+        {
+            if (destination.GetComponent<Enemy>().SerialNum == target.GetComponent<Enemy>().SerialNum)
+            {
+                if (!destination.TryGetComponent<Component>(out copy))
+                    copy = destination.AddComponent(type);
+                fields = type.GetFields();
+                foreach (System.Reflection.FieldInfo field in fields)
+                {
+                    field.SetValue(copy, field.GetValue(original));
+                }
+            }
+        }
+        return copy as T;
+    }
     public static void EnemyDataInput()
     {
         List<Dictionary<string, object>> EenemyDataCsv = CSVReader.Read("EnemyData");
-
+        EnemyList = new List<GameObject>();
         for (int i = 0; i < EenemyDataCsv.Count; i++)
         {
             foreach (GameObject obj in Resources.LoadAll<GameObject>("Enemy"))
@@ -19,19 +49,17 @@ public static class EnemyDataInputer
                 if (EenemyDataCsv[i]["EnemyName"].ToString() == obj.name)
                 {
                     EnemyList.Add(obj);
-                    obj.AddComponent<Enemy>();
+                    if (EnemyList == null)
+                        Debug.Log("안들어감");
                     EnemyType _Type = EenemyDataCsv[i]["Type"].ToString() == "Near" ? EnemyType.Near : EnemyType.Far;
                     int _SerialNum = Convert.ToInt32(EenemyDataCsv[i]["SerialNum"]);
+                    Debug.Log(_SerialNum);
                     int _Hp = Convert.ToInt32(EenemyDataCsv[i]["Hp"]);
                     int _Speed = Convert.ToInt32(EenemyDataCsv[i]["Speed"]);
                     int _Damage = Convert.ToInt32(EenemyDataCsv[i]["Damage"]);
                     int _AttackRange = Convert.ToInt32(EenemyDataCsv[i]["AttackRange"]);
                     int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
-                    int? _Projectile_SerialNum =null;
-                    if (EenemyDataCsv[i]["Projectile_SerialNum"] != null)
-                    {
-                        _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
-                    }
+                    int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
                     obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
                     Debug.Log("잘됨!");
                 }

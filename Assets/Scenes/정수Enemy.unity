@@ -14753,6 +14753,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9e6f11378e1967748b97899f80e6d82d, type: 2}
   - {fileID: 2100000, guid: ba57f625cbb7f5744b517182e93b3953, type: 2}
   Speed: 2
+  Sync: 0
   Range: 0.1
 --- !u!4 &301403520
 Transform:
@@ -35464,7 +35465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d003386d2a7304ba9754c2fa1576a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RhythmSync: 0.75
+  rhythmSyncValue: 0
 --- !u!1 &1749683367
 GameObject:
   m_ObjectHideFlags: 0
@@ -35587,10 +35588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 451050491, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
-  - {fileID: 451050491, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
-  - {fileID: 451050491, guid: 79b36f4f0336fe3448b4e39475f941b8, type: 3}
+  enemies: 010000000200000001000000
+  CoolTime: 2000
 --- !u!4 &1806568723
 Transform:
   m_ObjectHideFlags: 0

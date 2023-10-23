@@ -1,8 +1,3 @@
-using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,17 +16,54 @@ public class Enemy : MonoBehaviour, IEnemy
     public IState IState { get; set; }
     public bool isFlip { get; set; }
     public bool Attacking { get; set; }
+    public int AttackRange;
+    public int AttackCoolTime;
+    public int Projectile_SerialNum;
 
     AttackState attackState;
     RunState runState;
 
-    private void Start()
+    public Enemy Copy(Enemy value)
     {
+
+        Type = value.Type;
+        IState = value.IState;
+        SerialNum = value.SerialNum;
+        Speed = value.Speed;
+        Damage = value.Damage;
+        AttackCoolTime = value.AttackCoolTime;
+        Projectile_SerialNum = value.Projectile_SerialNum;
+        
+        return this;
+    }
+
+    private void OnEnable()
+    {
+        Copy(EnemyDataInputer.FindEnemy(this));
+        navMeshAgent = this.GetComponent<NavMeshAgent>();
+        EnemyDataInputer.CopyComponent<NavMeshAgent>(navMeshAgent, this.gameObject);
+        animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
+        EnemyDataInputer.CopyComponent<Animator>(animator, this.gameObject);
+
+        switch (this.Type)
+        {
+            case EnemyType.Near:
+                attackState = new AttackState(AttackRange, AttackCoolTime);
+                break;
+            case EnemyType.Far:
+                attackState = new FarAttackState(AttackRange, AttackCoolTime, Projectile_SerialNum);
+                break;
+        }
+        runState = new RunState(Speed);
+        IState = runState;
+
     }
     void Update()
     {
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
+        Debug.Log(IState.ToString());
+
     }
 
     public void Stun()
@@ -41,16 +73,16 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void Attack()
     {
-        IState = runState;
+        IState = attackState;
     }
     public void Move()
     {
-        IState = attackState;
+        IState = runState;
     }
 
     public void StateChange(Player player)
     {
-        if (GameManager.Instance.GameStop|| player.Died)
+        if (GameManager.Instance.GameStop || player.Died)
         {
             Idle();
             return;
@@ -60,20 +92,20 @@ public class Enemy : MonoBehaviour, IEnemy
             Die();
             return;
         }
-        navMeshAgent.SetDestination(player.gameObject.transform.position);
+        navMeshAgent.SetDestination(player.where().position);
         Filp(player.gameObject.transform);
-        if (state == State.Idle)
+        Debug.Log(navMeshAgent.remainingDistance);
+        Debug.Log(attackState.AttackRange);
+        if (navMeshAgent.remainingDistance < attackState.AttackRange)
         {
-            if (navMeshAgent.remainingDistance > attackState.AttackRange)
-            {
-                Attack();
-                Attacking = true;
-            }
-            else
-            {
-                Move();
-            }
+            Attack();
+            Attacking = true;
         }
+        else
+        {
+            Move();
+        }
+
         IState.Work(this, player.transform);
     }
 
@@ -99,12 +131,12 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Idle()
     {
         navMeshAgent.isStopped = true;
-        AnimatorControllerParameter[] paramarray = animator.parameters; 
+        AnimatorControllerParameter[] paramarray = animator.parameters;
         IState = null;
     }
     public void Filp(Transform player)
     {
-        isFlip = this.gameObject.GetComponent<RectTransform>().position.x - player.GetComponent<RectTransform>().position.x > 0 ? true : false;
+        isFlip = this.gameObject.transform.position.x - player.transform.position.x > 0 ? true : false;
         if (isFlip)
             this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         else
@@ -113,7 +145,6 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void Damaged(int Damage)
     {
-        Debug.Log(Damage);
         Hp -= Damage;
         eventcontroller.DoEvent(new EventData("Hp", Hp));
         if (Hp.ShowCurrentHp() <= 0)
@@ -131,7 +162,7 @@ public class Enemy : MonoBehaviour, IEnemy
     /// <param name="_AttackCoolTime"></param>
     /// <param name="AttackAnimationTime"></param>
     /// <param name="_projectile"></param>
-    public void Initailize(EnemyType _Type, int _SerialNum, int _Hp, int _Speed, int _Damage, int _AttackRange, int _AttackCoolTime,int? _Projectile_SerialNum =null)
+    public void Initailize(EnemyType _Type, int _SerialNum, int _Hp, int _Speed, int _Damage, int _AttackRange, int _AttackCoolTime, int _Projectile_SerialNum)
     {
         this.gameObject.tag = "enemy";
         this.Type = _Type;
@@ -141,19 +172,14 @@ public class Enemy : MonoBehaviour, IEnemy
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         Died = false;
         eventcontroller = this.transform.GetComponentInChildren<EventController>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = this.GetComponent<NavMeshAgent>();
         IState = null;
         Attacking = false;
-        switch (this.Type)
-        {
-            case EnemyType.Near:
-            attackState = new AttackState(_AttackRange,_AttackCoolTime);
-            break;
-        case EnemyType.Far:
-            attackState = new FarAttackState(_AttackRange, _AttackCoolTime, _Projectile_SerialNum);
-            break;
-        }
-        navMeshAgent.stoppingDistance = attackState.AttackRange;
-        runState = new RunState(_Speed);
+        AttackRange = _AttackRange;
+        AttackCoolTime = _AttackCoolTime;
+        Projectile_SerialNum = _Projectile_SerialNum;
+        Speed = _Speed;
+        navMeshAgent.stoppingDistance = _AttackRange-2;
+        navMeshAgent.speed = _Speed;
     }
-    }
+}

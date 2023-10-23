@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(root.Attacking);
+        //Debug.Log(root.Attacking);
     }
 
     private void OnTriggerEnter(Collider other)

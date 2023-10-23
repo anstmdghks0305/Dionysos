@@ -38,15 +38,15 @@ public class EnemyController : Singleton<EnemyController>
         enemy.gameObject.transform.SetParent(DiedEnemy, transform);
     }
 
-    public void EnemyPooling(Transform Pos, Enemy enemy)
+    public void EnemyPooling(Transform Pos, int enemy)
     {
         Enemy temp = null;
         foreach (Enemy died in DiedEnemy)
         {
-            if (died.SerialNum == enemy.SerialNum)
+            if (died.SerialNum == enemy)
             {
-                enemy.gameObject.transform.SetParent(EnemyPool);
-                enemy.animator.SetBool("Die", false);
+                died.gameObject.transform.SetParent(EnemyPool);
+                died.animator.SetBool("Die", false);
                 temp = died;
                 break;
             }
@@ -58,9 +58,16 @@ public class EnemyController : Singleton<EnemyController>
         }
         else
         {
-            GameObject obj = GameObject.Instantiate(enemy.gameObject, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), EnemyPool);
-            obj.transform.SetParent(EnemyPool);
-            AliveEnemyPool.Add(obj.GetComponent<Enemy>());
+            GameObject obj = null;
+            foreach (GameObject target in EnemyDataInputer.EnemyList)
+            {
+                if (target.GetComponent<Enemy>().SerialNum == enemy)
+                {
+                    obj = GameObject.Instantiate(target, Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), EnemyPool);
+                    obj.transform.SetParent(EnemyPool);
+                    AliveEnemyPool.Add(obj.GetComponent<Enemy>());
+                } 
+            }
         }
     }
 
