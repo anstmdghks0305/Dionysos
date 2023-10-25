@@ -20,6 +20,9 @@ public class MainUI : MonoBehaviour
 
     public void GoStageScene()
     {
+        soundControlUI.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        UIManager.Instance.Active = false;
         SceneManager.LoadScene(StageSceneBuildIndex);
     }
 
