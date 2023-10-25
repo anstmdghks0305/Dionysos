@@ -39,6 +39,9 @@ public class Weapon : MonoBehaviour
         {
             other.GetComponent<ICharacterData>().Damaged(Damage);
             root.Attacking = false;
+
+            if (name == "공격판정")
+                Debug.Log(transform.parent.parent.GetComponent<Player>().SkillInterface.powerUp);
         }
         else if(other.tag == "Projectile")
         {

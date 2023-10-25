@@ -24,7 +24,7 @@ public class Player : MonoBehaviour, ICharacterData
     public Animator anim;
     public bool Init = false;
     public Vector3 target;
-    ISkill SkillInterface;
+    public ISkill SkillInterface;
     public Slash SlashSkill;
     public Dash DashSkill;
     public float horizontal;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, ICharacterData
         attackScale = transform.GetChild(0).GetChild(3);
         scale = transform.GetChild(0).GetChild(3).localScale;
         newScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
-
+        Damage = 30;
     }
 
     public void Attack()
@@ -103,11 +103,7 @@ public class Player : MonoBehaviour, ICharacterData
         
         PlayerAnim();
         Move();
-
-        if(hurt)
-        {
-            HurtTime();
-        }
+        HurtTime();
         if (Input.GetKeyDown(KeyCode.Q)) 
         {
             GameObject ball = Instantiate(fireball);
@@ -116,6 +112,7 @@ public class Player : MonoBehaviour, ICharacterData
                 new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
 
             ball.AddComponent<FireBall>();
+            ball.GetComponent<FireBall>().damage = defaultDamage;
 
             if(isFlip)
                 ball.GetComponent<FireBall>().dir = Vector3.right;
@@ -132,7 +129,9 @@ public class Player : MonoBehaviour, ICharacterData
         if (Input.GetKeyDown(KeyCode.E))
         {
             slash = true;
+
             SkillInterface = SlashSkill;
+            PlayerRhythm.InputAction("Slash");
             SkillInterface.CanUse = true;
             if (SkillInterface.CanUse)
                 SkillInterface.Work(this);
@@ -164,47 +163,89 @@ public class Player : MonoBehaviour, ICharacterData
         else if (horizontal > 0)
             isFlip = true;
 
+
+
         if (attack)
         {
-            if (powerUp)
+            if(slash)
             {
-                if (!init)
+                if(SkillInterface.powerUp)
                 {
-                    Effect.AttackEffect("Perfect");
-                    init = true;
+                    Debug.Log("퍼펙");
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Perfect");
+                        init = true;
+                    }
                 }
-                attackScale.localScale = newScale;
-                weapon.Damage = 40;
+                else if (!SkillInterface.powerUp)
+                {
+                    Debug.Log("뱃");
+                    if (!init)
+                    {
+                        Debug.Log("bad");
+                        Effect.AttackEffect("Bad");
+                        init = true;
+                    }
+                }
+                weapon.Damage = Damage;
             }
             else
             {
-                if (!init)
+                if (powerUp)
                 {
-                    Effect.AttackEffect("Bad");
-                    init = true;
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Perfect");
+                        init = true;
+                    }
+                    attackScale.localScale = newScale;
+                    weapon.Damage = 40;
                 }
-                attackScale.localScale = scale;
-                weapon.Damage = defaultDamage;
+                else
+                {
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Bad");
+                        init = true;
+                    }
+                    attackScale.localScale = scale;
+                    weapon.Damage = defaultDamage;
+                }
             }
+            attackScale.localScale = newScale;
             anim.SetTrigger("RunToIdle");
             attackT += Time.deltaTime;
 
             if (attackT < attackSpeed)
             {
                 state = State.Attack;
-                GetComponent<ICharacterData>().Attacking = true;
+                if(!Init)
+                {
+                    GetComponent<ICharacterData>().Attacking = true;
+                    Init = true;
+                }
             }
             else if (attackT >= attackSpeed)
             {
                 init = false;
+                Init = false;
                 anim.SetTrigger("AttackToIdle");
                 powerUp = false;
                 state = State.Idle;
                 attack = false;
                 attackT = 0;
-                init = false;
                 attackScale.localScale = scale;
                 GetComponent<ICharacterData>().Attacking = false;
+                //if (GetComponent<ICharacterData>().Attacking)
+                //{
+                //    Debug.Log("공격실패");
+                //    GetComponent<ICharacterData>().Attacking = false;
+                //}
+                //else if (!GetComponent<ICharacterData>().Attacking)
+                //{
+                //    Debug.Log("공격성공");
+                //}
             }
         }
     }
@@ -237,14 +278,18 @@ public class Player : MonoBehaviour, ICharacterData
         }
     }
     float hurtTime = 0;
+
     private void HurtTime()
     {
-        hurtTime += Time.deltaTime;
-
-        if(hurtTime >= maxHurtTime)
+        if (hurt)
         {
-            hurt = false;
-            hurtTime = 0;
+            hurtTime += Time.deltaTime;
+
+            if (hurtTime >= maxHurtTime)
+            {
+                hurt = false;
+                hurtTime = 0;
+            }
         }
     }
 
@@ -262,17 +307,19 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if (dash)
         {
-            if(powerUp)
+            if (collision.CompareTag("enemy"))
             {
-                if (collision.CompareTag("enemy"))
-                {
-                    collision.GetComponent<Enemy>().Stun();
-                    collision.GetComponent<ICharacterData>().Damaged(Damage);
-                }
-                else if (collision.CompareTag("?"))
-                {
-                    Destroy(collision.gameObject);
-                }
+                Debug.Log("gh");
+                //collision.GetComponent<Enemy>().Stun();
+                collision.GetComponent<ICharacterData>().Damaged(Damage);
+            }
+            else if (collision.tag == "?")
+            {
+                Destroy(collision.gameObject);
+            }
+            if (powerUp)
+            {
+                
             }
         }
     }

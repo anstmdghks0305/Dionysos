@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Slash : MonoBehaviour, ISkill
 {
@@ -15,7 +16,7 @@ public class Slash : MonoBehaviour, ISkill
     //public List<Enemy> e;
     public EnemyController pool;
 
-    public bool powerUp;
+    public bool powerUp { get; set; }
 
     public Slash()
     {
@@ -27,13 +28,14 @@ public class Slash : MonoBehaviour, ISkill
         {
             if(powerUp)
             {
-                player.Damage = 60;
+                Debug.Log("퍼펙트");
+                player.Damage = 90;
             }
             else
             {
                 player.Damage = player.defaultDamage;
             }
-            player.attackSpeed = 0.3f;
+            player.attackSpeed = 0.1f;
             StartCoroutine(StartCorotin(player));
 
             Debug.Log(player.powerUp);
@@ -45,10 +47,10 @@ public class Slash : MonoBehaviour, ISkill
 
     IEnumerator StartCorotin(Player player)
     {
-        List<Enemy> e = new List<Enemy>();
-            e = pool.AliveEnemyPool;
+        List<Enemy> enmy = pool.AliveEnemyPool; 
+        List<Enemy> e = enmy.ToList();
 
-        if(e.Count > 0)
+        if (e.Count > 0)
         {
             for (int i = 0; i < e.Count; i++)
             {
@@ -88,9 +90,10 @@ public class Slash : MonoBehaviour, ISkill
             
             if(index >= e.Count - 1)
             {
+                e.Clear();
                 player.slash = false;
-
                 player.attackSpeed = 0.5f;
+                powerUp = false;
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);

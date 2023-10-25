@@ -55,6 +55,7 @@ public class Rhythm : MonoBehaviour
             case "Dash":
                 break;
             case "Slash":
+                player.SkillInterface.powerUp = true;
                 break;
             case "FireBall":
                 break;
@@ -74,6 +75,7 @@ public class Rhythm : MonoBehaviour
             case "Dash":
                 break;
             case "Slash":
+                player.SkillInterface.powerUp = false;
                 break;
             case "FireBall":
                 break;
