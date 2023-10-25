@@ -24,7 +24,11 @@ public class EnemySpawn : MonoBehaviour
     {
         foreach (int enemy in enemies)
         {
+            if (GameManager.Instance.GameStop == true)
+                await UniTask.WaitUntil(() => !GameManager.Instance.GameStop);
             await UniTask.Delay(CoolTime);
+            if (GameManager.Instance.GameStop == true)
+                await UniTask.WaitUntil(() => !GameManager.Instance.GameStop);
             EnemyController.Instance.EnemyPooling(this.transform, enemy);
         }
     }

@@ -94,18 +94,18 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void StateChange(Player player)
     {
-        if (GameManager.Instance.GameStop || player.Died)
-        {
-            Idle();
-            return;
-        }
-        if (state == State.Die)
-        {
-            Die();
-            return;
-        }
         if (navMeshAgent != null)
         {
+            if (GameManager.Instance.GameStop || player.Died)
+            {
+                Idle();
+                return;
+            }
+            if (state == State.Die)
+            {
+                Die();
+                return;
+            }
             navMeshAgent.SetDestination(player.transform.position);
             Filp(player.gameObject.transform);
             if (Vector3.Distance(player.transform.position, this.transform.position) < attackState.AttackRange)

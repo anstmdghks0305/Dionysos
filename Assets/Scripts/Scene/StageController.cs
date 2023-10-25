@@ -79,6 +79,8 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         LastDropPos = GetComponent<RectTransform>().position.x;
         while (true)
         {
+            if (GameManager.Instance.GameStop == true)
+                await UniTask.WaitUntil(() => !GameManager.Instance.GameStop);
             await UniTask.Delay(20, cancellationToken: token.Token);
             LastDropPos = Mathf.Lerp(LastDropPos, TargetPos, 0.3f);
             Debug.Log(LastDropPos);

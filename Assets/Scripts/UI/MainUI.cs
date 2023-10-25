@@ -23,6 +23,7 @@ public class MainUI : MonoBehaviour
         soundControlUI.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         UIManager.Instance.Active = false;
+        GameManager.Instance.GameStop = false;
         SceneManager.LoadScene(StageSceneBuildIndex);
     }
 
@@ -30,5 +31,6 @@ public class MainUI : MonoBehaviour
     {
         UIManager.Instance.Active = false;
         this.gameObject.SetActive(false);
+        GameManager.Instance.GameStop = false;
     }
 }
