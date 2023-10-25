@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Weapon : MonoBehaviour
 {
     public string Target = "Player";
     public int Damage = 5;
     public ICharacterData root;
-    Player player;
     Weapon(int _Damage)
     {
 
@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        if (name == "∞¯∞›∆«¡§")
+        if (name == "Í≥µÍ≤©ÌåêÏ†ï")
         {
             root = transform.parent.parent.GetComponent<ICharacterData>();
             //player = transform.parent.parent.GetComponent<Player>();
@@ -23,34 +23,34 @@ public class Weapon : MonoBehaviour
         }
         else
             root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
-
         root.Attacking = false;
     }
     private void Update()
     {
-        if (root.Attacking)
-            transform.GetComponent<Collider>().enabled = true;
-        else
-            transform.GetComponent<Collider>().enabled = false;
+        if (root.Attacking && transform.GetComponent<BoxCollider>().enabled == false)
+            transform.GetComponent<BoxCollider>().enabled = true;
+        else if (!root.Attacking&& transform.GetComponent<BoxCollider>().enabled == true)
+            transform.GetComponent<BoxCollider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Target))
+        if (other.CompareTag(Target)&&root.Attacking)
         {
-            //other.GetComponent<ICharacterData>().Damaged(Damage);
-            other.GetComponent<Boss.BossController>().GetDamange(Damage);
+            other.GetComponent<ICharacterData>().Damaged(Damage);
+            root.Attacking = false;
         }
-/*        else if(other.CompareTag(""))
+        else if(other.tag == "Projectile")
         {
-            if (name == "∞¯∞›∆«¡§")
+            if (name == "Í≥µÍ≤©ÌåêÏ†ï")
             {
-                Destroy(other.gameObject);
+                ProjectileController.Instance.UsedProjectilePooling(other.GetComponent<Projectile>());
+                other.gameObject.SetActive(false);
             }
-        }*/
+        }
     }
 
-    //¿Ã∞≈ æ»µ 
+    //ÔøΩÃ∞ÔøΩ ÔøΩ»µÔøΩ
     //private void OnTriggerEnter(Collider other)
     //{
     //    if (root.Attacking == true)

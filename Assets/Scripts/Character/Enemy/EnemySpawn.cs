@@ -25,7 +25,7 @@ public class EnemySpawn : MonoBehaviour
         foreach (int enemy in enemies)
         {
             await UniTask.Delay(CoolTime);
-            EnemyController.Instance.EnemyPooling(transform, enemy);
+            EnemyController.Instance.EnemyPooling(this.transform, enemy);
         }
     }
 }

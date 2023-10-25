@@ -15,7 +15,6 @@ public class BarUI: MonoBehaviour
 
     public void UIUpdate(Data data)
     {
-        //Debug.Log(data.ShowFillAmount());
         Bar.fillAmount = data.ShowFillAmount();
     }
 }

@@ -6,8 +6,13 @@ public class EffectManager : MonoBehaviour
 {
     [SerializeField] private Player player;
     public ParticleSystem[] Effect;
+    public float pSpeed;
     [SerializeField] private GameObject Night;
-
+    private void Awake()
+    {
+        Effect[0].playbackSpeed = pSpeed;
+        Effect[1].playbackSpeed = pSpeed;
+    }
     private void Update()
     {
 /*        if(Input.GetKeyDown(KeyCode.X))
@@ -25,7 +30,7 @@ public class EffectManager : MonoBehaviour
     }
     public void NightEffect(bool b)
     {
-        Night.SetActive(b);
+        //Night.SetActive(b);
     }
     public void AttackEffect(string str)
     {

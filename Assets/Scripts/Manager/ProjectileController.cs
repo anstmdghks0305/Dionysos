@@ -26,13 +26,13 @@ public class ProjectileController : Singleton<ProjectileController>
         {
             Projectile temp = Usedprojectiles[_Projectile_SerialNum].Dequeue();
             temp.transform.SetParent(projectileParent);
+            temp.ReUse(Pos);
             temp.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(temp);
         }
         else
         {
-            Debug.Log("¹ÙºÎ");
-            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position, Quaternion.Euler(EnemyController.Instance.player.gameObject.transform.position - Pos.position), projectileParent).transform.GetComponent<Projectile>();
+            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
             obj.transform.SetParent(projectileParent);
             obj.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(obj);
@@ -41,9 +41,9 @@ public class ProjectileController : Singleton<ProjectileController>
 
     public void UsedProjectilePooling(Projectile projectile)
     {
-        Projectile temp = projectiles[projectile.SerialNum].Dequeue();
+        projectile = projectiles[projectile.SerialNum].Dequeue();
         Usedprojectiles[projectile.SerialNum].Enqueue(projectile);
-        temp.transform.SetParent(usedprojectileParent);
+        projectile.transform.SetParent(usedprojectileParent);
     }
 
 

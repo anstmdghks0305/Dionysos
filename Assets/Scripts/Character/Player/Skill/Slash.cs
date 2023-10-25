@@ -33,6 +33,7 @@ public class Slash : MonoBehaviour, ISkill
             {
                 player.Damage = player.defaultDamage;
             }
+            player.attackSpeed = 0.3f;
             StartCoroutine(StartCorotin(player));
 
             Debug.Log(player.powerUp);
@@ -44,7 +45,8 @@ public class Slash : MonoBehaviour, ISkill
 
     IEnumerator StartCorotin(Player player)
     {
-        List<Enemy> e = pool.AliveEnemyPool;
+        List<Enemy> e = new List<Enemy>();
+            e = pool.AliveEnemyPool;
 
         if(e.Count > 0)
         {
@@ -69,7 +71,7 @@ public class Slash : MonoBehaviour, ISkill
         }
         while (true)
         {
-            if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f´Â Ä«¸Þ¶óÀÇ Àý¹ÝÀÌ´Ù
+            if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5fï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
             {
                 transform.position = new Vector3(e[index].transform.position.x - 1, e[index].transform.position.y, e[index].transform.position.z);
                 player.isFlip = true;
@@ -88,6 +90,7 @@ public class Slash : MonoBehaviour, ISkill
             {
                 player.slash = false;
 
+                player.attackSpeed = 0.5f;
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
