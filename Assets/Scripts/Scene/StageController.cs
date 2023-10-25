@@ -118,4 +118,10 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Centering().Forget();
     }
 
+    private void OnDisable()
+    {
+        StageUnlock = null;
+        StageDraw = null;
+        StageSelect = null;
+    }
 }
