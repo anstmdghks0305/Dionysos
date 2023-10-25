@@ -11,15 +11,18 @@ public class GameManager : Singleton<GameManager>
     public List<int> GameClearData = new List<int>();
     public bool GameStop = false;
     public Dictionary<string, StageData> Stages = new Dictionary<string, StageData>();
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(gameObject);
-        BossData.Instance.Read();
+        //BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
     }
     private void Start()
     {
         MainCam = Camera.main;
+        GameClearData.Add(0);
+        GameClearData.Add(1);
         GameClearData.Add(2);
         EnemyDataInputer.EnemyDataInput();
         ProjectileInputer.ProjectileDataInput();

@@ -23,7 +23,7 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
     }
     public void Select()
     {
-        if (Locked == true)
+        if (Locked == true ||GameManager.Instance.GameStop)
             return;
         else if (active == false)
         {
