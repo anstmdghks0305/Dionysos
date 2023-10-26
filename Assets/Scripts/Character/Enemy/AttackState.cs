@@ -24,6 +24,7 @@ public class AttackState : IState
             characterData.navMeshAgent.isStopped = true;
             characterData.animator.SetTrigger("Attack");
             CanAttack = false;
+            characterData.navMeshAgent.avoidancePriority = 1;
             StartAttacking(characterData).Forget();
             if (!characterData.Attacking)
             {
