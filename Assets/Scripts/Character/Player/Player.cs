@@ -43,7 +43,8 @@ public class Player : MonoBehaviour, ICharacterData
     public bool slash;
     public int slashMaxCount = 5;
     [SerializeField] private float maxHurtTime;
-    public LayerMask layermask;
+    public LayerMask enemyLayer;
+    public LayerMask projectileLayer;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -239,36 +240,38 @@ public class Player : MonoBehaviour, ICharacterData
                 attackT = 0;
                 attackScale.localScale = scale;
                 GetComponent<ICharacterData>().Attacking = false;
-                //if (GetComponent<ICharacterData>().Attacking)
-                //{
-                //    Debug.Log("공격실패");
-                //    GetComponent<ICharacterData>().Attacking = false;
-                //}
-                //else if (!GetComponent<ICharacterData>().Attacking)
-                //{
-                //    Debug.Log("공격성공");
-                //}
             }
         }
         if (dash)
         {
-            Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, layermask);
-            bool[] colInit = new bool[hitColliders.Length];
+            enemyColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, enemyLayer);
+            projectileColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, projectileLayer);
 
-            int i = 0;
-            while (i < hitColliders.Length)
+            for (int i = 0; i < projectileColliders.Length; i++)
             {
-                if(!colInit[i])
-                {
-                    hitColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
-                    colInit[i] = true;
-                }
-                i++;
+                ProjectileController.Instance.UsedProjectilePooling(projectileColliders[i].GetComponent<Projectile>());
+                projectileColliders[i].gameObject.SetActive(false);
             }
 
+            for (int i = 0; i < enemyColliders.Length; i++)
+            {
+                if(!enemyColliders[i].GetComponent<Enemy>().init)
+                {
+                    enemyColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
+                    enemyColliders[i].GetComponent<Enemy>().init = true;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < enemyColliders.Length; i++)
+            {
+                enemyColliders[i].GetComponent<Enemy>().init = false;
+            }
         }
     }
-
+    public Collider[] enemyColliders;
+    public Collider[] projectileColliders;
     public void Idle()
     {
 

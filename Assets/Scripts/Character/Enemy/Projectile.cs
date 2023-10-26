@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !other.GetComponent<Player>().dash)
         {
             ProjectileController.Instance.UsedProjectilePooling(this);
             this.gameObject.SetActive(false);
