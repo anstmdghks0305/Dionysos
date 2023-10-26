@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (navMeshAgent != null)
         {
-            if (GameManager.Instance.GameStop || player.Died)
+            if (GameManager.Instance.GameStop || player.Died||player.slash)
             {
                 Idle();
                 return;

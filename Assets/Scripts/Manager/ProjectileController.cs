@@ -44,6 +44,7 @@ public class ProjectileController : Singleton<ProjectileController>
         projectile = projectiles[projectile.SerialNum].Dequeue();
         Usedprojectiles[projectile.SerialNum].Enqueue(projectile);
         projectile.transform.SetParent(usedprojectileParent);
+        projectile.gameObject.SetActive(false);
     }
 
 
