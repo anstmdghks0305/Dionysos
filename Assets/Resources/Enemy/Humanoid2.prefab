@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 5881589601371984719}
   - component: {fileID: 6529734761040240599}
   - component: {fileID: 3523847314702656986}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Humanoid2
   m_TagString: enemy
   m_Icon: {fileID: 0}

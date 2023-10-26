@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public int Projectile_SerialNum;
     public int HP;
     private bool Hurt;
+    public bool init;
     AttackState attackState;
     RunState runState;
 

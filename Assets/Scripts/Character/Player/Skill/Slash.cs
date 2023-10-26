@@ -88,7 +88,7 @@ public class Slash : MonoBehaviour, ISkill
             player.Effect.NightEffect(true);
             
             
-            if(index >= e.Count - 1)
+            if(index == player.slashMaxCount - 1 || index >= e.Count - 1)
             {
                 e.Clear();
                 player.slash = false;

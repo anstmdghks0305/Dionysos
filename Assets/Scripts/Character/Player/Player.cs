@@ -41,7 +41,9 @@ public class Player : MonoBehaviour, ICharacterData
     public int defaultDamage = 30;
     private bool hurt;
     public bool slash;
+    public int slashMaxCount = 5;
     [SerializeField] private float maxHurtTime;
+    public LayerMask layermask;
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
-        Speed = 3;
+        Speed = 1;
         state = State.Idle;
         attackScale = transform.GetChild(0).GetChild(3);
         scale = transform.GetChild(0).GetChild(3).localScale;
@@ -248,6 +250,23 @@ public class Player : MonoBehaviour, ICharacterData
                 //}
             }
         }
+        if (dash)
+        {
+            Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, layermask);
+            bool[] colInit = new bool[hitColliders.Length];
+
+            int i = 0;
+            while (i < hitColliders.Length)
+            {
+                if(!colInit[i])
+                {
+                    hitColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
+                    colInit[i] = true;
+                }
+                i++;
+            }
+
+        }
     }
 
     public void Idle()
@@ -303,24 +322,24 @@ public class Player : MonoBehaviour, ICharacterData
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (dash)
-        {
-            if (collision.CompareTag("enemy"))
-            {
-                Debug.Log("gh");
-                //collision.GetComponent<Enemy>().Stun();
-                collision.GetComponent<ICharacterData>().Damaged(Damage);
-            }
-            else if (collision.tag == "?")
-            {
-                Destroy(collision.gameObject);
-            }
-            if (powerUp)
-            {
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    if (dash)
+    //    {
+    //        if (collision.CompareTag("enemy"))
+    //        {
+    //            Debug.Log("gh");
+    //            //collision.GetComponent<Enemy>().Stun();
+    //            collision.GetComponent<ICharacterData>().Damaged(Damage);
+    //        }
+    //        else if (collision.tag == "?")
+    //        {
+    //            Destroy(collision.gameObject);
+    //        }
+    //        if (powerUp)
+    //        {
                 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 }
