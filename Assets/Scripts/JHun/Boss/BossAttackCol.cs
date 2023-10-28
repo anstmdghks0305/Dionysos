@@ -12,6 +12,12 @@ namespace Boss
             if (other.CompareTag("Player"))
                 player = other.GetComponent<Player>();
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+                player = null;
+        }
     }
 }
 
