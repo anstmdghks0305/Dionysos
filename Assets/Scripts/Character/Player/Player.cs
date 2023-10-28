@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ICharacterData
     public int enemyCount;
     public bool powerUp;
     public float attackSpeed;
-    public Weapon weapon;
+    public PlayerWeapon weapon;
     public int defaultDamage = 30;
     private bool hurt;
     public bool slash;
@@ -45,6 +45,9 @@ public class Player : MonoBehaviour, ICharacterData
     [SerializeField] private float maxHurtTime;
     public LayerMask enemyLayer;
     public LayerMask projectileLayer;
+    public Collider[] enemyColliders;
+    public Collider[] projectileColliders;
+
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -105,93 +108,94 @@ public class Player : MonoBehaviour, ICharacterData
         SkillManage();
         
         PlayerAnim();
-        Move();
         HurtTime();
-        if (Input.GetKeyDown(KeyCode.Q)) 
+
+        if(!GameManager.Instance.GameStop)
         {
-            GameObject ball = Instantiate(fireball);
+            Move();
 
-            ball.transform.position = 
-                new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
-
-            ball.AddComponent<FireBall>();
-            ball.GetComponent<FireBall>().damage = defaultDamage;
-
-            if(isFlip)
-                ball.GetComponent<FireBall>().dir = Vector3.right;
-            else
-                ball.GetComponent<FireBall>().dir = Vector3.left;
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            attack = true;
-            PlayerRhythm.InputAction("Attack");
-            //if 퍼펙트 == true => powerUp = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            slash = true;
-
-            SkillInterface = SlashSkill;
-            PlayerRhythm.InputAction("Slash");
-            SkillInterface.CanUse = true;
-            if (SkillInterface.CanUse)
-                SkillInterface.Work(this);
-        }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dash = true;
-            SkillInterface = DashSkill;
-            SkillInterface.CanUse = true;
-            if (SkillInterface.CanUse)
-                SkillInterface.Work(this);
-
-            if(powerUp)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                Damage = 50;
+                GameObject ball = Instantiate(fireball);
+
+                ball.transform.position =
+                    new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+
+                ball.AddComponent<FireBall>();
+                ball.GetComponent<FireBall>().damage = defaultDamage;
+
+                if (isFlip)
+                    ball.GetComponent<FireBall>().dir = Vector3.right;
+                else
+                    ball.GetComponent<FireBall>().dir = Vector3.left;
             }
-            else if(powerUp)
+
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                Damage = defaultDamage;
+                attack = true;
+                PlayerRhythm.InputAction("Attack");
+                //if 퍼펙트 == true => powerUp = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                slash = true;
+
+                SkillInterface = SlashSkill;
+                PlayerRhythm.InputAction("Slash");
+                SkillInterface.CanUse = true;
+                if (SkillInterface.CanUse)
+                    SkillInterface.Work(this);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                dash = true;
+                SkillInterface = DashSkill;
+                SkillInterface.CanUse = true;
+                if (SkillInterface.CanUse)
+                    SkillInterface.Work(this);
+
+                if (powerUp)
+                {
+                    Damage = 50;
+                }
+                else if (powerUp)
+                {
+                    Damage = defaultDamage;
+                }
             }
         }
-        if(isFlip)
-            transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
-        else
-            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
-
-        if (horizontal < 0)
-            isFlip = false;
-        else if (horizontal > 0)
-            isFlip = true;
 
 
 
+        Flip();
+        IfAttack();
+        IfDash();
+    }
+    void IfAttack()
+    {
         if (attack)
         {
-            if(slash)
+            if (slash)
             {
-                if(SkillInterface.powerUp)
+                Debug.Log("slash");
+                if (SkillInterface.powerUp)
                 {
-                    Debug.Log("퍼펙");
                     if (!init)
                     {
                         Effect.AttackEffect("Perfect");
                         init = true;
                     }
+                    weapon.Damage = 90;
                 }
-                else if (!SkillInterface.powerUp)
+                else
                 {
-                    Debug.Log("뱃");
                     if (!init)
                     {
-                        Debug.Log("bad");
                         Effect.AttackEffect("Bad");
                         init = true;
                     }
+                    weapon.Damage = 0;
                 }
-                weapon.Damage = Damage;
             }
             else
             {
@@ -216,14 +220,14 @@ public class Player : MonoBehaviour, ICharacterData
                     weapon.Damage = defaultDamage;
                 }
             }
-            attackScale.localScale = newScale;
+            //attackScale.localScale = newScale;
             anim.SetTrigger("RunToIdle");
             attackT += Time.deltaTime;
 
             if (attackT < attackSpeed)
             {
                 state = State.Attack;
-                if(!Init)
+                if (!Init)
                 {
                     GetComponent<ICharacterData>().Attacking = true;
                     Init = true;
@@ -242,8 +246,13 @@ public class Player : MonoBehaviour, ICharacterData
                 GetComponent<ICharacterData>().Attacking = false;
             }
         }
+    }
+    void IfDash()
+    {
         if (dash)
         {
+            //effect
+
             enemyColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, enemyLayer);
             projectileColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, projectileLayer);
 
@@ -255,23 +264,33 @@ public class Player : MonoBehaviour, ICharacterData
 
             for (int i = 0; i < enemyColliders.Length; i++)
             {
-                if(!enemyColliders[i].GetComponent<Enemy>().init)
-                {
-                    enemyColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
-                    enemyColliders[i].GetComponent<Enemy>().init = true;
-                }
+                enemyColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
+                //if (!enemyColliders[i].GetComponent<Enemy>().init)
+                //{
+                //    enemyColliders[i].GetComponent<Enemy>().init = true;
+                //}
             }
         }
-        else
-        {
-            for (int i = 0; i < enemyColliders.Length; i++)
-            {
-                enemyColliders[i].GetComponent<Enemy>().init = false;
-            }
-        }
+        //else
+        //{
+        //    for (int i = 0; i < enemyColliders.Length; i++)
+        //    {
+        //        enemyColliders[i].GetComponent<Enemy>().init = false;
+        //    }
+        //}
     }
-    public Collider[] enemyColliders;
-    public Collider[] projectileColliders;
+    void Flip()
+    {
+        if (isFlip)
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
+        else
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
+
+        if (horizontal < 0)
+            isFlip = false;
+        else if (horizontal > 0)
+            isFlip = true;
+    }
     public void Idle()
     {
 
@@ -319,6 +338,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if(!hurt)
         {
+            
             Hp -= Damage;
             hurt = true;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
