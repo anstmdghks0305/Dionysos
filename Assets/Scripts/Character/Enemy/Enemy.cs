@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public int Projectile_SerialNum;
     public int HP;
     private bool Hurt;
+    public bool init = false;
     AttackState attackState;
     RunState runState;
 
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour, IEnemy
     }
     void Update()
     {
+
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
     }

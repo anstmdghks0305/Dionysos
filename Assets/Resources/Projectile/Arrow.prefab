@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3791680643911087219}
   - component: {fileID: 3791680643911087218}
   - component: {fileID: 47507835649944637}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
