@@ -11,10 +11,11 @@ public class ExplosionProjectile : Projectile
     private bool Explosioned = false;
     private float EffectDestroyTime = 0.5f;
     // Start is called before the first frame update
-    public override Projectile Copy(Projectile value)
+    public override void Copy(Projectile value)
     {
+        ExplosionProjectile temp = value as ExplosionProjectile;
         base.Copy(value);
-        return this;
+        ExplosionDamage = temp.ExplosionDamage;
     }
 
     public override void DirectionControl(Transform targetpos)
@@ -89,7 +90,11 @@ public class ExplosionProjectile : Projectile
         particle.gameObject.SetActive(false);
         ProjectileController.Instance.UsedProjectilePooling(this);
     }
-
+    public void Initialize(int serialNum, float speed, int damage, int Sencond_damage)
+    {
+        base.Initialize(serialNum, speed, damage);
+        ExplosionDamage = Sencond_damage;
+    }
 }
 
 

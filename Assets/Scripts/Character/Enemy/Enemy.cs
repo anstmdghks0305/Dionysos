@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     async UniTask HurtDelay()
     {
-        await UniTask.Delay(300);
+        await UniTask.Delay(1000);
         Hurt = false;
     }
 }

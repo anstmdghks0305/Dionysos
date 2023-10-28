@@ -14,10 +14,11 @@ public class ThrustProjectile : Projectile
     {
         particle = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
-    public override Projectile Copy(Projectile value)
+    public override void Copy(Projectile projectile)
     {
-        base.Copy(value);
-        return this;
+        ThrustProjectile temp =  projectile as ThrustProjectile;
+        base.Copy(temp);
+        this.ThrustDamage = temp.ThrustDamage;
     }
     public override void DirectionControl(Transform targetpos)
     {
@@ -41,7 +42,7 @@ public class ThrustProjectile : Projectile
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
+        this.Copy(ProjectileInputer.FindProjectile(this));
     }
 
     // Update is called once per frame
@@ -82,5 +83,11 @@ public class ThrustProjectile : Projectile
         particle.Pause();
         particle.gameObject.SetActive(false);
         ProjectileController.Instance.UsedProjectilePooling(this);
+    }
+
+    public void Initialize(int serialNum, float speed, int damage, int Sencond_damage)
+    {
+        base.Initialize(serialNum, speed, damage);
+        ThrustDamage = Sencond_damage;
     }
 }

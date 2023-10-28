@@ -10,11 +10,10 @@ public class Projectile : MonoBehaviour
     private float Speed;
     protected int Damage;
     private int DefaultDestroyTime = 5;
-    public virtual Projectile Copy(Projectile value)
+    public virtual void Copy(Projectile value)
     {
         Speed = value.Speed;
         Damage = value.Damage;
-        return this;
     }
     public virtual void DirectionControl(Transform targetpos)
     {
@@ -22,7 +21,6 @@ public class Projectile : MonoBehaviour
         Direction -= Vector3.up * Direction.y-Vector3.right;
         Debug.Log(Direction);
         Debug.Log(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)));
-        float temp;
         if (Direction.x < 0&& Direction.z <0)
             this.transform.rotation = Quaternion.Euler(90, -(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.left)) + 0.5f) * 180, 0);
         else if(Direction.x < 0 && Direction.z >0)

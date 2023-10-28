@@ -18,10 +18,10 @@ public static class EnemyDataInputer
         return null;
     }
 
-    public static T CopyComponent<T>(T original,GameObject destination) where T : Component
+    public static T CopyComponent<T>(T original, GameObject destination) where T : Component
     {
         System.Type type = original.GetType();
-        Component copy=null;
+        Component copy = null;
         System.Reflection.FieldInfo[] fields;
         foreach (GameObject target in EnemyDataInputer.EnemyList)
         {
@@ -58,7 +58,7 @@ public static class EnemyDataInputer
                     int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
                     int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
                     obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
-                    
+
                 }
             }
         }
@@ -86,13 +86,26 @@ public static class ProjectileInputer
         for (int i = 0; i < ProjectileDataCsv.Count; i++)
         {
             foreach (GameObject obj in Resources.LoadAll<GameObject>("Projectile"))
-            { 
+            {
                 if (ProjectileDataCsv[i]["ProjectileName"].ToString() == obj.name)
                 {
                     ProjectileList.Add(obj);
                     int _SerialNum = Convert.ToInt32(ProjectileDataCsv[i]["SerialNum"]);
+                    string type = ProjectileDataCsv[i]["Type"].ToString();
                     float _Speed = (float)Convert.ToDouble(ProjectileDataCsv[i]["Speed"]);
                     int _Damage = Convert.ToInt32(ProjectileDataCsv[i]["Damage"]);
+                    if (type == "Thrust")
+                    {
+                        int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
+                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        return;
+                    }
+                    else if (type == "Explosion")
+                    {
+                        int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
+                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage,_Damage2);
+                        return;
+                    }
                     obj.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
                 }
             }
