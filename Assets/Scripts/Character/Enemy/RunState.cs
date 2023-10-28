@@ -16,6 +16,8 @@ public class RunState : IState
     public void Work(IEnemy characterData, Transform target)
     {
         characterData.state = State.Move;
+        characterData.navMeshAgent.SetDestination(target.position);
+        characterData.navMeshAgent.stoppingDistance = characterData.AttackRange;
         characterData.navMeshAgent.avoidancePriority = 51;
         characterData.navMeshAgent.isStopped = false;
         characterData.animator.SetBool("Run", true);

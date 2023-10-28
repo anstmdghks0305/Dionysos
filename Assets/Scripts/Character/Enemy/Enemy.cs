@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public IState IState { get; set; }
     public bool isFlip { get; set; }
     public bool Attacking { get; set; }
-    public int AttackRange;
+    public int AttackRange{get; set;}
     public int AttackCoolTime;
     public int Projectile_SerialNum;
     public int HP;
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, IEnemy
         Damage = value.Damage;
         AttackCoolTime = value.AttackCoolTime;
         Projectile_SerialNum = value.Projectile_SerialNum;
-
+        AttackRange = value.AttackRange;
         return this;
     }
 
@@ -96,19 +96,18 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void StateChange(Player player)
     {
-        if (GameManager.Instance.GameStop || player.Died)
-        {
-            Idle();
-            return;
-        }
-        if (state == State.Die)
-        {
-            Die();
-            return;
-        }
         if (navMeshAgent != null)
         {
-            navMeshAgent.SetDestination(player.transform.position);
+            if (GameManager.Instance.GameStop || player.Died)
+            {
+                Idle();
+                return;
+            }
+            if (state == State.Die)
+            {
+                Die();
+                return;
+            }
             Filp(player.gameObject.transform);
             if (Vector3.Distance(player.transform.position, this.transform.position) < attackState.AttackRange)
             {
@@ -187,8 +186,6 @@ public class Enemy : MonoBehaviour, IEnemy
     /// <param name="_Damage"></param>
     /// <param name="_AttackRange"></param>
     /// <param name="_AttackCoolTime"></param>
-    /// <param name="AttackAnimationTime"></param>
-    /// <param name="_projectile"></param>
     public void Initailize(EnemyType _Type, int _SerialNum, int _Hp, int _Speed, int _Damage, int _AttackRange, int _AttackCoolTime, int _Projectile_SerialNum)
     {
         this.gameObject.tag = "enemy";
@@ -206,7 +203,7 @@ public class Enemy : MonoBehaviour, IEnemy
         AttackCoolTime = _AttackCoolTime;
         Projectile_SerialNum = _Projectile_SerialNum;
         Speed = _Speed;
-        navMeshAgent.stoppingDistance = _AttackRange - 3;
+        navMeshAgent.stoppingDistance = _AttackRange - 2;
         navMeshAgent.speed = _Speed;
     }
 

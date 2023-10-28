@@ -11,4 +11,5 @@ public interface IEnemy : ICharacterData
     }
     public void StateChange(Player player);
     public NavMeshAgent navMeshAgent { get; set; }
+    public int AttackRange { get; set; }
 }
