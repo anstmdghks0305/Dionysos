@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
     public ICharacterData root;
     private void Start()
     {
-        Damage = root.Damage;
         root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
+        Damage = root.Damage;
         root.Attacking = false;
     }
     private void Update()

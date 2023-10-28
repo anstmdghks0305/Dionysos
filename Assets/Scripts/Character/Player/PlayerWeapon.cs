@@ -21,8 +21,6 @@ public class PlayerWeapon : MonoBehaviour
             //player = transform.parent.parent.GetComponent<Player>();
             //Damage = player.Damage;
         }
-        else
-            root = transform.parent.parent.parent.parent.parent.parent.parent.parent.GetComponent<ICharacterData>();
         root.Attacking = false;
     }
     private void Update()
