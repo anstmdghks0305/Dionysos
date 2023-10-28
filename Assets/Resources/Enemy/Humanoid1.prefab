@@ -3257,7 +3257,7 @@ GameObject:
   - component: {fileID: 4918780207810862808}
   - component: {fileID: 3119774407758973101}
   - component: {fileID: 4918780207810862814}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Humanoid1
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -3333,6 +3333,7 @@ MonoBehaviour:
   AttackCoolTime: 5
   Projectile_SerialNum: 0
   HP: 0
+  init: 0
 --- !u!195 &4918780207810862814
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -38,7 +38,6 @@ public class Weapon : MonoBehaviour
         if (other.CompareTag(Target)&&root.Attacking)
         {
             other.GetComponent<ICharacterData>().Damaged(Damage);
-            root.Attacking = false;
         }
         else if(other.tag == "Projectile")
         {

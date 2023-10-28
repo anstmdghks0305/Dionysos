@@ -24,7 +24,7 @@ public class Player : MonoBehaviour, ICharacterData
     public Animator anim;
     public bool Init = false;
     public Vector3 target;
-    ISkill SkillInterface;
+    public ISkill SkillInterface;
     public Slash SlashSkill;
     public Dash DashSkill;
     public float horizontal;
@@ -37,11 +37,17 @@ public class Player : MonoBehaviour, ICharacterData
     public int enemyCount;
     public bool powerUp;
     public float attackSpeed;
-    public Weapon weapon;
+    public PlayerWeapon weapon;
     public int defaultDamage = 30;
     private bool hurt;
     public bool slash;
+    public int slashMaxCount = 5;
     [SerializeField] private float maxHurtTime;
+    public LayerMask enemyLayer;
+    public LayerMask projectileLayer;
+    public Collider[] enemyColliders;
+    public Collider[] projectileColliders;
+
     private void Awake()
     {
         //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
@@ -56,12 +62,12 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
-        Speed = 3;
+        Speed = 1;
         state = State.Idle;
         attackScale = transform.GetChild(0).GetChild(3);
         scale = transform.GetChild(0).GetChild(3).localScale;
         newScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
-
+        Damage = 30;
     }
 
     public void Attack()
@@ -102,59 +108,180 @@ public class Player : MonoBehaviour, ICharacterData
         SkillManage();
         
         PlayerAnim();
-        Move();
+        HurtTime();
 
-        if(hurt)
+        if(!GameManager.Instance.GameStop)
         {
-            HurtTime();
+            Move();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject ball = Instantiate(fireball);
+
+                ball.transform.position =
+                    new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+
+                ball.AddComponent<FireBall>();
+                ball.GetComponent<FireBall>().damage = defaultDamage;
+
+                if (isFlip)
+                    ball.GetComponent<FireBall>().dir = Vector3.right;
+                else
+                    ball.GetComponent<FireBall>().dir = Vector3.left;
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                attack = true;
+                PlayerRhythm.InputAction("Attack");
+                //if 퍼펙트 == true => powerUp = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                slash = true;
+
+                SkillInterface = SlashSkill;
+                PlayerRhythm.InputAction("Slash");
+                SkillInterface.CanUse = true;
+                if (SkillInterface.CanUse)
+                    SkillInterface.Work(this);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                dash = true;
+                SkillInterface = DashSkill;
+                SkillInterface.CanUse = true;
+                if (SkillInterface.CanUse)
+                    SkillInterface.Work(this);
+
+                if (powerUp)
+                {
+                    Damage = 50;
+                }
+                else if (powerUp)
+                {
+                    Damage = defaultDamage;
+                }
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Q)) 
+
+
+
+        Flip();
+        IfAttack();
+        IfDash();
+    }
+    void IfAttack()
+    {
+        if (attack)
         {
-            GameObject ball = Instantiate(fireball);
-
-            ball.transform.position = 
-                new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
-
-            ball.AddComponent<FireBall>();
-
-            if(isFlip)
-                ball.GetComponent<FireBall>().dir = Vector3.right;
+            if (slash)
+            {
+                Debug.Log("slash");
+                if (SkillInterface.powerUp)
+                {
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Perfect");
+                        init = true;
+                    }
+                    weapon.Damage = 90;
+                }
+                else
+                {
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Bad");
+                        init = true;
+                    }
+                    weapon.Damage = 0;
+                }
+            }
             else
-                ball.GetComponent<FireBall>().dir = Vector3.left;
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            attack = true;
-            PlayerRhythm.InputAction("Attack");
-            //if 퍼펙트 == true => powerUp = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            slash = true;
-            SkillInterface = SlashSkill;
-            SkillInterface.CanUse = true;
-            if (SkillInterface.CanUse)
-                SkillInterface.Work(this);
-        }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dash = true;
-            SkillInterface = DashSkill;
-            SkillInterface.CanUse = true;
-            if (SkillInterface.CanUse)
-                SkillInterface.Work(this);
-
-            if(powerUp)
             {
-                Damage = 50;
+                if (powerUp)
+                {
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Perfect");
+                        init = true;
+                    }
+                    attackScale.localScale = newScale;
+                    weapon.Damage = 40;
+                }
+                else
+                {
+                    if (!init)
+                    {
+                        Effect.AttackEffect("Bad");
+                        init = true;
+                    }
+                    attackScale.localScale = scale;
+                    weapon.Damage = defaultDamage;
+                }
             }
-            else if(powerUp)
+            //attackScale.localScale = newScale;
+            anim.SetTrigger("RunToIdle");
+            attackT += Time.deltaTime;
+
+            if (attackT < attackSpeed)
             {
-                Damage = defaultDamage;
+                state = State.Attack;
+                if (!Init)
+                {
+                    GetComponent<ICharacterData>().Attacking = true;
+                    Init = true;
+                }
+            }
+            else if (attackT >= attackSpeed)
+            {
+                init = false;
+                Init = false;
+                anim.SetTrigger("AttackToIdle");
+                powerUp = false;
+                state = State.Idle;
+                attack = false;
+                attackT = 0;
+                attackScale.localScale = scale;
+                GetComponent<ICharacterData>().Attacking = false;
             }
         }
-        if(isFlip)
+    }
+    void IfDash()
+    {
+        if (dash)
+        {
+            //effect
+
+            enemyColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, enemyLayer);
+            projectileColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, projectileLayer);
+
+            for (int i = 0; i < projectileColliders.Length; i++)
+            {
+                ProjectileController.Instance.UsedProjectilePooling(projectileColliders[i].GetComponent<Projectile>());
+                projectileColliders[i].gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < enemyColliders.Length; i++)
+            {
+                enemyColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
+                //if (!enemyColliders[i].GetComponent<Enemy>().init)
+                //{
+                //    enemyColliders[i].GetComponent<Enemy>().init = true;
+                //}
+            }
+        }
+        //else
+        //{
+        //    for (int i = 0; i < enemyColliders.Length; i++)
+        //    {
+        //        enemyColliders[i].GetComponent<Enemy>().init = false;
+        //    }
+        //}
+    }
+    void Flip()
+    {
+        if (isFlip)
             transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
         else
             transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
@@ -163,52 +290,7 @@ public class Player : MonoBehaviour, ICharacterData
             isFlip = false;
         else if (horizontal > 0)
             isFlip = true;
-
-        if (attack)
-        {
-            if (powerUp)
-            {
-                if (!init)
-                {
-                    Effect.AttackEffect("Perfect");
-                    init = true;
-                }
-                attackScale.localScale = newScale;
-                weapon.Damage = 40;
-            }
-            else
-            {
-                if (!init)
-                {
-                    Effect.AttackEffect("Bad");
-                    init = true;
-                }
-                attackScale.localScale = scale;
-                weapon.Damage = defaultDamage;
-            }
-            anim.SetTrigger("RunToIdle");
-            attackT += Time.deltaTime;
-
-            if (attackT < attackSpeed)
-            {
-                state = State.Attack;
-                GetComponent<ICharacterData>().Attacking = true;
-            }
-            else if (attackT >= attackSpeed)
-            {
-                init = false;
-                anim.SetTrigger("AttackToIdle");
-                powerUp = false;
-                state = State.Idle;
-                attack = false;
-                attackT = 0;
-                init = false;
-                attackScale.localScale = scale;
-                GetComponent<ICharacterData>().Attacking = false;
-            }
-        }
     }
-
     public void Idle()
     {
 
@@ -237,14 +319,18 @@ public class Player : MonoBehaviour, ICharacterData
         }
     }
     float hurtTime = 0;
+
     private void HurtTime()
     {
-        hurtTime += Time.deltaTime;
-
-        if(hurtTime >= maxHurtTime)
+        if (hurt)
         {
-            hurt = false;
-            hurtTime = 0;
+            hurtTime += Time.deltaTime;
+
+            if (hurtTime >= maxHurtTime)
+            {
+                hurt = false;
+                hurtTime = 0;
+            }
         }
     }
 
@@ -252,28 +338,31 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if(!hurt)
         {
+            
             Hp -= Damage;
             hurt = true;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (dash)
-        {
-            if(powerUp)
-            {
-                if (collision.CompareTag("enemy"))
-                {
-                    collision.GetComponent<Enemy>().Stun();
-                    collision.GetComponent<ICharacterData>().Damaged(Damage);
-                }
-                else if (collision.CompareTag("?"))
-                {
-                    Destroy(collision.gameObject);
-                }
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    if (dash)
+    //    {
+    //        if (collision.CompareTag("enemy"))
+    //        {
+    //            Debug.Log("gh");
+    //            //collision.GetComponent<Enemy>().Stun();
+    //            collision.GetComponent<ICharacterData>().Damaged(Damage);
+    //        }
+    //        else if (collision.tag == "?")
+    //        {
+    //            Destroy(collision.gameObject);
+    //        }
+    //        if (powerUp)
+    //        {
+                
+    //        }
+    //    }
+    //}
 }

@@ -7,16 +7,16 @@ public class Dash : MonoBehaviour, ISkill
     public bool CanUse { get; set; }
     public float CoolTime { get; set; }
     public float RemainTime { get; set; }
-    public bool powerUp;
+    public bool powerUp { get; set; }
 
     public void Work(Player player)
     {
         if (CanUse)
         {
-            StartCoroutine(StartCorotin(player));
+            StartCoroutine(SlashLogic(player));
         }
     }
-    IEnumerator StartCorotin(Player player)
+    IEnumerator SlashLogic(Player player)
     {
         if ((player.vertical == 0f) && (player.horizontal == 0f))
         {
@@ -52,7 +52,7 @@ public class Dash : MonoBehaviour, ISkill
             elapseTime += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 2);
 
-            if (Vector3.Distance(player.target, transform.position) < 0.1f)
+            if (Vector3.Distance(player.target, transform.position) < 0.01f)
             {
                 CanUse = false;
                 player.dash = false;
