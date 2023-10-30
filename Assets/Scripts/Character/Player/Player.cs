@@ -6,14 +6,14 @@ using UnityEngine;
 public class Player : MonoBehaviour, ICharacterData
 {
     public Data Hp { private set; get; }
-    public Data Fever{private set;get;}
-    public int Speed{ set; get; }
-    public int Damage{ set; get; }
-    public int AttackSpeed{set; get;}
-    public Animator animator{ set; get; }
+    public Data Fever { private set; get; }
+    public int Speed { set; get; }
+    public int Damage { set; get; }
+    public int AttackSpeed { set; get; }
+    public Animator animator { set; get; }
     public bool isFlip { get; set; }
     public bool Died;
-    public State state{ set; get; }
+    public State state { set; get; }
     public IState IState { get; set; }
     public bool Attacking { get; set; }
     public Rhythm PlayerRhythm;
@@ -42,22 +42,22 @@ public class Player : MonoBehaviour, ICharacterData
     private bool hurt;
     public bool slash;
     public int slashMaxCount = 5;
-    [SerializeField] private float maxHurtTime;
+    [SerializeField] private float maxHurtTime = 1;
     public LayerMask enemyLayer;
     public LayerMask projectileLayer;
     public Collider[] enemyColliders;
     public Collider[] projectileColliders;
+    public bool isFireball;
 
     private void Awake()
     {
-        //weapon = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(1).GetChild(0).GetChild(1).gameObject;
+
     }
     private void SkillManage()
     {
-        //if (Input.GetKeyDown(KeyCode.K))
-        //if(om[itget
+
     }
-    
+
 
     public void Start()
     {
@@ -78,15 +78,12 @@ public class Player : MonoBehaviour, ICharacterData
     }
     public void Move()
     {
+       
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        if (!dash && state != State.Attack)
+        if (!dash && state != State.Stun && state != State.Attack)
         {
             transform.position += new Vector3(horizontal, 0f, vertical) * Time.deltaTime * Speed;
-        }
-        else
-        {
-            
         }
         if ((horizontal != 0) || (vertical != 0))
         {
@@ -106,16 +103,37 @@ public class Player : MonoBehaviour, ICharacterData
     private void Update()
     {
         SkillManage();
-        
+
         PlayerAnim();
         HurtTime();
 
-        if(!GameManager.Instance.GameStop)
+        if (!hurt && !GameManager.Instance.GameStop)
         {
             Move();
 
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                attack = true;
+                isFireball = false;
+                weapon.Damage = 10;
+                PlayerRhythm.InputAction("Attack");
+                //if 퍼펙트 == true => powerUp = true;
+
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                slash = true;
+
+                SkillInterface = SlashSkill;
+                PlayerRhythm.InputAction("Slash");
+                SkillInterface.CanUse = true;
+                if (SkillInterface.CanUse)
+                    SkillInterface.Work(this);
+            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                attack = true;
+                isFireball = true;
                 GameObject ball = Instantiate(fireball);
 
                 ball.transform.position =
@@ -128,23 +146,7 @@ public class Player : MonoBehaviour, ICharacterData
                     ball.GetComponent<FireBall>().dir = Vector3.right;
                 else
                     ball.GetComponent<FireBall>().dir = Vector3.left;
-            }
 
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                attack = true;
-                PlayerRhythm.InputAction("Attack");
-                //if 퍼펙트 == true => powerUp = true;
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                slash = true;
-
-                SkillInterface = SlashSkill;
-                PlayerRhythm.InputAction("Slash");
-                SkillInterface.CanUse = true;
-                if (SkillInterface.CanUse)
-                    SkillInterface.Work(this);
             }
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
@@ -175,51 +177,65 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if (attack)
         {
-            if (slash)
+            if(!slash && !isFireball)
             {
-                Debug.Log("slash");
-                if (SkillInterface.powerUp)
+                if (!init)
                 {
-                    if (!init)
+                    if (powerUp)
                     {
                         Effect.AttackEffect("Perfect");
-                        init = true;
+                        attackScale.localScale = newScale;
                     }
-                    weapon.Damage = 90;
-                }
-                else
-                {
-                    if (!init)
+                    else
                     {
                         Effect.AttackEffect("Bad");
-                        init = true;
+                        attackScale.localScale = newScale;
                     }
-                    weapon.Damage = 0;
+                    init = true;
                 }
+                
             }
-            else
-            {
-                if (powerUp)
-                {
-                    if (!init)
-                    {
-                        Effect.AttackEffect("Perfect");
-                        init = true;
-                    }
-                    attackScale.localScale = newScale;
-                    weapon.Damage = 40;
-                }
-                else
-                {
-                    if (!init)
-                    {
-                        Effect.AttackEffect("Bad");
-                        init = true;
-                    }
-                    attackScale.localScale = scale;
-                    weapon.Damage = defaultDamage;
-                }
-            }
+            //if (slash)
+            //{
+            //    Debug.Log("slash");
+            //    if (SkillInterface.powerUp)
+            //    {
+            //        if (!init)
+            //        {
+            //            Effect.AttackEffect("Perfect");
+            //            init = true;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (!init)
+            //        {
+            //            Effect.AttackEffect("Bad");
+            //            init = true;
+            //        }
+            //    }
+            //}
+            
+            //{
+            //    if (powerUp)
+            //    {
+            //        if (!init)
+            //        {
+            //            Effect.AttackEffect("Perfect");
+            //            init = true;
+            //        }
+            //        attackScale.localScale = newScale;
+            //    }
+            //    else
+            //    {
+            //        if (!init)
+            //        {
+            //            Effect.AttackEffect("Bad");
+            //            init = true;
+            //        }
+            //        attackScale.localScale = scale;
+            //    }
+            //}
             //attackScale.localScale = newScale;
             anim.SetTrigger("RunToIdle");
             attackT += Time.deltaTime;
@@ -227,11 +243,15 @@ public class Player : MonoBehaviour, ICharacterData
             if (attackT < attackSpeed)
             {
                 state = State.Attack;
-                if (!Init)
+                if(!isFireball)
                 {
-                    GetComponent<ICharacterData>().Attacking = true;
-                    Init = true;
+                    if (!Init)
+                    {
+                        GetComponent<ICharacterData>().Attacking = true;
+                        Init = true;
+                    }
                 }
+                
             }
             else if (attackT >= attackSpeed)
             {
@@ -244,6 +264,7 @@ public class Player : MonoBehaviour, ICharacterData
                 attackT = 0;
                 attackScale.localScale = scale;
                 GetComponent<ICharacterData>().Attacking = false;
+                isFireball = false;
             }
         }
     }
@@ -253,8 +274,8 @@ public class Player : MonoBehaviour, ICharacterData
         {
             //effect
 
-            enemyColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, enemyLayer);
-            projectileColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale, Quaternion.identity, projectileLayer);
+            enemyColliders = Physics.OverlapBox(transform.position, transform.localScale, Quaternion.identity, enemyLayer);
+            projectileColliders = Physics.OverlapBox(transform.position, transform.localScale, Quaternion.identity, projectileLayer);
 
             for (int i = 0; i < projectileColliders.Length; i++)
             {
@@ -263,21 +284,8 @@ public class Player : MonoBehaviour, ICharacterData
             }
 
             for (int i = 0; i < enemyColliders.Length; i++)
-            {
                 enemyColliders[i].GetComponent<ICharacterData>().Damaged(Damage);
-                //if (!enemyColliders[i].GetComponent<Enemy>().init)
-                //{
-                //    enemyColliders[i].GetComponent<Enemy>().init = true;
-                //}
-            }
         }
-        //else
-        //{
-        //    for (int i = 0; i < enemyColliders.Length; i++)
-        //    {
-        //        enemyColliders[i].GetComponent<Enemy>().init = false;
-        //    }
-        //}
     }
     void Flip()
     {
@@ -303,19 +311,29 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void PlayerAnim()
     {
-        if(state == State.Move) //뛰기
+        if (state == State.Move) //뛰기
         {
-            anim.SetTrigger("IdleToRun");
+            if(!hurt)
+                anim.SetTrigger("IdleToRun");
         }
-        else if(state == State.Attack) //공격하기
+        else if (state == State.Attack) //공격
         {
             anim.SetTrigger("IdleToAttack");
         }
-        else if(state == State.Idle) //쉬기
+        else if (state == State.Idle) //쉬기
         {
             anim.SetTrigger("RunToIdle");
             anim.SetTrigger("AttackToIdle");
             anim.ResetTrigger("IdleToRun");
+            anim.ResetTrigger("IdleToDamage");
+        }
+        else if(state == State.Stun) //스턴
+        {
+            anim.SetTrigger("IdleToDamage");
+        }
+        else if(state == State.Die)
+        {
+
         }
     }
     float hurtTime = 0;
@@ -325,24 +343,34 @@ public class Player : MonoBehaviour, ICharacterData
         if (hurt)
         {
             hurtTime += Time.deltaTime;
+            state = State.Stun;
 
             if (hurtTime >= maxHurtTime)
             {
                 hurt = false;
                 hurtTime = 0;
+                anim.SetTrigger("DamageToIdle");
+                state = State.Idle;
             }
         }
     }
 
     public void Damaged(int Damage)
     {
-        if(!hurt)
+        if(!dash && !slash)
         {
-            
-            Hp -= Damage;
-            hurt = true;
-            eventcontroller.DoEvent(new EventData("Hp", Hp));
+            if (!hurt)
+            {
+                anim.ResetTrigger("IdleToRun");
+                anim.ResetTrigger("IdleToAttack");
+                anim.SetTrigger("AttackToIdle");
+                anim.SetTrigger("RunToIdle");
+                Hp -= Damage;
+                hurt = true;
+                eventcontroller.DoEvent(new EventData("Hp", Hp));
+            }
         }
+        
     }
 
     //private void OnTriggerEnter(Collider collision)
@@ -361,7 +389,7 @@ public class Player : MonoBehaviour, ICharacterData
     //        }
     //        if (powerUp)
     //        {
-                
+
     //        }
     //    }
     //}
