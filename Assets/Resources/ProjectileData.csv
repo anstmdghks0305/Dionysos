@@ -1,2 +1,3 @@
-ProjectileName,SerialNum,Speed,Damage
-Arrow,0,5,5
+ProjectileName,SerialNum,Type,Speed,Damage,SecondDamage
+Arrow,0,,0,5,5,0
+ExplosionArrow,1,Explosion,5,4,1

@@ -4,75 +4,68 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 public class Projectile : MonoBehaviour
 {
+    public string Target ="Player";
     public int SerialNum;
     private Vector3 Direction;
     private float Speed;
-    private int Damage;
-    public Projectile Copy(Projectile value)
+    protected int Damage;
+    private int DefaultDestroyTime = 5;
+    public virtual void Copy(Projectile value)
     {
         Speed = value.Speed;
         Damage = value.Damage;
-        return this;
     }
-    public void DirectionControl(Transform targetpos)
+    public virtual void DirectionControl(Transform targetpos)
     {
         Direction = targetpos.position - this.transform.position;
         Direction -= Vector3.up * Direction.y-Vector3.right;
-        //Debug.Log(Direction);
-        //Debug.Log(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)));
-        float temp;
+        Debug.Log(Direction);
+        Debug.Log(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)));
         if (Direction.x < 0&& Direction.z <0)
             this.transform.rotation = Quaternion.Euler(90, -(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.left)) + 0.5f) * 180, 0);
         else if(Direction.x < 0 && Direction.z >0)
             this.transform.rotation = Quaternion.Euler(90, +(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.left)) +0.5f) * 180, 0);
         else if (Direction.x > 0&&Direction.z > 0)
-        {
             this.transform.rotation = Quaternion.Euler(90, -(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)) - 0.5f) * 180,0);
-        }
         else
-        {
             this.transform.rotation = Quaternion.Euler(90, (Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)) - 0.5f) * 180, 0);
-        }
     }
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        StartCoroutine(Destory());
+        StartCoroutine(Destory(DefaultDestroyTime));
     }
 
-    private IEnumerator Destory()
+    protected IEnumerator Destory(int delay)
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(delay);
         ProjectileController.Instance.UsedProjectilePooling(this);
-        this.gameObject.SetActive(false);
     }
-    public void ReUse(Transform Pos)
+    public virtual void ReUse(Transform Pos)
     {
         this.gameObject.SetActive(true);
         this.transform.position = Pos.transform.position + 0.5f * Vector3.up;
     }
-    private void Start()
+    protected virtual void Start()
     {
         Copy(ProjectileInputer.FindProjectile(this));
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         this.gameObject.transform.position += Direction.normalized * Speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !other.GetComponent<Player>().dash)
+        if (other.gameObject.tag == Target)
         {
             ProjectileController.Instance.UsedProjectilePooling(this);
-            this.gameObject.SetActive(false);
             other.GetComponent<ICharacterData>().Damaged(Damage);
         }
         else if (other.gameObject.tag == "Obstacle")
         {
             ProjectileController.Instance.UsedProjectilePooling(this);
-            this.gameObject.SetActive(false);
         }
     }
 

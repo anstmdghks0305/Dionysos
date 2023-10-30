@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (navMeshAgent != null)
         {
-            if (GameManager.Instance.GameStop || player.Died)
+            if (GameManager.Instance.GameStop || player.Died||player.slash)
             {
                 Idle();
                 return;
@@ -209,7 +209,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     async UniTask HurtDelay()
     {
-        await UniTask.Delay(300);
+        await UniTask.Delay(1000);
         Hurt = false;
     }
 }
