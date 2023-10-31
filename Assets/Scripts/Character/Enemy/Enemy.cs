@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour, IEnemy
         navMeshAgent.updateRotation = false;
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         Copy(EnemyDataInputer.FindEnemy(this));
-        Debug.LogWarning("¹ÙºÎ");
         switch (this.Type)
         {
             case EnemyType.Near:
@@ -190,8 +189,6 @@ public class Enemy : MonoBehaviour, IEnemy
         this.gameObject.tag = "enemy";
         this.Type = _Type;
         Hp = new Data(_Hp);
-        Debug.Log(Hp.Current);
-        Debug.Log(Hp.Max);
         SerialNum = _SerialNum;
         Damage = _Damage;
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
