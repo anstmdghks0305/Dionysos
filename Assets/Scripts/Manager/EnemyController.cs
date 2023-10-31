@@ -34,6 +34,7 @@ public class EnemyController : Singleton<EnemyController>
     public GameObject FristPooling(Enemy enemy)
     {
         GameObject obj = Instantiate(enemy.gameObject);
+        obj.name = enemy.name;
         obj.transform.SetParent(EnemyPool);
         AliveEnemyPool.Add(obj.GetComponent<Enemy>());
         return obj;
@@ -69,6 +70,7 @@ public class EnemyController : Singleton<EnemyController>
                 if (target.GetComponent<Enemy>().SerialNum == enemy)
                 {
                     obj=Instantiate(target, Pos, Quaternion.Euler(player.gameObject.transform.position - Pos));
+                    obj.name = target.name;
                     obj.transform.SetParent(EnemyPool);
                     AliveEnemyPool.Add(obj.GetComponent<Enemy>());
                     return obj;

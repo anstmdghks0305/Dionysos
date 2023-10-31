@@ -1,4 +1,4 @@
 EnemyName,SerialNum,Hp,Type,Speed,Damage,AttackRange,AttackCoolTime,Projectile_SerialNum
 Humanoid1,1,100,Far,5,10,10,5,2
-Humanoid2,2,100,Near,5,10,2,5,-1
-Humanoid1,1,100,Far,5,10,20,5,3
+Humanoid2,2,100,Near,5,10,2,1,-1
+Humanoid1,3,100,Far,8,10,20,5,3

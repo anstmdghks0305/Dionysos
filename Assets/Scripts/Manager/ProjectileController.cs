@@ -17,14 +17,13 @@ public class ProjectileController : Singleton<ProjectileController>
         if (!Usedprojectiles.ContainsKey(pro.SerialNum))
         {
             Usedprojectiles.Add(pro.SerialNum, new Queue<Projectile>());
-            Debug.Log("투사체" + pro.SerialNum + "죽어있음");
         }
         if (!projectiles.ContainsKey(pro.SerialNum))
         {
             projectiles.Add(pro.SerialNum, new Queue<Projectile>());
-            Debug.Log("투사체" + pro.SerialNum + "살아있음");
         }
         Projectile obj = GameObject.Instantiate(pro.gameObject, pro.transform.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
+        obj.name = pro.name;
         obj.transform.SetParent(projectileParent);
         obj.DirectionControl(Target.transform);
         projectiles[pro.SerialNum].Enqueue(obj);
@@ -45,6 +44,7 @@ public class ProjectileController : Singleton<ProjectileController>
         else
         {
             Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
+            obj.name = ProjectileInputer.ProjectileList[_Projectile_SerialNum].name;
             obj.transform.SetParent(projectileParent);
             obj.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(obj);

@@ -3327,13 +3327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5da5ee38590a43a66c2fdb9f5f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SerialNum: 1
+  SerialNum: 3
   Died: 0
   eventcontroller: {fileID: 6600837475373162051}
   AttackCoolTime: 5
-  Projectile_SerialNum: 2
-  HP: 0
-  init: 0
+  Projectile_SerialNum: 3
 --- !u!195 &4918780207810862814
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3348,7 +3346,7 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 1
   m_AngularSpeed: 0
-  m_StoppingDistance: 8
+  m_StoppingDistance: 18
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
