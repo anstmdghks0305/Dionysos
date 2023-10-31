@@ -3257,7 +3257,7 @@ GameObject:
   - component: {fileID: 4918780207810862808}
   - component: {fileID: 3119774407758973101}
   - component: {fileID: 4918780207810862814}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Humanoid1
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -3331,8 +3331,9 @@ MonoBehaviour:
   Died: 0
   eventcontroller: {fileID: 6600837475373162051}
   AttackCoolTime: 5
-  Projectile_SerialNum: 0
+  Projectile_SerialNum: 1
   HP: 0
+  init: 0
 --- !u!195 &4918780207810862814
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3347,7 +3348,7 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 1
   m_AngularSpeed: 0
-  m_StoppingDistance: 18
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

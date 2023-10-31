@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Slash : MonoBehaviour, ISkill
 {
@@ -10,13 +11,9 @@ public class Slash : MonoBehaviour, ISkill
     public float RemainTime { get; set; }
 
     public int index = 0;
-
-    public List<GameObject> enemies;
-    //public List<Enemy> e;
     public EnemyController pool;
 
-    public bool powerUp;
-
+    public bool powerUp { get; set; }
     public Slash()
     {
         CoolTime = 3;
@@ -25,15 +22,7 @@ public class Slash : MonoBehaviour, ISkill
     {
         if (CanUse)
         {
-            if(powerUp)
-            {
-                player.Damage = 60;
-            }
-            else
-            {
-                player.Damage = player.defaultDamage;
-            }
-            player.attackSpeed = 0.3f;
+            player.attackSpeed = 0.1f;
             StartCoroutine(StartCorotin(player));
 
             Debug.Log(player.powerUp);
@@ -46,22 +35,22 @@ public class Slash : MonoBehaviour, ISkill
     IEnumerator StartCorotin(Player player)
     {
         List<Enemy> e = new List<Enemy>();
-            e = pool.AliveEnemyPool;
 
-        if(e.Count > 0)
+        if (pool.AliveEnemyPool.Count > 0)
         {
-            for (int i = 0; i < e.Count; i++)
+            for (int i = 0; i < pool.AliveEnemyPool.Count; i++)
             {
-                Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(e[i].transform.position);
+                Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(pool.AliveEnemyPool[i].transform.position);
 
-                if (!(enemyPoints.x > 0 && enemyPoints.x < 1
-                    && enemyPoints.y > 0 && enemyPoints.y < 1))
+                if (enemyPoints.x > 0 && enemyPoints.x < 1
+                    && enemyPoints.y > 0 && enemyPoints.y < 1)
                 {
-                    e.RemoveAt(i);
+                    e.Add(pool.AliveEnemyPool[i]);
                 }
             }
         }
-        else
+        
+        if(pool.AliveEnemyPool.Count == 0 || e.Count == 0)
         {
             CanUse = false;
             index = 0;
@@ -69,6 +58,8 @@ public class Slash : MonoBehaviour, ISkill
             player.Damage = player.defaultDamage;
             yield break;
         }
+
+        
         while (true)
         {
             if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f�� ī�޶��� �����̴�
@@ -86,15 +77,24 @@ public class Slash : MonoBehaviour, ISkill
             player.Effect.NightEffect(true);
             
             
-            if(index >= e.Count - 1)
+            if(index == player.slashMaxCount - 1 || 
+                index >= e.Count - 1)
             {
+                e.Clear();
+                if(player.slash)
+                {
+                    player.Damage = 90;
+                }
+                else
+                {
+                    player.Damage = player.defaultDamage;
+                }
                 player.slash = false;
-
                 player.attackSpeed = 0.5f;
+                powerUp = false;
                 CanUse = false;
                 index = 0;
                 player.Effect.NightEffect(false);
-                player.Damage = player.defaultDamage;
                 yield break;
             }
             else if (index < e.Count - 1)

@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public int Projectile_SerialNum;
     public int HP;
     private bool Hurt;
+    public bool init = false;
     AttackState attackState;
     RunState runState;
 
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour, IEnemy
     }
     void Update()
     {
+
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
     }
@@ -96,7 +98,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (navMeshAgent != null)
         {
-            if (GameManager.Instance.GameStop || player.Died)
+            if (GameManager.Instance.GameStop || player.Died||player.slash)
             {
                 Idle();
                 return;
@@ -207,7 +209,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     async UniTask HurtDelay()
     {
-        await UniTask.Delay(300);
+        await UniTask.Delay(1000);
         Hurt = false;
     }
 }

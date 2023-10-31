@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireBall : MonoBehaviour
 {
     public Vector3 dir;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
