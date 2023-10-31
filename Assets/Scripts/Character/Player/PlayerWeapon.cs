@@ -5,56 +5,36 @@ using System;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    public string Target = "Player";
     public int Damage = 5;
-    public ICharacterData root;
-    PlayerWeapon(int _Damage)
-    {
-
-    }
+    ICharacterData root;
 
     private void Start()
     {
-        if (name == "AttackCol")
-        {
-            root = transform.parent.parent.GetComponent<ICharacterData>();
-            //player = transform.parent.parent.GetComponent<Player>();
-            //Damage = player.Damage;
-        }
+        root = transform.parent.parent.GetComponent<ICharacterData>();
         root.Attacking = false;
     }
     private void Update()
     {
-        if (root.Attacking && transform.GetComponent<BoxCollider>().enabled == false)
+        if (root.Attacking)
             transform.GetComponent<BoxCollider>().enabled = true;
-        else if (!root.Attacking && transform.GetComponent<BoxCollider>().enabled == true)
+        else if (!root.Attacking)
             transform.GetComponent<BoxCollider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Target) && root.Attacking)
+        if (other.CompareTag("enemy"))
         {
             other.GetComponent<ICharacterData>().Damaged(Damage);
+            //other.GetComponent<Boss.BossController>().GetDamange(Damage);
+            Debug.Log("check");
         }
-        else if (other.tag == "Projectile")
-        {
-            if (name == "AttackCol")
-            {
-                ProjectileController.Instance.UsedProjectilePooling(other.GetComponent<Projectile>());
-                other.gameObject.SetActive(false);
-            }
-        }
-    }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (root.Attacking == true)
-    //    {
-    //        if (other.tag == Target)
-    //        {
-    //            other.GetComponent<ICharacterData>().Damaged(Damage);
-    //        }
-    //    }
-    //}
+        else if (other.CompareTag("Projectile") || other.name == "ExplosionArrow(Clone)")
+        {
+            ProjectileController.Instance.UsedProjectilePooling(other.GetComponent<Projectile>());
+            other.gameObject.SetActive(false);
+        }
+
+    }
 }
