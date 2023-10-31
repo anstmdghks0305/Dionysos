@@ -5,44 +5,66 @@ using UnityEngine;
 public class Dash : MonoBehaviour, ISkill
 {
     public bool CanUse { get; set; }
-    public float CoolTime { get; set; }
-    public float RemainTime { get; set; }
+    public float coolTime { get; set; }
+    public float maxTime { get; set; }
     public bool powerUp { get; set; }
 
+    void Start()
+    {
+        coolTime = 0;
+    }
+    void Update()
+    {
+        if (!CanUse)
+        {
+            if (coolTime >= 0)
+            {
+                coolTime -= Time.deltaTime;
+            }
+        }
+    }
     public void Work(Player player)
     {
         if (CanUse)
         {
-            StartCoroutine(SlashLogic(player));
+            if(powerUp)
+            {
+                player.dashPowerUp = true;
+            }
+            else
+            {
+                player.dashPowerUp = false;
+            }
+            StartCoroutine(DashLogic(player));
         }
     }
-    IEnumerator SlashLogic(Player player)
+    IEnumerator DashLogic(Player player)
     {
         if ((player.vertical == 0f) && (player.horizontal == 0f))
         {
             if (player.isFlip)
-                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+                player.target = new Vector3(transform.position.x + player.DashDistance, transform.position.y, transform.position.z);
             else
-                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+                player.target = new Vector3(transform.position.x - player.DashDistance, transform.position.y, transform.position.z);
         }
         else
         {
             if (player.vertical > 0f && player.horizontal == 0f)//¡è
-                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.5f);
+                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z + player.DashDistance);
             else if (player.vertical > 0f && player.horizontal > 0)//¢Ö
-                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z + 1.5f);
+                player.target = new Vector3(transform.position.x + player.DashDistance, transform.position.y, transform.position.z + player.DashDistance);
             else if (player.vertical == 0f && player.horizontal > 0)//¡æ
-                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+                player.target = new Vector3(transform.position.x + player.DashDistance, transform.position.y, transform.position.z);
             else if (player.vertical < 0f && player.horizontal > 0)//¢Ù
-                player.target = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z - 1.5f);
+                player.target = new Vector3(transform.position.x + player.DashDistance, transform.position.y, transform.position.z - player.DashDistance);
             else if (player.vertical < 0f && player.horizontal == 0f)//¡é
-                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1.5f);
+                player.target = new Vector3(transform.position.x, transform.position.y, transform.position.z - player.DashDistance);
             else if (player.vertical < 0f && player.horizontal < 0)//¢×
-                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z - 1.5f);
+                player.target = new Vector3(transform.position.x - player.DashDistance, transform.position.y, transform.position.z - player.DashDistance);
             else if (player.vertical == 0f && player.horizontal < 0)//¡ç
-                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+                player.target = new Vector3(transform.position.x - player.DashDistance, transform.position.y, transform.position.z);
             else if(player.vertical > 0f && player.horizontal < 0) //¢Ø
-                player.target = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z + 1.5f);
+                player.target = new Vector3(transform.position.x - player.DashDistance, transform.position.y, transform.position.z + player.DashDistance);
             
         }
 
@@ -56,6 +78,8 @@ public class Dash : MonoBehaviour, ISkill
             {
                 CanUse = false;
                 player.dash = false;
+                coolTime = player.coolTime;
+
                 yield break;
             }
             yield return null;

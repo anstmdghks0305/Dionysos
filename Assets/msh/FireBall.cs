@@ -9,7 +9,7 @@ public class FireBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 4);
     }
 
     // Update is called once per frame
@@ -22,8 +22,7 @@ public class FireBall : MonoBehaviour
     {
         if(other.CompareTag("enemy"))
         {
-            other.GetComponent<ICharacterData>().Damaged(30);
-            Destroy(gameObject);
+            other.GetComponent<ICharacterData>().Damaged(damage);
         }
     }
 }
