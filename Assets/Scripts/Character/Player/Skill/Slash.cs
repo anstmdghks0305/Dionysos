@@ -6,32 +6,47 @@ public class Slash : MonoBehaviour, ISkill
 {
 
     public bool CanUse { get; set; }
-    public float CoolTime { get; set; }
-    public float RemainTime { get; set; }
+    public float coolTime { get; set; }
+    public float maxTime { get; set; }
     public bool powerUp { get; set; }
 
-    public Slash()
+    void Start()
     {
-        CoolTime = 3;
+        coolTime = 0;
+    }
+    void Update()
+    {
+        if(!CanUse)
+        {
+            if(coolTime >= 0)
+            {
+                coolTime -= Time.deltaTime;
+            }
+        }
     }
 
     public void Work(Player player)
     {
         if (CanUse)
         {
-            player.attackSpeed = 0.1f;
+            player.AttackSpeed = 0.1f;
 
             if (powerUp)
+            {
                 player.weapon.Damage = 100;
+                player.attackScale.localScale = player.scale;
+            }
 
             else
+            {
                 player.weapon.Damage = 50;
+                player.attackScale.localScale = player.scale;
+            }
 
-            StartCoroutine(StartCorotin(player));
-            
+            StartCoroutine(SlashLogic(player));
         }
     }
-    IEnumerator StartCorotin(Player player)
+    IEnumerator SlashLogic(Player player)
     {
         int index = 0;
         List<Enemy> pool = EnemyController.Instance.AliveEnemyPool;
@@ -50,9 +65,12 @@ public class Slash : MonoBehaviour, ISkill
 
         if (EnemyController.Instance.AliveEnemyPool.Count == 0 || e.Count == 0)
         {
+            coolTime = player.coolTime;
+            player.slash = false;
+            player.AttackSpeed = player.defaultAttackSpeed;
+            powerUp = false;
             CanUse = false;
             player.Effect.NightEffect(false);
-            player.Damage = player.defaultDamage;
             yield break;
         }
 
@@ -79,8 +97,10 @@ public class Slash : MonoBehaviour, ISkill
             if (index == player.slashMaxCount - 1 ||
                 index >= e.Count - 1)
             {
+                Debug.Log("end");
+                coolTime = player.coolTime;
                 player.slash = false;
-                player.attackSpeed = 0.5f;
+                player.AttackSpeed = player.defaultAttackSpeed;
                 powerUp = false;
                 CanUse = false;
                 player.Effect.NightEffect(false);
@@ -93,8 +113,8 @@ public class Slash : MonoBehaviour, ISkill
             yield return new WaitForSeconds(0.25f);
         }
     }
-    private void OnEnable()
-    {
-        RemainTime = 0;
-    }
+    //private void OnEnable()
+    //{
+    //    maxTime = 0;
+    //}
 }

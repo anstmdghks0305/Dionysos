@@ -26,7 +26,10 @@ public class PlayerWeapon : MonoBehaviour
         if (other.CompareTag("enemy"))
         {
             other.GetComponent<ICharacterData>().Damaged(Damage);
+            //other.GetComponent<Boss.BossController>().GetDamange(Damage);
+            Debug.Log("check");
         }
+
         else if (other.CompareTag("Projectile") || other.name == "ExplosionArrow(Clone)")
         {
             ProjectileController.Instance.UsedProjectilePooling(other.GetComponent<Projectile>());
