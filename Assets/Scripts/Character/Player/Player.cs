@@ -25,11 +25,14 @@ public class Player : MonoBehaviour, ICharacterData
     bool attackInit1 = false;
     public GameObject fireball;
     public Animator anim;
-    public int defaultSpeed;
-    public float dashDistance = 3;
+    [SerializeField] int defaultSpeed;
+    [SerializeField] float dashDistance = 3;
     public float defaultAttackSpeed;
-    public int defaultDamage = 30;
+    [SerializeField] int defaultDamage = 30;
     public float coolTime;
+    public int slashMaxCount = 5;
+    [SerializeField] float maxHurtTime = 1;
+    [SerializeField] float maxFeverT = 3;
     public bool attackInit2 = false;
     public Vector3 target;
     public ISkill SkillInterface;
@@ -46,13 +49,10 @@ public class Player : MonoBehaviour, ICharacterData
     private bool hurt;
     float hurtTime = 0;
     public bool slash;
-    public int slashMaxCount = 5;
-    [SerializeField] private float maxHurtTime = 1;
     bool dashInit;
     public bool dashPowerUp;
     bool fever;
     float feverT;
-    [SerializeField] float maxFeverT = 3;
 
 
     private void Awake()
