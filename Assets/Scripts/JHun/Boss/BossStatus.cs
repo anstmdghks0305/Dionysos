@@ -24,6 +24,15 @@ namespace Boss
             AttackSpeed = _attackSpeed;
             AttackRange = _attackRange;
         }
+        public BossStatus(BossStatus _bossStatus)
+        {
+            Name = _bossStatus.Name;
+            Hp = _bossStatus.Hp;
+            Speed = _bossStatus.Speed;
+            Damage = _bossStatus.Damage;
+            AttackSpeed = _bossStatus.AttackSpeed;
+            AttackRange = _bossStatus.AttackRange;
+        }
     }    
 }
 

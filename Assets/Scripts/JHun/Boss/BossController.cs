@@ -85,7 +85,7 @@ namespace Boss
 
         void LoadData()
         {
-            Status = DataManager<BossStatus>._BossStatus[gameObject.name];
+            Status = new BossStatus(DataManager<BossStatus>._BossStatus[gameObject.name]);
         }
 
         void SaveData()
