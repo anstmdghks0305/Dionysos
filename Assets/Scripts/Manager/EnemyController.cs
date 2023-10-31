@@ -38,7 +38,7 @@ public class EnemyController : Singleton<EnemyController>
         enemy.gameObject.transform.SetParent(DiedEnemy);
     }
 
-    public void EnemyPooling(Transform Pos, int enemy)
+    public void EnemyPooling(Vector3 Pos, int enemy)
     {
         Enemy temp = null;
         foreach (Enemy died in DieEnemyPool)
@@ -60,7 +60,7 @@ public class EnemyController : Singleton<EnemyController>
             {
                 if (target.GetComponent<Enemy>().SerialNum == enemy)
                 {
-                    obj=Instantiate(target, Pos.position, Quaternion.Euler(player.gameObject.transform.position - Pos.position));
+                    obj=Instantiate(target, Pos, Quaternion.Euler(player.gameObject.transform.position - Pos));
                     obj.transform.SetParent(EnemyPool);
                     AliveEnemyPool.Add(obj.GetComponent<Enemy>());
                 } 

@@ -17,10 +17,12 @@ public class ProjectileController : Singleton<ProjectileController>
         if (!Usedprojectiles.ContainsKey(_Projectile_SerialNum))
         {
             Usedprojectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
+            Debug.Log("투사체" + _Projectile_SerialNum + "죽어있음");
         }
         if (!projectiles.ContainsKey(_Projectile_SerialNum))
         {
             projectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
+            Debug.Log("투사체" + _Projectile_SerialNum + "살아있음");
         }
         if (Usedprojectiles[_Projectile_SerialNum].Count != 0)
         {

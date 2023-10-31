@@ -62,9 +62,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     }
 
-    public void Revive(Transform Pos)
+    public void Revive(Vector3 Pos)
     {
-        this.transform.position = Pos.position;
+        this.transform.position = Pos;
         this.gameObject.SetActive(true);
         animator.SetBool("Die", false);
         Hp = Hp.Reset();

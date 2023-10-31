@@ -83,12 +83,14 @@ public static class ProjectileInputer
     {
         ProjectileList = new List<GameObject>();
         List<Dictionary<string, object>> ProjectileDataCsv = CSVReader.Read("ProjectileData");
+        Debug.Log(ProjectileDataCsv.Count);
         for (int i = 0; i < ProjectileDataCsv.Count; i++)
         {
             foreach (GameObject obj in Resources.LoadAll<GameObject>("Projectile"))
             {
                 if (ProjectileDataCsv[i]["ProjectileName"].ToString() == obj.name)
                 {
+                    Debug.Log("리스트 추가");
                     ProjectileList.Add(obj);
                     int _SerialNum = Convert.ToInt32(ProjectileDataCsv[i]["SerialNum"]);
                     string type = ProjectileDataCsv[i]["Type"].ToString();
@@ -97,16 +99,20 @@ public static class ProjectileInputer
                     if (type == "Thrust")
                     {
                         int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
-                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
-                        return;
+                        obj.GetComponent<ThrustProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        break;
                     }
                     else if (type == "Explosion")
                     {
                         int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
-                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage,_Damage2);
-                        return;
+                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        break;
                     }
-                    obj.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
+                    else
+                    {
+                        obj.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
+                        break;
+                    }
                 }
             }
         }

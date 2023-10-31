@@ -3331,7 +3331,7 @@ MonoBehaviour:
   Died: 0
   eventcontroller: {fileID: 6600837475373162051}
   AttackCoolTime: 5
-  Projectile_SerialNum: 1
+  Projectile_SerialNum: 2
   HP: 0
   init: 0
 --- !u!195 &4918780207810862814

@@ -29,7 +29,7 @@ public class EnemySpawn : MonoBehaviour
             await UniTask.Delay(CoolTime);
             if (GameManager.Instance.GameStop == true)
                 await UniTask.WaitUntil(() => !GameManager.Instance.GameStop);
-            EnemyController.Instance.EnemyPooling(this.transform, enemy);
+            EnemyController.Instance.EnemyPooling(this.transform.position+new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)), enemy);
         }
     }
 }
