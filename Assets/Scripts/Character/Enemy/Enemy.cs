@@ -20,29 +20,19 @@ public class Enemy : MonoBehaviour, IEnemy
     public int AttackRange{get; set;}
     public int AttackCoolTime;
     public int Projectile_SerialNum;
-    public int HP;
     private bool Hurt;
-    public bool init = false;
     AttackState attackState;
     RunState runState;
 
     public Enemy Copy(Enemy value)
     {
         Hp = new Data(value.Hp.Max);
-        Type = value.Type;
-        SerialNum = value.SerialNum;
-        Speed = value.Speed;
-        Damage = value.Damage;
-        AttackCoolTime = value.AttackCoolTime;
-        Projectile_SerialNum = value.Projectile_SerialNum;
-        AttackRange = value.AttackRange;
         return this;
     }
 
     private void Start()
     {
         Copy(EnemyDataInputer.FindEnemy(this));
-
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         EnemyDataInputer.CopyComponent<NavMeshAgent>(navMeshAgent, this.gameObject);
@@ -191,6 +181,8 @@ public class Enemy : MonoBehaviour, IEnemy
         this.gameObject.tag = "enemy";
         this.Type = _Type;
         Hp = new Data(_Hp);
+        Debug.Log(Hp.Current);
+        Debug.Log(Hp.Max);
         SerialNum = _SerialNum;
         Damage = _Damage;
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
