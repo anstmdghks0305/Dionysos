@@ -6,36 +6,24 @@ using Manager;
 
 public class SoundControlUI : MonoBehaviour
 {
-    public Slider AllSlider;
-    public Slider PlayerSlider;
+    public Slider MasterSlider;
     public Slider BGMSlier;
+    public Slider SFXSlider;
     public void VolumeAll()
     {
-        //SoundManager.Instance.listenner.volume = AllSlider.value;
+        AudioListener.volume = (MasterSlider.value * 20) / 100f;
     }
     public void VolumeBGM()
     {
-        SoundManager.VolumeBGM = BGMSlier.value;
+        SoundManager.VolumeBGM = (BGMSlier.value * 20) / 100f;
     }
-    public void VolumePlayer()
+    public void VolumeSFX()
     {
-        SoundManager.VolumeBGM = PlayerSlider.value;
+        SoundManager.VolumeSFX = (SFXSlider.value * 20) / 100f;
     }
 
     public void ExitButtonDown()
     {
         this.gameObject.SetActive(false);
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

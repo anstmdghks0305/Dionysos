@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainUI : MonoBehaviour
 {
     SoundControlUI soundControlUI;
-    public short StageSceneBuildIndex = 1;
+    [SerializeField] private GameObject RetryButton;
 
     public void Awake()
     {
-        soundControlUI = transform.GetComponentInChildren<SoundControlUI>();
+        soundControlUI = transform.GetChild(1).GetComponent<SoundControlUI>();
         soundControlUI.gameObject.SetActive(false);
     }
     public void SoundUIOpen()
@@ -18,13 +18,28 @@ public class MainUI : MonoBehaviour
         soundControlUI.gameObject.SetActive(true);
     }
 
-    public void GoStageScene()
+    public void GoInputScene(string input)
     {
         soundControlUI.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         UIManager.Instance.Active = false;
         GameManager.Instance.GameStop = false;
-        SceneManager.LoadScene(StageSceneBuildIndex);
+        UIManager.Instance.InStage(false);
+        SceneManager.LoadScene(input);
+    }
+
+    public void Retry()
+    {
+        soundControlUI.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        UIManager.Instance.Active = false;
+        GameManager.Instance.GameStop = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void RetryActive(bool b)
+    {
+        RetryButton.SetActive(b);
     }
 
     public void ExitButtonDown()
