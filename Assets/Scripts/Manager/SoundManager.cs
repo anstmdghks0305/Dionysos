@@ -6,8 +6,8 @@ namespace Manager
 {
     public class SoundManager : Singleton<SoundManager>
     {
-        public AudioSource SFXPlayer; // 효과음 사용하기 위한 플레이어
         public AudioSource BGMPlayer; // 배경음 사용하기 위한 플레이어
+        public AudioSource SFXPlayer; // 효과음 사용하기 위한 플레이어
 
         [SerializeField] public AudioClip[] MainAudioClip; // 배경음 저장
         [SerializeField] private AudioClip[] SFXAudioClips; // 효과음 저장
@@ -19,9 +19,10 @@ namespace Manager
         Dictionary<string, AudioClip> audioclipdic = new Dictionary<string, AudioClip>();
         private void Awake()
         {
+            //base.Awake();
             DontDestroyOnLoad(gameObject);
-            BGMPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>(); // BGM플레이어
-            SFXPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>(); // 효과음플레이어
+            //BGMPlayer = GameObject.Find("BGM").GetComponent<AudioSource>(); // BGM플레이어
+            //SFXPlayer = GameObject.Find("SFX").GetComponent<AudioSource>(); // 효과음플레이어
 
             // SFXAudioClips내에 오디오클립들을 Dictionary내에 저장
             foreach (AudioClip audioclip in SFXAudioClips)
@@ -29,7 +30,7 @@ namespace Manager
                 audioclipdic.Add(audioclip.name, audioclip);
             }
 
-            PlayBGMSound();
+            //PlayBGMSound();
         }
 
         public void PlaySFXSound(string name, float volum = 1.0f)
@@ -54,6 +55,11 @@ namespace Manager
         private void Update()
         {
             BGMPlayer.volume = VolumeBGM;
+            if(Input.GetKeyDown(KeyCode.O))
+            {
+                Debug.Log(VolumeBGM);
+                Debug.Log(VolumeSFX);
+            }
         }
     }
 }
