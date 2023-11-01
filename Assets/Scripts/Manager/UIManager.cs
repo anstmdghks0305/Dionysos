@@ -27,6 +27,8 @@ public class UIManager : Singleton<UIManager>
         {
             Active = !Active;
             mainUI.gameObject.SetActive(Active);
+            if(mainUI.transform.GetChild(1).gameObject.activeSelf)
+                mainUI.transform.GetChild(1).gameObject.SetActive(false);
             GameManager.Instance.GameStop=Active;
         }
     }

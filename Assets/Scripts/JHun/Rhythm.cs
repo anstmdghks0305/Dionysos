@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.SceneManagement;
 public class Rhythm : MonoBehaviour
 {
     [SerializeField] private ParticleSystem RhythmEffect; // 리듬을 맞추기 위한 이펙트
@@ -27,7 +27,7 @@ public class Rhythm : MonoBehaviour
     {
         EffectTime = RhythmEffect.time;
         Sync = RhythmManager.Instance.RhythmSyncValue;
-        if (Input.GetKeyDown(KeyCode.X))
+        if(Input.GetKeyDown(KeyCode.X))
         {
             InputAction("X");
         }

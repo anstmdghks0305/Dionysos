@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
+    [SerializeField] private string name;
     private static StageController stagecontroller;
-    public int StageBuildIndex;
-    private bool active = false;
+    [SerializeField] private bool active = false;
     public bool Locked = true;
+    public StagePlayer stagePlayer;
     // Start is called before the first frame update
     private void Awake()
     {
         StageController.StageSelect += this.ReceiveActive;
         StageController.StageUnlock += this.ReceiveUnlocked;
-        this.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f); //락걸린 이미지
+        gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f); //락걸린 이미지
     }
     private void Start()
     {
@@ -33,7 +34,7 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
         else
         { 
             UIManager.Instance.InStage(true);
-            SceneManager.LoadScene(StageBuildIndex);
+            SceneManager.LoadScene(stagePlayer.Name);
         } 
     }
 
@@ -47,9 +48,13 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
             active = false;
     }
 
-    public void ReceiveUnlocked(int stage)
+    public void ReceiveUnlocked(StagePlayer temp)
     {
-        if (stage == StageBuildIndex)
+        if(name == temp.Name)
+        {
+            stagePlayer = temp;
+        }
+        if (stagePlayer.Active)
         {
             Locked = false;
             StageController.StageDraw += this.Draw;
