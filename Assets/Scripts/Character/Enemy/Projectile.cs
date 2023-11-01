@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     public string Target ="Player";
     public int SerialNum;
     private Vector3 Direction;
-    private float Speed;
+    protected float Speed;
     protected int Damage;
     private int DefaultDestroyTime = 5;
     public virtual void Copy(Projectile value)
