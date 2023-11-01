@@ -31,7 +31,10 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
             StageController.StageDraw();
         }
         else
+        { 
+            UIManager.Instance.InStage(true);
             SceneManager.LoadScene(StageBuildIndex);
+        } 
     }
 
     public void ReceiveActive(Stage stage)

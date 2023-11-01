@@ -24,6 +24,11 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     /// ¼±ÅÃÃ¢Ä­ Å©±â ÀÌ°É·Î lerp½á¼­ µüµü Ä­¿¡ ¸ÂÃã
     /// </summary>
 
+    private void OnDestroy()
+    {
+        token.Cancel();
+    }
+
     private void Start()
     {
         SelectSize = Screen.width;

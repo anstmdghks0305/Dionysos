@@ -11,7 +11,7 @@ public class SoundControlUI : MonoBehaviour
     public Slider BGMSlier;
     public void VolumeAll()
     {
-        //SoundManager.Instance.listenner.volume = AllSlider.value;
+        AudioListener.volume = AllSlider.value;
     }
     public void VolumeBGM()
     {
@@ -25,17 +25,5 @@ public class SoundControlUI : MonoBehaviour
     public void ExitButtonDown()
     {
         this.gameObject.SetActive(false);
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

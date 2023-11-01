@@ -7,44 +7,53 @@ namespace Boss
     {
         private BossController controller;
         private int damage;
+        private float attackSpeed;
         private float attackRange;
         private NavMeshAgent navAgent;
         private BossAttackCol attackCol;
-        private bool attacking;
+        private BossAnimation animation;
+        private bool attacking = true;
         private float timer;
         public void Work()
         {
-            timer += Time.deltaTime;
-            if (timer >= 1f && !attacking)
+            if (animation.isAttack)
             {
                 Attack();
-                attacking = true;
             }
-
-            if (timer >= 1.1f)
+            else
             {
-                controller.State = BossState.Idle;
-                navAgent.isStopped = false;
-                attacking = false;
-                timer = 0;
+                attacking = true;
             }
         }
 
-        public BossAttack(BossController controller, int damage, float attackRange, BossAttackCol attackCol, NavMeshAgent navAgent)
+        public BossAttack(BossController controller, int damage, float attackSpeed, float attackRange, BossAttackCol attackCol, NavMeshAgent navAgent, BossAnimation animation)
         {
             this.controller = controller;
             this.damage = damage;
+            this.attackSpeed = attackSpeed;
             this.attackRange = attackRange;
             this.navAgent = navAgent;
             this.attackCol = attackCol;
+            this.animation = animation;
         }
 
         void Attack()
         {
             if(attackCol.player != null)
             {
-                attackCol.player.Damaged(damage);
-            }  
+                if (attacking)
+                {
+                    navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                    attackCol.player.Damaged(damage);
+                    attacking = false;
+                }
+            }
+            else
+            {
+                navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                controller.State = BossState.Idle;
+                navAgent.isStopped = false;
+            }
         }
     }
 }

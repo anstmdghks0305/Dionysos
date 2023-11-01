@@ -7,7 +7,7 @@ namespace Boss
         private BossController controller;
         private Animator animator;
         private BossState state;
-
+        public bool isAttack;
         private void Start()
         {
             controller = this.transform.GetComponentInParent<BossController>();
@@ -26,6 +26,14 @@ namespace Boss
                 animator.SetBool(state.ToString(), false);
 
             state = controller.State;
+        }
+
+        public void isAttacking(string str)
+        {
+            if (str == "true")
+                isAttack = true;
+            else
+                isAttack = false;
         }
     }
 }

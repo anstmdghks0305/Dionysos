@@ -18,7 +18,8 @@ public class StageDataRead : MonoBehaviour
             string StageName = StageDataCsv[index]["StageName"].ToString();
             string Difficult = StageDataCsv[index]["Difficult"].ToString();
 
-            GameManager.Instance.Stages.Add(StageName, new StageData(index, bpm, progress, maxScore, StageName, Difficult));
+            //GameManager.Instance.Stages1.Add(StageName, new StageData(index, bpm, progress, maxScore, StageName, Difficult));
+            GameManager.Instance.StageSet(index, bpm, progress, maxScore, StageName, Difficult);
             Debug.Log($"로드 성공!{Difficult}");
         }
     }
