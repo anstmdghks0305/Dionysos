@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RhythmSync : MonoBehaviour
 {
     public Text SyncText;
     private string str;
-    void Start()
-    {
-        
-    }
+
 
     void Update()
     {
@@ -34,5 +32,10 @@ public class RhythmSync : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void Exit(string input)
+    {
+        SceneManager.LoadScene(input);
     }
 }
