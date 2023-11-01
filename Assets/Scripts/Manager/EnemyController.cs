@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 public class EnemyController : Singleton<EnemyController>
 {
     public List<Enemy> AliveEnemyPool = new List<Enemy>();
@@ -10,6 +11,7 @@ public class EnemyController : Singleton<EnemyController>
     public List<Enemy> DieEnemyPool = new List<Enemy>();
     Transform DiedEnemy;
     public Player player;
+    CancellationTokenSource token = new CancellationTokenSource();
 
     private void Awake()
     {
@@ -17,7 +19,10 @@ public class EnemyController : Singleton<EnemyController>
         DiedEnemy = this.transform.GetChild(1);
     }
 
-
+    private void OnDestroy()
+    {
+        token.Cancel();
+    }
 
     async UniTask StartAttacking()
     {
@@ -27,7 +32,7 @@ public class EnemyController : Singleton<EnemyController>
             {
                 enemy.StateChange(player);
             }
-            await UniTask.Delay(300);
+            await UniTask.Delay(300, cancellationToken: token.Token);
         }
     }
 

@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 112549058}
   - component: {fileID: 112549060}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,6 +318,7 @@ MonoBehaviour:
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
+  mainUi: {fileID: 0}
 --- !u!4 &112549059
 Transform:
   m_ObjectHideFlags: 0
