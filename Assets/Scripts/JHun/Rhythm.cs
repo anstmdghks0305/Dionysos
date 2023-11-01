@@ -27,10 +27,10 @@ public class Rhythm : MonoBehaviour
     {
         EffectTime = RhythmEffect.time;
         Sync = RhythmManager.Instance.RhythmSyncValue;
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            InputAction("X");
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    InputAction("X");
+        //}
     }
     public void InputAction(string input)
     {
@@ -47,7 +47,10 @@ public class Rhythm : MonoBehaviour
     {
         Debug.Log("Perfect!");
         PerfectEffect.Play();
-        switch(input)
+
+        if(!player.fever)
+            player.PlusFever(20);
+        switch (input)
         {
             case "Attack":
                 player.attackPowerUP = true;

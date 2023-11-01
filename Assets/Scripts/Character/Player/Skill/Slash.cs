@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour, ISkill
 {
+    public float _coolTime;
 
     public bool CanUse { get; set; }
     public float coolTime { get; set; }
@@ -12,15 +13,16 @@ public class Slash : MonoBehaviour, ISkill
 
     void Start()
     {
-        coolTime = 0;
+        coolTime = _coolTime;
     }
     void Update()
     {
+        
         if(!CanUse)
         {
-            if(coolTime >= 0)
+            if (coolTime <= _coolTime)
             {
-                coolTime -= Time.deltaTime;
+                coolTime += Time.deltaTime;
             }
         }
     }
@@ -63,9 +65,9 @@ public class Slash : MonoBehaviour, ISkill
             }
         }
 
-        if (EnemyController.Instance.AliveEnemyPool.Count == 0 || e.Count == 0)
+        if (pool.Count == 0 || e.Count == 0)
         {
-            coolTime = player.coolTime;
+            coolTime = 0;
             player.slash = false;
             player.AttackSpeed = player.defaultAttackSpeed;
             powerUp = false;
@@ -98,7 +100,7 @@ public class Slash : MonoBehaviour, ISkill
                 index >= e.Count - 1)
             {
                 Debug.Log("end");
-                coolTime = player.coolTime;
+                coolTime = 0;
                 player.slash = false;
                 player.AttackSpeed = player.defaultAttackSpeed;
                 powerUp = false;
