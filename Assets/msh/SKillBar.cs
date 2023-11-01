@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SKillBar : MonoBehaviour
+public class SkillBar : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] Image slashPanel;
@@ -14,43 +14,51 @@ public class SKillBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<Slash>().coolTime <= player.GetComponent<Slash>()._coolTime)
-        {
-            if (!slashInit)
-            {
-                slashPanel.fillAmount = 0;
-                slashInit = true;
-            }
-
-            slashPanel.fillAmount += Time.deltaTime / player.GetComponent<Slash>()._coolTime;
-
-
-            //if (GetComponent<Image>().fillAmount < 1f)
-        }
-        else if (player.GetComponent<Slash>().coolTime >= player.GetComponent<Slash>()._coolTime)
+        if(player.GetComponent<Player>().fever)
         {
             slashPanel.fillAmount = 100;
-            slashInit = false;
+            dashPanel.fillAmount = 100;
         }
-
-        if (player.GetComponent<Dash>().coolTime <= player.GetComponent<Dash>()._coolTime)
+        else
         {
-            if (!dashInit)
+            if (player.GetComponent<Slash>().coolTime <= player.GetComponent<Slash>()._coolTime)
             {
-                dashPanel.fillAmount = 0;
-                dashInit = true;
+                if (!slashInit)
+                {
+                    slashPanel.fillAmount = 0;
+                    slashInit = true;
+                }
+
+                slashPanel.fillAmount += Time.deltaTime / player.GetComponent<Slash>()._coolTime;
+
+
+                //if (GetComponent<Image>().fillAmount < 1f)
+            }
+            else if (player.GetComponent<Slash>().coolTime >= player.GetComponent<Slash>()._coolTime)
+            {
+                slashPanel.fillAmount = 100;
+                slashInit = false;
             }
 
-            dashPanel.fillAmount += Time.deltaTime / player.GetComponent<Dash>()._coolTime;
+            if (player.GetComponent<Dash>().coolTime <= player.GetComponent<Dash>()._coolTime)
+            {
+                if (!dashInit)
+                {
+                    dashPanel.fillAmount = 0;
+                    dashInit = true;
+                }
 
+                dashPanel.fillAmount += Time.deltaTime / player.GetComponent<Dash>()._coolTime;
 
-            //if (GetComponent<Image>().fillAmount < 1f)
+                //if (GetComponent<Image>().fillAmount < 1f)
+            }
+            else if (player.GetComponent<Dash>().coolTime >= player.GetComponent<Dash>()._coolTime)
+            {
+                dashPanel.fillAmount = 100;
+                dashInit = false;
+            }
         }
-        else if (player.GetComponent<Dash>().coolTime >= player.GetComponent<Dash>()._coolTime)
-        {
-            dashPanel.fillAmount = 100;
-            dashInit = false;
-        }
+        
         //FillManage(dashPanel, player.GetComponent<Dash>().coolTime, player.GetComponent<Dash>()._coolTime, dashInit);
     }
 }

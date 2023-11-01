@@ -70,8 +70,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         Hp = new Data(100);
         Fever = new Data(100);
-        Fever -= 0;
-        eventcontroller.DoEvent(new EventData("Fever", Fever));
+        Fever -= 100;
         Speed = defaultSpeed;
         state = State.Idle;
         attackScale = transform.GetChild(0).GetChild(3);
@@ -149,7 +148,6 @@ public class Player : MonoBehaviour, ICharacterData
                     attackPowerUP = true;
                 else
                 {
-                    Debug.Log("gg");
                     PlayerRhythm.InputAction("Attack");
 
                 }
@@ -173,6 +171,7 @@ public class Player : MonoBehaviour, ICharacterData
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 attack = true;
+
                 if (fever)
                     fireBallPowerUP = true;
                 else
@@ -184,8 +183,7 @@ public class Player : MonoBehaviour, ICharacterData
                 if (fireBallPowerUP)
                 {
                     ball.transform.localScale = new Vector3(transform.localScale.x + 3, transform.localScale.y + 3, transform.localScale.z + 3); 
-                    ball.transform.position =
-                         new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                    ball.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                     ball.GetComponent<FireBall>().damage = 50;
                 }
                 else
@@ -316,6 +314,7 @@ public class Player : MonoBehaviour, ICharacterData
         else
         {
             dashInit = false;
+            dashPowerUp = false;
         }
     }
     void IfFever()
@@ -348,11 +347,14 @@ public class Player : MonoBehaviour, ICharacterData
         {
             if(!feverInit)
             {
+                eventcontroller.DoEvent(new EventData("Fever", Fever));
                 AttackSpeed = defaultAttackSpeed;
                 Speed = defaultSpeed;
                 DashDistance = dashDistance;
                 Damage = defaultDamage;
                 feverInit = true;
+                SlashSkill.coolTime = SlashSkill._coolTime;
+                DashSkill.coolTime = DashSkill._coolTime;
             }
         }
     }
@@ -381,8 +383,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if (state == State.Move) //뛰기
         {
-            if(!hurt)
-                anim.SetTrigger("IdleToRun");
+            anim.SetTrigger("IdleToRun");
         }
         else if (state == State.Attack) //공격
         {
