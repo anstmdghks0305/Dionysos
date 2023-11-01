@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     {
         DontDestroyOnLoad(this);
         Active = false;
-        transform.Find("MainUI").gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(true);
         mainUI = transform.GetComponentInChildren<MainUI>();
         mainUI.gameObject.SetActive(Active);
     }
@@ -29,5 +29,10 @@ public class UIManager : Singleton<UIManager>
             mainUI.gameObject.SetActive(Active);
             GameManager.Instance.GameStop=Active;
         }
+    }
+
+    public void InStage(bool b)
+    {
+        mainUI.RetryActive(b);
     }
 }
