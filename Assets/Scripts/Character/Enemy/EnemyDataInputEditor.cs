@@ -38,7 +38,7 @@ public static class EnemyDataInputer
         }
         return copy as T;
     }
-    public static void EnemyDataInput()
+    public static void EnemyDataInput(List<int> UseMob)
     {
         List<Dictionary<string, object>> EenemyDataCsv = CSVReader.Read("EnemyData");
         EnemyList = new List<GameObject>();
@@ -48,20 +48,25 @@ public static class EnemyDataInputer
             {
                 if (EenemyDataCsv[i]["EnemyName"].ToString() == obj.name)
                 {
-                    EnemyType _Type = EenemyDataCsv[i]["Type"].ToString() == "Near" ? EnemyType.Near : EnemyType.Far;
                     int _SerialNum = Convert.ToInt32(EenemyDataCsv[i]["SerialNum"]);
-                    int _Hp = Convert.ToInt32(EenemyDataCsv[i]["Hp"]);
-                    int _Speed = Convert.ToInt32(EenemyDataCsv[i]["Speed"]);
-                    int _Damage = Convert.ToInt32(EenemyDataCsv[i]["Damage"]);
-                    int _AttackRange = Convert.ToInt32(EenemyDataCsv[i]["AttackRange"]);
-                    int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
-                    int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
-                    obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
-                    GameObject temp = EnemyController.Instance.FristPooling(obj.GetComponent<Enemy>());
-                    temp.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
-                    EnemyList.Add(temp);
-                    temp.SetActive(false);
-                    EnemyController.Instance.EnemyDiePooling(temp.GetComponent<Enemy>());
+                    if (UseMob.Contains(_SerialNum))
+                    {
+                        Debug.Log("몇번도니?");
+                        EnemyType _Type = EenemyDataCsv[i]["Type"].ToString() == "Near" ? EnemyType.Near : EnemyType.Far;
+                        int _Hp = Convert.ToInt32(EenemyDataCsv[i]["Hp"]);
+                        int _Speed = Convert.ToInt32(EenemyDataCsv[i]["Speed"]);
+                        int _Damage = Convert.ToInt32(EenemyDataCsv[i]["Damage"]);
+                        int _AttackRange = Convert.ToInt32(EenemyDataCsv[i]["AttackRange"]);
+                        int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
+                        int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
+                        obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
+                        GameObject temp = EnemyController.Instance.FristPooling(obj.GetComponent<Enemy>());
+                        temp.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
+                        EnemyList.Add(temp);
+                        temp.SetActive(false);
+                        EnemyController.Instance.EnemyDiePooling(temp.GetComponent<Enemy>());
+                        break;
+                    }
                 }
             }
         }
