@@ -14,7 +14,7 @@ public class SkillBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.GetComponent<Player>().fever)
+        if (player.GetComponent<Player>().fever)
         {
             slashPanel.fillAmount = 100;
             dashPanel.fillAmount = 100;
@@ -58,7 +58,7 @@ public class SkillBar : MonoBehaviour
                 dashInit = false;
             }
         }
-        
+
         //FillManage(dashPanel, player.GetComponent<Dash>().coolTime, player.GetComponent<Dash>()._coolTime, dashInit);
     }
 }
