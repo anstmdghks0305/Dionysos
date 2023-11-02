@@ -1633,10 +1633,8 @@ MonoBehaviour:
   SerialNum: 2
   Died: 0
   eventcontroller: {fileID: 872117759927375684}
-  AttackCoolTime: 5
+  AttackCoolTime: 1
   Projectile_SerialNum: -1
-  HP: 0
-  init: 0
 --- !u!195 &3523847314702656986
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1646,7 +1644,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3751400024636134918}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.05
   m_Speed: 5
   m_Acceleration: 40
   avoidancePriority: 50

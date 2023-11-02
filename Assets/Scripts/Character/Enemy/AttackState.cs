@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 
-public class AttackState : MonoBehaviour, IState
+public class AttackState : IState
 {
     public int AttackRange;
     public float AttackCoolTime;
     protected bool CanAttack;
-    CancellationTokenSource token = new CancellationTokenSource();
+    CancellationTokenSource token;
 
 
     public AttackState(int _AttackRange, float _AttackCoolTime)
@@ -17,6 +17,12 @@ public class AttackState : MonoBehaviour, IState
         AttackRange = _AttackRange;
         AttackCoolTime = _AttackCoolTime;
         CanAttack = true;
+        token = new CancellationTokenSource();
+    }
+
+    ~AttackState()
+    {
+        token.Cancel();
     }
 
     public virtual void Work(IEnemy characterData, Transform target)
@@ -34,13 +40,9 @@ public class AttackState : MonoBehaviour, IState
             }
         }
     }
-    private void OnDestroy()
-    {
-        token.Cancel();
-    }
     async UniTask StartAttacking(IEnemy characterData)
     {
-        await UniTask.Delay((int)(AttackCoolTime * 1000), cancellationToken: token.Token);
+        await UniTask.Delay((int)(AttackCoolTime * 1000), cancellationToken:token.Token);
         CanAttack = true;
     }
 

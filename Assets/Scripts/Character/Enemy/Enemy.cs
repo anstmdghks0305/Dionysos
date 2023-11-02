@@ -20,41 +20,39 @@ public class Enemy : MonoBehaviour, IEnemy
     public int AttackRange{get; set;}
     public int AttackCoolTime;
     public int Projectile_SerialNum;
-    public int HP;
     private bool Hurt;
-    public bool init = false;
     AttackState attackState;
     RunState runState;
 
     public Enemy Copy(Enemy value)
     {
-        Hp = new Data(value.Hp.Max);
         Type = value.Type;
-        SerialNum = value.SerialNum;
+        Hp = new Data(value.Hp.Max);
         Speed = value.Speed;
         Damage = value.Damage;
-        AttackCoolTime = value.AttackCoolTime;
-        Projectile_SerialNum = value.Projectile_SerialNum;
         AttackRange = value.AttackRange;
         return this;
     }
 
     private void Start()
     {
-        Copy(EnemyDataInputer.FindEnemy(this));
-
         navMeshAgent = this.GetComponent<NavMeshAgent>();
+        eventcontroller = this.transform.GetComponentInChildren<EventController>();
         navMeshAgent.updateRotation = false;
-        EnemyDataInputer.CopyComponent<NavMeshAgent>(navMeshAgent, this.gameObject);
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
-        EnemyDataInputer.CopyComponent<Animator>(animator, this.gameObject);
+        Copy(EnemyDataInputer.FindEnemy(this));
         switch (this.Type)
         {
             case EnemyType.Near:
+                Debug.Log("attack");
                 attackState = new AttackState(AttackRange, AttackCoolTime);
                 break;
             case EnemyType.Far:
+                Debug.Log("farattack");
                 attackState = new FarAttackState(AttackRange, AttackCoolTime, Projectile_SerialNum);
+                break;
+            default:
+                Debug.Log("잘못어감");
                 break;
         }
         runState = new RunState(Speed);
@@ -62,9 +60,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     }
 
-    public void Revive(Transform Pos)
+    public void Revive(Vector3 Pos)
     {
-        this.transform.position = Pos.position;
+        this.transform.position = Pos;
         this.gameObject.SetActive(true);
         animator.SetBool("Die", false);
         Hp = Hp.Reset();

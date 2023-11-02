@@ -38,7 +38,7 @@ public static class EnemyDataInputer
         }
         return copy as T;
     }
-    public static void EnemyDataInput()
+    public static void EnemyDataInput(List<int> UseMob)
     {
         List<Dictionary<string, object>> EenemyDataCsv = CSVReader.Read("EnemyData");
         EnemyList = new List<GameObject>();
@@ -48,17 +48,25 @@ public static class EnemyDataInputer
             {
                 if (EenemyDataCsv[i]["EnemyName"].ToString() == obj.name)
                 {
-                    EnemyList.Add(obj);
-                    EnemyType _Type = EenemyDataCsv[i]["Type"].ToString() == "Near" ? EnemyType.Near : EnemyType.Far;
                     int _SerialNum = Convert.ToInt32(EenemyDataCsv[i]["SerialNum"]);
-                    int _Hp = Convert.ToInt32(EenemyDataCsv[i]["Hp"]);
-                    int _Speed = Convert.ToInt32(EenemyDataCsv[i]["Speed"]);
-                    int _Damage = Convert.ToInt32(EenemyDataCsv[i]["Damage"]);
-                    int _AttackRange = Convert.ToInt32(EenemyDataCsv[i]["AttackRange"]);
-                    int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
-                    int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
-                    obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
-
+                    if (UseMob.Contains(_SerialNum))
+                    {
+                        Debug.Log("몇번도니?");
+                        EnemyType _Type = EenemyDataCsv[i]["Type"].ToString() == "Near" ? EnemyType.Near : EnemyType.Far;
+                        int _Hp = Convert.ToInt32(EenemyDataCsv[i]["Hp"]);
+                        int _Speed = Convert.ToInt32(EenemyDataCsv[i]["Speed"]);
+                        int _Damage = Convert.ToInt32(EenemyDataCsv[i]["Damage"]);
+                        int _AttackRange = Convert.ToInt32(EenemyDataCsv[i]["AttackRange"]);
+                        int _AttackCoolTime = Convert.ToInt32(EenemyDataCsv[i]["AttackCoolTime"]);
+                        int _Projectile_SerialNum = Convert.ToInt32(EenemyDataCsv[i]["Projectile_SerialNum"]);
+                        obj.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
+                        GameObject temp = EnemyController.Instance.FristPooling(obj.GetComponent<Enemy>());
+                        temp.GetComponent<Enemy>().Initailize(_Type, _SerialNum, _Hp, _Speed, _Damage, _AttackRange, _AttackCoolTime, _Projectile_SerialNum);
+                        EnemyList.Add(temp);
+                        temp.SetActive(false);
+                        EnemyController.Instance.EnemyDiePooling(temp.GetComponent<Enemy>());
+                        break;
+                    }
                 }
             }
         }
@@ -75,10 +83,13 @@ public static class ProjectileInputer
         foreach (GameObject target in ProjectileInputer.ProjectileList)
         {
             if (projectile.GetComponent<Projectile>().SerialNum == target.GetComponent<Projectile>().SerialNum)
+            {
                 return target.GetComponent<Projectile>();
+            }
         }
         return null;
     }
+
     public static void ProjectileDataInput()
     {
         ProjectileList = new List<GameObject>();
@@ -89,7 +100,6 @@ public static class ProjectileInputer
             {
                 if (ProjectileDataCsv[i]["ProjectileName"].ToString() == obj.name)
                 {
-                    ProjectileList.Add(obj);
                     int _SerialNum = Convert.ToInt32(ProjectileDataCsv[i]["SerialNum"]);
                     string type = ProjectileDataCsv[i]["Type"].ToString();
                     float _Speed = (float)Convert.ToDouble(ProjectileDataCsv[i]["Speed"]);
@@ -97,16 +107,33 @@ public static class ProjectileInputer
                     if (type == "Thrust")
                     {
                         int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
-                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
-                        return;
+                        obj.GetComponent<ThrustProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        Projectile temp = ProjectileController.Instance.FirstPooling(obj.GetComponent<ThrustProjectile>());
+                        temp.GetComponent<ThrustProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        ProjectileList.Add(temp.gameObject);
+                        ProjectileController.Instance.UsedProjectilePooling(temp);
+                        break;
                     }
                     else if (type == "Explosion")
                     {
                         int _Damage2 = Convert.ToInt32(ProjectileDataCsv[i]["SecondDamage"]);
-                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage,_Damage2);
-                        return;
+                        obj.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        Projectile temp = ProjectileController.Instance.FirstPooling(obj.GetComponent<ExplosionProjectile>());
+                        temp.GetComponent<ExplosionProjectile>().Initialize(_SerialNum, _Speed, _Damage, _Damage2);
+                        ProjectileList.Add(temp.gameObject);
+                        ProjectileController.Instance.UsedProjectilePooling(temp);
+                        break;
                     }
-                    obj.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
+                    else
+                    {
+                        obj.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
+                        Projectile temp =ProjectileController.Instance.FirstPooling(obj.GetComponent<Projectile>());
+                        temp.GetComponent<Projectile>().Initialize(_SerialNum, _Speed, _Damage);
+                        ProjectileList.Add(temp.gameObject);
+                        ProjectileController.Instance.UsedProjectilePooling(temp);
+                        break;
+                    }
+
                 }
             }
         }
