@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillBar : MonoBehaviour
+public class SkillUI : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] Image slashPanel;
