@@ -29,7 +29,6 @@ public class Player : MonoBehaviour, ICharacterData
     [SerializeField] float dashDistance = 3;
     public float defaultAttackSpeed;
     [SerializeField] int defaultDamage = 30;
-    public float coolTime;
     public int slashMaxCount = 5;
     [SerializeField] float maxHurtTime = 1;
     [SerializeField] float maxFeverT = 3;
@@ -51,8 +50,10 @@ public class Player : MonoBehaviour, ICharacterData
     public bool slash;
     bool dashInit;
     public bool dashPowerUp;
-    bool fever;
+    public bool fever;
     float feverT;
+    float feverT2;
+    bool feverInit;
 
 
     private void Awake()
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour, ICharacterData
     public void Start()
     {
         Hp = new Data(100);
+        Fever = new Data(100);
+        Fever -= 100;
         Speed = defaultSpeed;
         state = State.Idle;
         attackScale = transform.GetChild(0).GetChild(3);
@@ -116,7 +119,9 @@ public class Player : MonoBehaviour, ICharacterData
         PlayerAnim();
         HurtTime();
 
-        if (Hp.ShowCurrentHp() > 0 && !hurt && !GameManager.Instance.GameStop)
+        if (Hp.ShowCurrentHp() > 0 && 
+            //!hurt && 
+            !GameManager.Instance.GameStop)
         {
             InputKey();
         }
@@ -142,7 +147,10 @@ public class Player : MonoBehaviour, ICharacterData
                 if (fever)
                     attackPowerUP = true;
                 else
+                {
                     PlayerRhythm.InputAction("Attack");
+
+                }
 
                 if(attackPowerUP)
                 {
@@ -163,6 +171,7 @@ public class Player : MonoBehaviour, ICharacterData
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 attack = true;
+
                 if (fever)
                     fireBallPowerUP = true;
                 else
@@ -170,15 +179,11 @@ public class Player : MonoBehaviour, ICharacterData
 
                 GameObject ball = Instantiate(fireball);
 
-
-
-
                 ball.AddComponent<FireBall>();
                 if (fireBallPowerUP)
                 {
                     ball.transform.localScale = new Vector3(transform.localScale.x + 3, transform.localScale.y + 3, transform.localScale.z + 3); 
-                    ball.transform.position =
-                         new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+                    ball.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                     ball.GetComponent<FireBall>().damage = 50;
                 }
                 else
@@ -200,7 +205,7 @@ public class Player : MonoBehaviour, ICharacterData
                 slash = true;
                 SkillInterface = SlashSkill;
 
-                if (fever || SkillInterface.coolTime <= 0)
+                if (fever || SkillInterface.coolTime >= SlashSkill._coolTime)
                 {
                     SkillInterface.CanUse = true;
 
@@ -220,7 +225,7 @@ public class Player : MonoBehaviour, ICharacterData
                 dash = true;
                 SkillInterface = DashSkill;
 
-                if (fever || SkillInterface.coolTime <= 0)
+                if (fever || SkillInterface.coolTime >= DashSkill._coolTime)
                 {
                     SkillInterface.CanUse = true;
 
@@ -246,7 +251,8 @@ public class Player : MonoBehaviour, ICharacterData
             }
             if (Input.GetKeyDown(KeyCode.CapsLock))
             {
-                fever = true;
+                if(Fever.ShowCurrentHp() >= 100)
+                    fever = true;
             }
         }
 
@@ -308,6 +314,7 @@ public class Player : MonoBehaviour, ICharacterData
         else
         {
             dashInit = false;
+            dashPowerUp = false;
         }
     }
     void IfFever()
@@ -315,23 +322,40 @@ public class Player : MonoBehaviour, ICharacterData
         if(fever)
         {
             feverT += Time.deltaTime;
+            feverT2 += Time.deltaTime;
             AttackSpeed = 0.1f;
             Speed = 15;
             DashDistance = 5;
             Damage = 50;
 
+
+
             if (feverT >= maxFeverT)
             {
                 feverT = 0;
                 fever = false;
+                feverInit = false;
+            }
+            if (Fever.ShowCurrentHp() != 0 && feverT2 >= 0.03f)
+            {
+                Fever -= 1;
+                eventcontroller.DoEvent(new EventData("Fever", Fever));
+                feverT2 = 0;
             }
         }
         else if(!fever)
         {
-            AttackSpeed = defaultAttackSpeed;
-            Speed = defaultSpeed;
-            DashDistance = dashDistance; 
-            Damage = defaultDamage;
+            if(!feverInit)
+            {
+                eventcontroller.DoEvent(new EventData("Fever", Fever));
+                AttackSpeed = defaultAttackSpeed;
+                Speed = defaultSpeed;
+                DashDistance = dashDistance;
+                Damage = defaultDamage;
+                feverInit = true;
+                SlashSkill.coolTime = SlashSkill._coolTime;
+                DashSkill.coolTime = DashSkill._coolTime;
+            }
         }
     }
     void Flip()
@@ -359,8 +383,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if (state == State.Move) //뛰기
         {
-            if(!hurt)
-                anim.SetTrigger("IdleToRun");
+            anim.SetTrigger("IdleToRun");
         }
         else if (state == State.Attack) //공격
         {
@@ -380,9 +403,11 @@ public class Player : MonoBehaviour, ICharacterData
         else if(state == State.Die) //사망
         {
             Debug.Log("death");
+            anim.SetTrigger("RunToIdle");
             if (!dieInit)
             {
-                anim.SetTrigger("RunToIdle");
+                
+                anim.SetTrigger("AttackToIdle");
                 dieInit = true;
             }
             anim.SetTrigger("IdleToDeath");
@@ -395,13 +420,13 @@ public class Player : MonoBehaviour, ICharacterData
         if (hurt)
         {
             hurtTime += Time.deltaTime;
-            state = State.Stun;
+            //state = State.Stun;
 
             if (hurtTime >= maxHurtTime)
             {
                 hurt = false;
                 hurtTime = 0;
-                anim.SetTrigger("DamageToIdle");
+                //anim.SetTrigger("DamageToIdle");
                 state = State.Idle;
             }
         }
@@ -413,16 +438,27 @@ public class Player : MonoBehaviour, ICharacterData
         {
             if (!hurt)
             {
-                anim.ResetTrigger("IdleToRun");
-                anim.ResetTrigger("IdleToAttack");
-                anim.SetTrigger("AttackToIdle");
-                anim.SetTrigger("RunToIdle");
+                //anim.ResetTrigger("IdleToRun");
+                //anim.ResetTrigger("IdleToAttack");
+                //anim.SetTrigger("AttackToIdle");
+                //anim.SetTrigger("RunToIdle");
                 Hp -= Damage;
                 eventcontroller.DoEvent(new EventData("Hp", Hp));
+                //Fever -= 1;
+                //eventcontroller.DoEvent(new EventData("Fever", Fever));
+
                 hurt = true;
             }
         }
         
+    }
+    public void PlusFever(int value)
+    {
+        if(Fever.ShowCurrentHp() < 100)
+        {
+            Fever += value;
+            eventcontroller.DoEvent(new EventData("Fever", Fever));
+        }
     }
 
     //private void OnTriggerEnter(Collider collision)
