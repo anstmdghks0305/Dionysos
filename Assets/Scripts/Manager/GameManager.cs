@@ -46,7 +46,8 @@ public class GameManager : Singleton<GameManager>
         if(!NotBuild)
             base.Awake();
         
-        BossData.Instance.Read();
+        if(BossData.Instance != null)
+            BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
     }
     private void Start()
