@@ -1293,7 +1293,7 @@ MonoBehaviour:
   Died: 0
   eventcontroller: {fileID: 3868932757008715781}
   AttackCoolTime: 4
-  Projectile_SerialNum: 1
+  Projectile_SerialNum: 0
 --- !u!1 &3181371726783093705
 GameObject:
   m_ObjectHideFlags: 0
