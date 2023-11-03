@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     public string Target ="Player";
     public int SerialNum;
     private Vector3 Direction;
-    private float Speed;
+    protected float Speed;
     protected int Damage;
     private int DefaultDestroyTime = 5;
     public virtual void Copy(Projectile value)
@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour
     {
         Direction = targetpos.position - this.transform.position;
         Direction -= Vector3.up * Direction.y-Vector3.right;
-        Debug.Log(Direction);
         Debug.Log(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.right)));
         if (Direction.x < 0&& Direction.z <0)
             this.transform.rotation = Quaternion.Euler(90, -(Mathf.Cos(Vector3.Dot(Direction.normalized, Vector3.left)) + 0.5f) * 180, 0);
@@ -47,7 +46,7 @@ public class Projectile : MonoBehaviour
     }
     protected virtual void Start()
     {
-        Copy(ProjectileInputer.FindProjectile(this));
+        //Copy(ProjectileInputer.FindProjectile(this));
     }
 
     // Update is called once per frame
