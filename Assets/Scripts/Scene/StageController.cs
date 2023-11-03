@@ -11,7 +11,7 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public ScrollRect scrollrect;
     public delegate void MyAction();
     public static Action<Stage> StageSelect;
-    public static event Action<int> StageUnlock;
+    public static event Action<StagePlayer> StageUnlock;
     public static MyAction StageDraw;
     private CancellationTokenSource token;
     private int SelectSize;
@@ -36,9 +36,9 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         First = GetComponent<RectTransform>().position.x;
         TargetPos = First;
         token = new CancellationTokenSource();
-        foreach (int i in GameManager.Instance.GameClearData)
+        for(int i=0; i<GameManager.Instance.StageP.Count; i++)
         {
-            StageUnlock(i);
+            StageUnlock(GameManager.Instance.StageP[i]);
         }
         StageDraw();
     }
