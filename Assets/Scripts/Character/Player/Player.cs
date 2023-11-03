@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour, ICharacterData
 {
     public Data Hp { private set; get; }
@@ -22,17 +22,17 @@ public class Player : MonoBehaviour, ICharacterData
     public EffectManager Effect;
     public Slash SlashSkill;
     public Dash DashSkill;
-    bool attackInit1 = false;
     public GameObject fireball;
     public Animator anim;
-    [SerializeField] int defaultSpeed;
+    [SerializeField] int defaultSpeed = 3;
+    [SerializeField] int feverSpeed = 10;
     [SerializeField] float dashDistance = 3;
-    public float defaultAttackSpeed;
+    public float defaultAttackSpeed = 0.4f;
     [SerializeField] int defaultDamage = 30;
     public int slashMaxCount = 5;
-    [SerializeField] float maxHurtTime = 1;
+    public int feverSlashMaxCount = 8;
+    [SerializeField] float maxHurtTime = 0.5f;
     [SerializeField] float maxFeverT = 3;
-    public bool attackInit2 = false;
     public Vector3 target;
     public ISkill SkillInterface;
     public float horizontal;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour, ICharacterData
     float attackT;
     public Vector3 scale, newScale;
     public Transform attackScale;
-    public bool attackPowerUP;
+    public bool attackPowerUp;
     public bool fireBallPowerUP;
     public PlayerWeapon weapon;
     private bool hurt;
@@ -51,6 +51,7 @@ public class Player : MonoBehaviour, ICharacterData
     bool dashInit;
     public bool dashPowerUp;
     public bool fever;
+    public BarUI feverUI;
     float feverT;
     float feverT2;
     bool feverInit;
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         attack = true;
 
-        //퍼펙트 == true => attackPowerUP = true;
+        //퍼펙트 == true => attackPowerUp = true;
     }
     public void Move()
     {
@@ -145,14 +146,14 @@ public class Player : MonoBehaviour, ICharacterData
                 attack = true;
 
                 if (fever)
-                    attackPowerUP = true;
+                    attackPowerUp = true;
                 else
                 {
                     PlayerRhythm.InputAction("Attack");
 
                 }
 
-                if(attackPowerUP)
+                if(attackPowerUp)
                 {
                     weapon.Damage = 70; 
                     Effect.AttackEffect("Perfect");
@@ -165,7 +166,7 @@ public class Player : MonoBehaviour, ICharacterData
                     attackScale.localScale = scale;
                 }
 
-                //if 퍼펙트 == true => attackPowerUP = true;
+                //if 퍼펙트 == true => attackPowerUp = true;
 
             }
             if (Input.GetKeyDown(KeyCode.Q))
@@ -257,11 +258,17 @@ public class Player : MonoBehaviour, ICharacterData
         }
 
     }
+    bool init;
     void IfAttack()
     {
         if (attack)
         {
-            anim.SetTrigger("RunToIdle");
+            if(!init)
+            {
+
+                anim.SetTrigger("RunToIdle");
+                init = true;
+            }
             attackT += Time.deltaTime;
 
             if (attackT < AttackSpeed)
@@ -272,8 +279,10 @@ public class Player : MonoBehaviour, ICharacterData
             }
             else if (attackT >= AttackSpeed)
             {
+
+                init = false;
                 anim.SetTrigger("AttackToIdle");
-                attackPowerUP = false;
+                attackPowerUp = false;
                 state = State.Idle;
                 attack = false;
                 attackT = 0;
@@ -336,7 +345,7 @@ public class Player : MonoBehaviour, ICharacterData
                 fever = false;
                 feverInit = false;
             }
-            if (Fever.ShowCurrentHp() != 0 && feverT2 >= 0.03f)
+            if (feverUI.ReturnFillAmount() != 0 && feverT2 >= 0.022f)
             {
                 Fever -= 1;
                 eventcontroller.DoEvent(new EventData("Fever", Fever));
@@ -406,7 +415,6 @@ public class Player : MonoBehaviour, ICharacterData
             anim.SetTrigger("RunToIdle");
             if (!dieInit)
             {
-                
                 anim.SetTrigger("AttackToIdle");
                 dieInit = true;
             }
@@ -458,6 +466,7 @@ public class Player : MonoBehaviour, ICharacterData
         {
             Fever += value;
             eventcontroller.DoEvent(new EventData("Fever", Fever));
+            Debug.Log(Fever.ShowCurrentHp());
         }
     }
 
@@ -475,7 +484,7 @@ public class Player : MonoBehaviour, ICharacterData
     //        {
     //            Destroy(collision.gameObject);
     //        }
-    //        if (attackPowerUP)
+    //        if (attackPowerUp)
     //        {
 
     //        }

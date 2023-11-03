@@ -52,7 +52,7 @@ public class Rhythm : MonoBehaviour
         switch(input)
         {
             case "Attack":
-                player.attackPowerUP = true;
+                player.attackPowerUp = true;
                 break;
             case "Dash":
                 player.SkillInterface.powerUp = true;
@@ -74,7 +74,7 @@ public class Rhythm : MonoBehaviour
         switch (input)
         {
             case "Attack":
-                player.attackPowerUP = false;
+                player.attackPowerUp = false;
                 break;
             case "Dash":
                 player.SkillInterface.powerUp = false;
