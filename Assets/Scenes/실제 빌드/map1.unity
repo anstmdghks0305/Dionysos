@@ -350,7 +350,6 @@ MonoBehaviour:
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
-  mainUi: {fileID: 0}
 --- !u!1 &185988610
 GameObject:
   m_ObjectHideFlags: 0
@@ -20055,6 +20054,7 @@ MonoBehaviour:
   Sync: 0
   Range: 0.1
   player: {fileID: 108687461}
+  SyncScene: 0
 --- !u!4 &301403520
 Transform:
   m_ObjectHideFlags: 0
@@ -52482,7 +52482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1340448406897144703, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.93
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1340448406897144703, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
       propertyPath: m_LocalPosition.y
@@ -52490,7 +52490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1340448406897144703, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.74
+      value: 7.87
       objectReference: {fileID: 0}
     - target: {fileID: 1340448406897144703, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
       propertyPath: m_LocalRotation.w
@@ -52519,6 +52519,30 @@ PrefabInstance:
     - target: {fileID: 1340448406897144703, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762091873928, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762091873928, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762091873928, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762727427141, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762727427141, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549488762727427141, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b54be07e2e65946a80333d83c54155, type: 3}
@@ -52617,6 +52641,7 @@ GameObject:
   - component: {fileID: 1361632479}
   - component: {fileID: 1361632482}
   - component: {fileID: 1361632483}
+  - component: {fileID: 1361632484}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -52758,6 +52783,18 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1361632484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361632478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42bec1aff2170d408abdc0f17852bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1383758072
 GameObject:
   m_ObjectHideFlags: 0
@@ -59957,7 +59994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223045, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.37
+      value: 6.12
       objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223045, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_LocalPosition.y
@@ -59965,7 +60002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223045, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.31
+      value: 54.2
       objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223045, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_LocalRotation.w

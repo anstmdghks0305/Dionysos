@@ -48,17 +48,23 @@ public class GameManager : Singleton<GameManager>
         if(BossData.Instance != null)
             BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        MainCam = Camera.main;
         //EnemyDataInputer.EnemyDataInput();
-        //ProjectileInputer.ProjectileDataInput();
+        try
+        {
+            ProjectileInputer.ProjectileDataInput();
+        }
+        catch (NullReferenceException ie)
+        {
+
+        }  
     }
     private void Update()
     { 
-        if(SceneManager.GetActiveScene().name == "SampleScene")
+        if(SceneManager.GetActiveScene().name == "Title")
         {
             if(Input.anyKeyDown)
             {

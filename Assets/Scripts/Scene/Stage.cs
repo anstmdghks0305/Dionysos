@@ -24,7 +24,7 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
         stagecontroller.Stages.Add(this);
 
     }
-    public void Select()
+    public void Select(string input)
     {
         if (Locked == true ||GameManager.Instance.GameStop)
             return;
@@ -36,7 +36,7 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
         else
         { 
             UIManager.Instance.InStage(true);
-            SceneManager.LoadScene(stagePlayer.Name);
+            SceneManager.LoadScene(input);
         } 
     }
 
