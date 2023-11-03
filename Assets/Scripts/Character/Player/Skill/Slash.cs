@@ -31,7 +31,7 @@ public class Slash : MonoBehaviour, ISkill
     {
         if (CanUse)
         {
-            player.AttackSpeed = 0.1f;
+            player.AttackSpeed = 0.24f;
 
             if (powerUp)
             {
