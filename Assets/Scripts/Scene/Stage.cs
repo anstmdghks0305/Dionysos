@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
     [SerializeField] private string name;
+    [SerializeField] private Image select;
     private static StageController stagecontroller;
-    [SerializeField] private bool active = false;
+    public bool active = false;
     public bool Locked = true;
     public StagePlayer stagePlayer;
     // Start is called before the first frame update
@@ -15,11 +16,12 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
     {
         StageController.StageSelect += this.ReceiveActive;
         StageController.StageUnlock += this.ReceiveUnlocked;
-        gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f); //락걸린 이미지
+        gameObject.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f); //락걸린 이미지
     }
     private void Start()
     {
         stagecontroller = this.transform.parent.GetComponent<StageController>();
+        stagecontroller.Stages.Add(this);
 
     }
     public void Select()
@@ -67,7 +69,9 @@ public class Stage : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandle
             return;
         if (active == true)
         {
-            this.GetComponent<Image>().color = new Color(1f, 0.5f, 0.5f); // 첫 선택시 애니메이션등 넣을것
+            //this.GetComponent<Image>().color = new Color(1f, 0.5f, 0.5f); // 첫 선택시 애니메이션등 넣을것
+            select.transform.position = gameObject.transform.position;
+            select.gameObject.SetActive(true);
         }
         else
         {

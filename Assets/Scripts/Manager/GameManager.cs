@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         MainCam = Camera.main;
         //EnemyDataInputer.EnemyDataInput();
-        ProjectileInputer.ProjectileDataInput();
+        //ProjectileInputer.ProjectileDataInput();
     }
     private void Update()
     { 
