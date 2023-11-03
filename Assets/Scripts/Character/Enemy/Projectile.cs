@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
     }
     protected virtual void Start()
     {
-        //Copy(ProjectileInputer.FindProjectile(this));
+        Copy(ProjectileInputer.FindProjectile(this));
     }
 
     // Update is called once per frame

@@ -44,5 +44,6 @@ public class FarAttackState : AttackState
         enemy.navMeshAgent.SetDestination(RandomMove);
         enemy.navMeshAgent.stoppingDistance = 0;
         AfterAttackBool = true;
+        enemy.animator.SetFloat("RunState", 0.5f);
     }
 }
