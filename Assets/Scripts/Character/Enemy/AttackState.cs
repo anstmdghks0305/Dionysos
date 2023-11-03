@@ -6,18 +6,22 @@ using System.Threading;
 
 public class AttackState : IState
 {
+    protected float AttackType;
     public int AttackRange;
     public float AttackCoolTime;
-    protected bool CanAttack;
+    public bool CanAttack;
     CancellationTokenSource token;
 
 
     public AttackState(int _AttackRange, float _AttackCoolTime)
     {
+        AttackType = 0;
         AttackRange = _AttackRange;
         AttackCoolTime = _AttackCoolTime;
         CanAttack = true;
+
         token = new CancellationTokenSource();
+
     }
 
     ~AttackState()
@@ -30,6 +34,7 @@ public class AttackState : IState
         if (CanAttack == true)
         {
             characterData.navMeshAgent.isStopped = true;
+            characterData.animator.SetFloat("NormalState", AttackType);
             characterData.animator.SetTrigger("Attack");
             CanAttack = false;
             characterData.navMeshAgent.avoidancePriority = 1;

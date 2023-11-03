@@ -64,12 +64,12 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         this.transform.position = Pos;
         this.gameObject.SetActive(true);
-        animator.SetBool("Die", false);
+        animator.SetBool("EditChk", true);
         Hp = Hp.Reset();
         Died = false;
         eventcontroller.DoEvent(new EventData("Hp", Hp));
         state = State.Idle;
-
+        animator.SetBool("EditChk", false) ;
     }
     void Update()
     {
@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (navMeshAgent != null)
         {
-            if (GameManager.Instance.GameStop || player.Died||player.slash)
+            if (GameManager.Instance.GameStop || player.Died||player.slash||!attackState.CanAttack)
             {
                 Idle();
                 return;
@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             Died = true;
             navMeshAgent.isStopped = true;
-            animator.SetBool("Die", true);
+            animator.SetTrigger("Die");
             Invoke("PoolingSkin", 0.5f);
         }
     }
@@ -144,8 +144,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void Idle()
     {
+        animator.SetBool("Run", true);
+        animator.SetFloat("RunState", 0);
         navMeshAgent.isStopped = true;
-        AnimatorControllerParameter[] paramarray = animator.parameters;
         IState = null;
     }
     public void Filp(Transform player)
