@@ -1,5 +1,7 @@
 EnemyName,SerialNum,Hp,Type,Speed,Damage,AttackRange,AttackCoolTime,Projectile_SerialNum
-OrkWarrior,1,100,Near,5,5,1,5,-1
+OrkWarrior,1,140,Near,5,5,1,3,-1
 OrkWarrior,2,300,Near,10,8,1,3,-1
-OrkArcher,3,100,Far,3,0,12,4,0
-OrkWizard,4,100,Far,3,0,7,7,3
+OrkArcher,3,100,Far,6,0,12,4,0
+OrkWizard,4,80,Far,3,0,7,7,3
+HumanWarrior,5,160,Near,6,8,1,4,-1
+HumanArcher,6,100,Far,7,0,15,4,1
