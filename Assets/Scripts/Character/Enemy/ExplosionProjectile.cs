@@ -9,7 +9,7 @@ public class ExplosionProjectile : Projectile
     private ParticleSystem particle;
     public int ExplosionDamage = 3;
     private bool Explosioned = false;
-    private float EffectDestroyTime = 0.5f;
+    private float EffectDestroyTime = 1f;
     // Start is called before the first frame update
     public override void Copy(Projectile value)
     {
@@ -27,13 +27,6 @@ public class ExplosionProjectile : Projectile
         particle = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
 
-    private void OnDisable()
-    {
-        particle.Pause();
-        particle.gameObject.SetActive(false);
-        transform.GetChild(0).gameObject.SetActive(true);
-        Explosioned = false;
-    }
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -85,7 +78,7 @@ public class ExplosionProjectile : Projectile
     public override void ReUse(Transform Pos)
     {
         transform.GetChild(0).gameObject.SetActive(true);
-        particle.Pause();
+        particle.Stop();
         particle.gameObject.SetActive(false);
         Explosioned = false;
         base.ReUse(Pos);
