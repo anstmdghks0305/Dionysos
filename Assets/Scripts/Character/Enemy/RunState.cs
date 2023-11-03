@@ -21,6 +21,7 @@ public class RunState : IState
         characterData.navMeshAgent.avoidancePriority = 51;
         characterData.navMeshAgent.isStopped = false;
         characterData.animator.SetBool("Run", true);
+        characterData.animator.SetFloat("RunState", 0.5f);
     }
 
 }
