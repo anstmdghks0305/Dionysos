@@ -40,7 +40,6 @@ public class GameManager : Singleton<GameManager>
     }
     public Dictionary<int, StagePlayer> StageP = new Dictionary<int, StagePlayer>();
     //[SerializeField] private List<StagePlayer> ssview = new List<StagePlayer>();
-    [SerializeField] private MainUI mainUi;
     protected override void Awake()
     {
         if(!NotBuild)
