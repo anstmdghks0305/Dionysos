@@ -14,6 +14,7 @@ public class FarAttackState : AttackState
     public FarAttackState(int _AttackRange, float _AttackCoolTime,int? _Projectile_SerialNum) : base(_AttackRange, _AttackCoolTime)  
     {
         Projectile_SerialNum = (int)_Projectile_SerialNum;
+        AttackType = 0.5f;
     }
 
     public override void Work(IEnemy enemy, Transform target)
