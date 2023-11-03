@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour, IEnemy
         navMeshAgent.updateRotation = false;
         animator = this.transform.GetChild(0).transform.GetComponent<Animator>();
         Copy(EnemyDataInputer.FindEnemy(this));
+        eventcontroller.DoEvent(new EventData("Hp", Hp));
         switch (this.Type)
         {
             case EnemyType.Near:
