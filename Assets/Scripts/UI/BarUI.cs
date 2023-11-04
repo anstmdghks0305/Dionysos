@@ -17,4 +17,8 @@ public class BarUI: MonoBehaviour
     {
         Bar.fillAmount = data.ShowFillAmount();
     }
+    public float ReturnFillAmount()
+    {
+        return Bar.fillAmount;
+    }
 }

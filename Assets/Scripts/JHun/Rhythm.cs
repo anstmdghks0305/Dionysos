@@ -14,6 +14,7 @@ public class Rhythm : MonoBehaviour
     [SerializeField] private float Sync; // ∏ÆµÎ ΩÃ≈©
     [SerializeField] float Range; // ∆€∆Â∆Æ √º≈© π¸¿ß
     [SerializeField] private Player player;
+    [SerializeField] private bool SyncScene;
     void Awake()
     {
         //Speed = 60 / GameManager.Instance.Stages[UnityEngine.SceneManagement.SceneManager.GetActiveScene().name].bpm;
@@ -27,7 +28,7 @@ public class Rhythm : MonoBehaviour
     {
         EffectTime = RhythmEffect.time;
         Sync = RhythmManager.Instance.RhythmSyncValue;
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && SyncScene)
         {
             InputAction("X");
         }
@@ -45,12 +46,14 @@ public class Rhythm : MonoBehaviour
     }
     void Perfect(string input)
     {
+        if (player != null && !player.fever)
+            player.PlusFever(20);
         Debug.Log("Perfect!");
         PerfectEffect.Play();
         switch(input)
         {
             case "Attack":
-                player.attackPowerUP = true;
+                player.attackPowerUp = true;
                 break;
             case "Dash":
                 player.SkillInterface.powerUp = true;
@@ -72,7 +75,7 @@ public class Rhythm : MonoBehaviour
         switch (input)
         {
             case "Attack":
-                player.attackPowerUP = false;
+                player.attackPowerUp = false;
                 break;
             case "Dash":
                 player.SkillInterface.powerUp = false;

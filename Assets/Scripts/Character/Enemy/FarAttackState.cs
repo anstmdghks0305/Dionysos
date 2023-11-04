@@ -14,6 +14,7 @@ public class FarAttackState : AttackState
     public FarAttackState(int _AttackRange, float _AttackCoolTime,int? _Projectile_SerialNum) : base(_AttackRange, _AttackCoolTime)  
     {
         Projectile_SerialNum = (int)_Projectile_SerialNum;
+        AttackType = 0.5f;
     }
 
     public override void Work(IEnemy enemy, Transform target)
@@ -25,7 +26,7 @@ public class FarAttackState : AttackState
         {
             if (enemy.Attacking == false)
             {
-                AfterAttack(enemy);
+                AfterAttack(enemy,target);
                 if (enemy.navMeshAgent.stoppingDistance - enemy.navMeshAgent.remainingDistance< 0.1f)
                     AfterAttackBool = false;
             }
@@ -33,15 +34,16 @@ public class FarAttackState : AttackState
 
     }
 
-    public void AfterAttack(IEnemy enemy)
+    public void AfterAttack(IEnemy enemy,Transform Target)
     {
         if (AfterAttackBool == true)
             return;
         enemy.navMeshAgent.isStopped = false;
         enemy.navMeshAgent.avoidancePriority = 51;
-        Vector3 RandomMove = enemy.where().position + new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
+        Vector3 RandomMove = enemy.where().position +(enemy.where().position-Target.position).normalized;
         enemy.navMeshAgent.SetDestination(RandomMove);
         enemy.navMeshAgent.stoppingDistance = 0;
         AfterAttackBool = true;
+        enemy.animator.SetFloat("RunState", 0.5f);
     }
 }

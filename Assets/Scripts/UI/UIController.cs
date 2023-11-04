@@ -13,8 +13,9 @@ public class UIController:MonoBehaviour
     public BarUI bar;
     public TextUI text;
 
-    private void Start()
+    private void OnEnable()
     {
+        action = null;
         action += bar.UIUpdate;
         if(text !=null)
             action += text.UIUpdate;

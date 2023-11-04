@@ -9,12 +9,12 @@ public class ExplosionProjectile : Projectile
     private ParticleSystem particle;
     public int ExplosionDamage = 3;
     private bool Explosioned = false;
-    private float EffectDestroyTime = 0.5f;
+    private float EffectDestroyTime = 1f;
     // Start is called before the first frame update
     public override void Copy(Projectile value)
     {
         ExplosionProjectile temp = value as ExplosionProjectile;
-        base.Copy(value);
+        base.Copy(temp);
         ExplosionDamage = temp.ExplosionDamage;
     }
 
@@ -29,15 +29,13 @@ public class ExplosionProjectile : Projectile
 
     protected override void OnEnable()
     {
-        particle.Pause();
-        particle.gameObject.SetActive(false);
-        Explosioned = false;
         base.OnEnable();
     }
 
     protected override void Start()
     {
         base.Start();
+        Copy(ProjectileInputer.FindProjectile(this));
     }
 
     // Update is called once per frame
@@ -53,6 +51,7 @@ public class ExplosionProjectile : Projectile
         {
             if (Explosioned == false)
             {
+                this.gameObject.transform.rotation = Quaternion.identity;
                 particle.gameObject.SetActive(true);
                 particle.Play();
                 Explosioned = true;
@@ -79,8 +78,9 @@ public class ExplosionProjectile : Projectile
     public override void ReUse(Transform Pos)
     {
         transform.GetChild(0).gameObject.SetActive(true);
-        particle.Pause();
+        particle.Stop();
         particle.gameObject.SetActive(false);
+        Explosioned = false;
         base.ReUse(Pos);
     }
     protected IEnumerator Destroy(float Time)

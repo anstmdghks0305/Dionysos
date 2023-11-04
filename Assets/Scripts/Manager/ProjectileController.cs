@@ -12,30 +12,43 @@ public class ProjectileController : Singleton<ProjectileController>
     Transform usedprojectileParent;
     public Player Target;
 
-    public void ProjectilePooling(Transform Pos, int _Projectile_SerialNum)
+    public Projectile FirstPooling(Projectile pro)
     {
-        if (!Usedprojectiles.ContainsKey(_Projectile_SerialNum))
+        if (!Usedprojectiles.ContainsKey(pro.SerialNum))
         {
-            Usedprojectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
+            Usedprojectiles.Add(pro.SerialNum, new Queue<Projectile>());
         }
-        if (!projectiles.ContainsKey(_Projectile_SerialNum))
+        if (!projectiles.ContainsKey(pro.SerialNum))
         {
-            projectiles.Add(_Projectile_SerialNum, new Queue<Projectile>());
+            projectiles.Add(pro.SerialNum, new Queue<Projectile>());
         }
-        if (Usedprojectiles[_Projectile_SerialNum].Count != 0)
+        Projectile obj = GameObject.Instantiate(pro.gameObject, pro.transform.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
+        obj.name = pro.name;
+        obj.transform.SetParent(projectileParent);
+        obj.DirectionControl(Target.transform);
+        projectiles[pro.SerialNum].Enqueue(obj);
+        return obj;
+    }
+
+    public Projectile ProjectilePooling(Transform Pos, int _Projectile_SerialNum)
+    {
+        if (Usedprojectiles[_Projectile_SerialNum].Count > 0)
         {
             Projectile temp = Usedprojectiles[_Projectile_SerialNum].Dequeue();
             temp.transform.SetParent(projectileParent);
             temp.ReUse(Pos);
             temp.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(temp);
+            return temp;
         }
         else
         {
             Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
+            obj.name = ProjectileInputer.ProjectileList[_Projectile_SerialNum].name;
             obj.transform.SetParent(projectileParent);
             obj.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(obj);
+            return obj;
         }
     }
 
@@ -49,7 +62,7 @@ public class ProjectileController : Singleton<ProjectileController>
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         projectileParent = this.transform.GetChild(0).transform;
         usedprojectileParent = this.transform.GetChild(1).transform;

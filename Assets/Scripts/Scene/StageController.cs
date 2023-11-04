@@ -4,10 +4,12 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
 using System.Threading;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    [SerializeField] private Image select;
     public ScrollRect scrollrect;
     public delegate void MyAction();
     public static Action<Stage> StageSelect;
@@ -20,6 +22,7 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private float LastDropPos;
     public CanvasScaler scaler;
     public float Ratio;
+    public List<Stage> Stages = new List<Stage>();
     /// <summary>
     /// ¼±ÅÃÃ¢Ä­ Å©±â ÀÌ°É·Î lerp½á¼­ µüµü Ä­¿¡ ¸ÂÃã
     /// </summary>
@@ -43,8 +46,18 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         StageDraw();
     }
 
+    private void DeSelect()
+    {
+        select.gameObject.SetActive(false);
+        for (int i = 0; i < Stages.Count; i++)
+        {
+            Stages[i].active = false;
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        DeSelect();
         scrollrect.OnBeginDrag(eventData);
         if (token.IsCancellationRequested.Equals(false))
         {
@@ -53,11 +66,13 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
     public void OnDrag(PointerEventData eventData)
     {
+        DeSelect();
         scrollrect.OnDrag(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        DeSelect();
         token = new CancellationTokenSource();
         LastDropPos = GetComponent<RectTransform>().position.x;
         TargetPosSetting();
@@ -80,7 +95,6 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     async UniTask Centering()
     {
-
         LastDropPos = GetComponent<RectTransform>().position.x;
         while (true)
         {
@@ -100,6 +114,7 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void LeftMove()
     {
+        DeSelect();
         if (token.IsCancellationRequested.Equals(false))
         {
             token.Cancel();
@@ -113,6 +128,7 @@ public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void RightMove()
     {
+        DeSelect();
         if (token.IsCancellationRequested.Equals(false))
         {
             token.Cancel();

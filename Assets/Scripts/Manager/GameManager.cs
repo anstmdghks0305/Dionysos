@@ -40,25 +40,31 @@ public class GameManager : Singleton<GameManager>
     }
     public Dictionary<int, StagePlayer> StageP = new Dictionary<int, StagePlayer>();
     //[SerializeField] private List<StagePlayer> ssview = new List<StagePlayer>();
-    [SerializeField] private MainUI mainUi;
     protected override void Awake()
     {
         if(!NotBuild)
             base.Awake();
         
-        //BossData.Instance.Read();
+        if(BossData.Instance != null)
+            BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        MainCam = Camera.main;
-        EnemyDataInputer.EnemyDataInput();
-        ProjectileInputer.ProjectileDataInput();
+        //EnemyDataInputer.EnemyDataInput();
+        try
+        {
+            ProjectileInputer.ProjectileDataInput();
+        }
+        catch (NullReferenceException ie)
+        {
+
+        }  
     }
     private void Update()
     { 
-        if(SceneManager.GetActiveScene().name == "SampleScene")
+        if(SceneManager.GetActiveScene().name == "Title")
         {
             if(Input.anyKeyDown)
             {

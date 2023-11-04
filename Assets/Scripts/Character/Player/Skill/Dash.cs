@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour, ISkill
 {
+    public float _coolTime; 
     public bool CanUse { get; set; }
     public float coolTime { get; set; }
     public float maxTime { get; set; }
@@ -11,15 +12,15 @@ public class Dash : MonoBehaviour, ISkill
 
     void Start()
     {
-        coolTime = 0;
+        coolTime = _coolTime;
     }
     void Update()
     {
         if (!CanUse)
         {
-            if (coolTime >= 0)
+            if (coolTime <= _coolTime)
             {
-                coolTime -= Time.deltaTime;
+                coolTime += Time.deltaTime;
             }
         }
     }
@@ -78,7 +79,7 @@ public class Dash : MonoBehaviour, ISkill
             {
                 CanUse = false;
                 player.dash = false;
-                coolTime = player.coolTime;
+                coolTime = 0;
 
                 yield break;
             }
