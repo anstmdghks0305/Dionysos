@@ -97,10 +97,14 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (navMeshAgent != null)
         {
-            if (GameManager.Instance.GameStop || player.Died||player.slash||!attackState.CanAttack)
+            if (GameManager.Instance.GameStop || player.Died||player.slash)
             {
                 Idle();
                 return;
+            }
+            if(!attackState.CanAttack)
+            {
+                Idle();
             }
             if (state == State.Die)
             {
