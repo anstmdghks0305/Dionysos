@@ -140,6 +140,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         EnemyController.Instance.EnemyDiePooling(this);
         this.gameObject.SetActive(false);
+        //GameManager.Instance.CurrentStage.Score += csv점수 변수;
     }
 
     public Transform where()
@@ -175,6 +176,7 @@ public class Enemy : MonoBehaviour, IEnemy
             Hurt = true;
             HurtDelay().Forget();
             Hp -= Damage;
+            //GameManager.Instance.CurrentStage.Score += csv점수 변수;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
             if (Hp.ShowCurrentHp() <= 0)
                 state = State.Die;

@@ -18,7 +18,7 @@ public struct StagePlayer
         this.num = _num;
         this.Name = _name;
         this.Score = 0;
-        if (_name == "¿ì¸®ÀÇ ²Þ")
+        if (_name == "map1")
             this.Active = true;
         else
             this.Active = false;
@@ -27,6 +27,7 @@ public struct StagePlayer
 };
 public class GameManager : Singleton<GameManager>
 {
+    public StagePlayer CurrentStage;
     public bool NotBuild;
     public Camera MainCam;
     public List<int> GameClearData = new List<int>();
