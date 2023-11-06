@@ -7,7 +7,7 @@ using System;
 public class StageDataRead : MonoBehaviour
 {
     public List<Dictionary<string, object>> StageDataCsv;
-    void Awake()
+    void Start()
     {
         StageDataCsv = CSVReader.Read("StageData");
         for (int index = 0; index < StageDataCsv.Count; index++)

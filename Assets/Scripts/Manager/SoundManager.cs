@@ -19,7 +19,7 @@ namespace Manager
         Dictionary<string, AudioClip> audioclipdic = new Dictionary<string, AudioClip>();
         private void Awake()
         {
-            //base.Awake();
+            base.Awake();
             DontDestroyOnLoad(gameObject);
             //BGMPlayer = GameObject.Find("BGM").GetComponent<AudioSource>(); // BGM플레이어
             //SFXPlayer = GameObject.Find("SFX").GetComponent<AudioSource>(); // 효과음플레이어

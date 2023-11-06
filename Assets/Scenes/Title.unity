@@ -323,7 +323,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705172000}
-  - component: {fileID: 705171999}
   - component: {fileID: 705171998}
   m_Layer: 0
   m_Name: StageData
@@ -344,19 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e64ac04ea4b604fbb0ecec7c1765ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &705171999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705171997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df63670db5c19f449fc4dedfc8e383f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StageView: []
 --- !u!4 &705172000
 Transform:
   m_ObjectHideFlags: 0
@@ -991,7 +977,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: dffc0ce1555aed4418816331190c337c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: b5d3100144a0a2a47ba9e7801b386c9b, type: 2}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,10 +1132,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5759bc70da4a0ac48be6bd4d1f12c3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Fade: {fileID: 0}
+  CurrentStage:
+    progress: 0
+    maxScore: 0
+    currentProgress: 0
+    currentScore: 0
+    clear: 0
+    stageIndex: 0
+    bpm: 0
+    ResultScore: 0
+    StageName: 
+    Difficult: 
+    Active: 0
   NotBuild: 1
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
+  UserData: []
 --- !u!4 &1005633718
 Transform:
   m_ObjectHideFlags: 0

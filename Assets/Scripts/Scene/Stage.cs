@@ -13,7 +13,7 @@ namespace StageSelect
         private static StageController stagecontroller;
         public bool active = false;
         public bool Locked = true;
-        public StagePlayer stagePlayer;
+        public StageData stageData;
         // Start is called before the first frame update
         private void Awake()
         {
@@ -38,6 +38,8 @@ namespace StageSelect
             }
             else
             {
+                GameManager.Instance.CurrentStage = GameManager.Instance.Stages[stageData.StageName];
+                GameManager.Instance.CurrentStage.CurrentScore = 0;
                 UIManager.Instance.InStage(true);
                 SceneManager.LoadScene(input);
             }
@@ -53,13 +55,13 @@ namespace StageSelect
                 active = false;
         }
 
-        public void ReceiveUnlocked(StagePlayer temp)
+        public void ReceiveUnlocked(StageData temp)
         {
-            if (name == temp.Name)
+            if (name == temp.StageName)
             {
-                stagePlayer = temp;
+                stageData = temp;
             }
-            if (stagePlayer.Active)
+            if (stageData.Active)
             {
                 Locked = false;
                 StageController.StageDraw += this.Draw;
