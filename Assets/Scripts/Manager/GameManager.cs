@@ -18,7 +18,7 @@ public struct StagePlayer
         this.num = _num;
         this.Name = _name;
         this.Score = 0;
-        if (_name == "¿ì¸®ÀÇ ²Þ")
+        if (_name == "map1")
             this.Active = true;
         else
             this.Active = false;
@@ -27,6 +27,7 @@ public struct StagePlayer
 };
 public class GameManager : Singleton<GameManager>
 {
+    public StagePlayer CurrentStage;
     public bool NotBuild;
     public Camera MainCam;
     public List<int> GameClearData = new List<int>();
@@ -40,25 +41,31 @@ public class GameManager : Singleton<GameManager>
     }
     public Dictionary<int, StagePlayer> StageP = new Dictionary<int, StagePlayer>();
     //[SerializeField] private List<StagePlayer> ssview = new List<StagePlayer>();
-    [SerializeField] private MainUI mainUi;
     protected override void Awake()
     {
         if(!NotBuild)
             base.Awake();
         
-        //BossData.Instance.Read();
+        if(BossData.Instance != null)
+            BossData.Instance.Read();
         Screen.SetResolution(1920, 1080, true);
+        DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        MainCam = Camera.main;
         //EnemyDataInputer.EnemyDataInput();
-        ProjectileInputer.ProjectileDataInput();
+        try
+        {
+            ProjectileInputer.ProjectileDataInput();
+        }
+        catch (NullReferenceException ie)
+        {
+
+        }  
     }
     private void Update()
     { 
-        if(SceneManager.GetActiveScene().name == "SampleScene")
+        if(SceneManager.GetActiveScene().name == "Title")
         {
             if(Input.anyKeyDown)
             {

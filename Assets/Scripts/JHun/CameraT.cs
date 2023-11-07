@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class CameraT : MonoBehaviour
 {
-    public GameObject d;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.MainCam = gameObject.GetComponent<Camera>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.position = d.transform.position;
-    }
 }
