@@ -341,6 +341,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352302085 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4225530336620300312, guid: b124480d33e0f084685929cf8498d959, type: 3}
+  m_PrefabInstance: {fileID: 1678014899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b4b78892500024dac8b91487046c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &382256493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4225530337827022262, guid: b124480d33e0f084685929cf8498d959, type: 3}
+      propertyPath: mainUI
+      value: 
+      objectReference: {fileID: 352302085}
     - target: {fileID: 4225530337827022263, guid: b124480d33e0f084685929cf8498d959, type: 3}
       propertyPath: m_Name
       value: UICanvas
