@@ -113,6 +113,7 @@ public class Player : MonoBehaviour, ICharacterData
     public void Die()
     {
         Died = true;
+        GameManager.Instance.EndStage(false);
     }
     private void Update()
     {
@@ -419,9 +420,9 @@ public class Player : MonoBehaviour, ICharacterData
                 dieInit = true;
             }
             anim.SetTrigger("IdleToDeath");
+            Die();
         }
     }
-
     bool dieInit = false;
     private void HurtTime()
     {
