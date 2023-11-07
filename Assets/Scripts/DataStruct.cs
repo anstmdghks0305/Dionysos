@@ -36,6 +36,10 @@ public struct Data
     public static Data operator -(Data data, int value)
     {
         data.Current -= value;
+        if(data.Current<0)
+        {
+            data.Current = 0;
+        }
         return data;
     }
 
