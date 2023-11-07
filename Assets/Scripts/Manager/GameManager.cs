@@ -74,6 +74,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator gotoInputScene(string input)
     {
+        Debug.Log("그러지 말아다오");
         Fade.Active(1);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(input);
