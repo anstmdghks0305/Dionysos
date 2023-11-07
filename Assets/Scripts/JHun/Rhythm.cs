@@ -9,6 +9,7 @@ public class Rhythm : MonoBehaviour
     [SerializeField] private ParticleSystem PerfectEffect; // 퍼펙트 시 발생하는 이펙트
     ParticleSystemRenderer RhythmRenderer; // 이펙트 렌더러
     [SerializeField] private Material[] RythmMaterial; // 이펙트 매테리얼
+    [SerializeField] float bpm;
     public float Speed; // 이펙트 속도
     private float EffectTime; // 현재 이펙트의 시간
     [SerializeField] private float Sync; // 리듬 싱크
@@ -18,7 +19,15 @@ public class Rhythm : MonoBehaviour
     void Awake()
     {
         //Speed = 60 / GameManager.Instance.Stages[UnityEngine.SceneManagement.SceneManager.GetActiveScene().name].bpm;
-        Speed = 128f / 60f;
+        if(SceneManager.GetActiveScene().name != "RhythmSync")
+        {
+            bpm = GameManager.Instance.CurrentStage.bpm;
+        }
+        else
+        {
+            Manager.SoundManager.Instance.PlayBGMSound("map1");
+        }
+        Speed = bpm / 60f;
         RhythmEffect.playbackSpeed = Speed;
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
     }

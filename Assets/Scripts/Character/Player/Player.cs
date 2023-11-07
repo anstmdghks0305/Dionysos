@@ -328,7 +328,7 @@ public class Player : MonoBehaviour, ICharacterData
                     else
                         Colliders[i].GetComponent<ICharacterData>().Damaged(30);
                 }
-                else if (Colliders[i].CompareTag("Obstacle"))
+                else if (Colliders[i].CompareTag("Respawn"))
                 {
                     dash = false;
                     break;

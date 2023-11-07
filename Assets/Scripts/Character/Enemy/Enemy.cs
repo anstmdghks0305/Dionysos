@@ -76,7 +76,11 @@ public class Enemy : MonoBehaviour, IEnemy
     }
     void Update()
     {
-
+        PoolingSkin();
+        if (poolingBool)
+        {
+            poolingTime += Time.deltaTime;
+        }
         if (GameManager.Instance.GameStop == true || state == State.Die)
             return;
     }
@@ -131,22 +135,28 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (!Died)
         {
+            poolingTime = 0;
             Died = true;
             navMeshAgent.isStopped = true;
             animator.SetTrigger("Die");
-            StartCoroutine(PoolingSkin());
+            poolingBool = true;
         }
     }
-
-    IEnumerator  PoolingSkin()
+    [SerializeField] private float poolingTime;
+    [SerializeField] private bool poolingBool;
+    void PoolingSkin()
     {
-        yield return new WaitForSeconds(0.5f);
-        this.gameObject.SetActive(false);
-        GameManager.Instance.CurrentStage.CurrentScore += Score;
-        EnemyController.Instance.EnemyDiePooling(this);
-        if (isBoss)
+        if(poolingTime >= 0.5f)
         {
-            GameManager.Instance.EndStage(true);
+            poolingBool = false;
+            this.gameObject.SetActive(false);
+            GameManager.Instance.CurrentStage.CurrentScore += Score;
+            EnemyController.Instance.EnemyDiePooling(this);
+            if (isBoss)
+            {
+                GameManager.Instance.EndStage(true);
+            }
+            poolingTime = 0;
         }
     }
 

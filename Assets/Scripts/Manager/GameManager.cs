@@ -53,17 +53,19 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            CurrentStage.CurrentScore += 10;
+            CurrentStage.CurrentScore += 100;
         }
         if (SceneManager.GetActiveScene().name == "Title")
         {
             if(Input.anyKeyDown)
             {
-                if (SceneManager.GetActiveScene().name == "EndingScene")
-                    Application.Quit();
-                else
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "EndingScene")
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+                Application.Quit();
         }
     }
 
