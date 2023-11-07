@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IEnemy
     private bool Hurt;
     AttackState attackState;
     RunState runState;
-
+    
     public Enemy Copy(Enemy value)
     {
         Type = value.Type;
@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         EnemyController.Instance.EnemyDiePooling(this);
         this.gameObject.SetActive(false);
-        //GameManager.Instance.CurrentStage.Score += csv점수 변수;
+        GameManager.Instance.CurrentStage.CurrentScore += Score;
     }
 
     public Transform where()
@@ -177,7 +177,7 @@ public class Enemy : MonoBehaviour, IEnemy
             Hurt = true;
             HurtDelay().Forget();
             Hp -= Damage;
-            GameManager.Instance.CurrentStage.CurrentScore += 10;
+            //GameManager.Instance.CurrentStage.CurrentScore += 10;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
             if (Hp.ShowCurrentHp() <= 0)
                 state = State.Die;
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour, IEnemy
     /// <param name="_Damage"></param>
     /// <param name="_AttackRange"></param>
     /// <param name="_AttackCoolTime"></param>
-    public void Initailize(EnemyType _Type, int _SerialNum, int _Hp, int _Speed, int _Damage, int _AttackRange, int _AttackCoolTime, int _Projectile_SerialNum)
+    public void Initailize(EnemyType _Type, int _SerialNum, int _Hp, int _Speed, int _Damage, int _AttackRange, int _AttackCoolTime, int _Projectile_SerialNum, int _Score)
     {
         this.gameObject.tag = "enemy";
         this.Type = _Type;
@@ -212,6 +212,7 @@ public class Enemy : MonoBehaviour, IEnemy
         Speed = _Speed;
         navMeshAgent.stoppingDistance = _AttackRange - 2;
         navMeshAgent.speed = _Speed;
+        Score = _Score;
     }
 
     async UniTask HurtDelay()
