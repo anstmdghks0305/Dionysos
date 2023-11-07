@@ -31,7 +31,7 @@ public class EnemySpawn : MonoBehaviour
             if (GameManager.Instance.GameStop == true)
                 await UniTask.WaitUntil(() => !GameManager.Instance.GameStop);
             await UniTask.Delay(1,cancellationToken: this.GetCancellationTokenOnDestroy());
-            EnemyController.Instance.EnemyPooling(this.transform.position+new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f)), enemy);
+            EnemyController.Instance.EnemyPooling(this.transform.position+new Vector3(Random.Range(-0.5f,0.5f),0, Random.Range(-0.5f, 0.5f)), enemy);
         }
     }
 }
