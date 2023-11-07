@@ -743,7 +743,12 @@ MonoBehaviour:
   SFXPlayer: {fileID: 825174238}
   MainAudioClip:
   - {fileID: 8300000, guid: 4621b8b5acac44046be0475f63c52b4c, type: 3}
-  SFXAudioClips: []
+  SFXAudioClips:
+  - {fileID: 8300000, guid: 5231c76d00b744a4bbadaca439f4bd7e, type: 3}
+  - {fileID: 8300000, guid: fe24e962f66667d40bd7c691bbbebdc8, type: 3}
+  - {fileID: 8300000, guid: a25184fedbbdba046942a31dd3ab8560, type: 3}
+  - {fileID: 8300000, guid: bf4fb41b4b6591b4e946b25bce5ffa33, type: 3}
+  - {fileID: 8300000, guid: d586e9510d4c31146a0430a57c458816, type: 3}
 --- !u!4 &881555342
 Transform:
   m_ObjectHideFlags: 0
