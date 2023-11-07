@@ -114,8 +114,11 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void Die()
     {
-        Died = true;
-        GameManager.Instance.EndStage(false);
+        if(!Died)
+        {
+            Died = true;
+            GameManager.Instance.EndStage(false);
+        }
     }
     private void Update()
     {
@@ -432,7 +435,7 @@ public class Player : MonoBehaviour, ICharacterData
                 dieInit = true;
             }
             anim.SetTrigger("IdleToDeath");
-            Die();
+            
         }
     }
     bool dieInit = false;
@@ -455,7 +458,7 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void Damaged(int Damage)
     {
-        if(!fever && !dashPowerUp && !slash && Hp.ShowCurrentHp() > 0)
+        if (!fever && !dashPowerUp && !slash && Hp.ShowCurrentHp() > 0)
         {
             if (!hurt)
             {
@@ -471,7 +474,12 @@ public class Player : MonoBehaviour, ICharacterData
                 hurt = true;
             }
         }
-        
+        else if(Hp.ShowCurrentHp() <= 0)
+        {
+            GameManager.Instance.MainCam.transform.SetParent(null);
+            gameObject.SetActive(false);
+            Die();
+        }
     }
     public void PlusFever(int value)
     {
@@ -479,7 +487,6 @@ public class Player : MonoBehaviour, ICharacterData
         {
             Fever += value;
             eventcontroller.DoEvent(new EventData("Fever", Fever));
-            Debug.Log(Fever.ShowCurrentHp());
         }
     }
     public void PlusHP(int value)

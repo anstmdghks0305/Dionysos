@@ -40,7 +40,7 @@ namespace StageSelect
             {
                 GameManager.Instance.CurrentStage = GameManager.Instance.Stages[stageData.StageName];
                 GameManager.Instance.CurrentStage.CurrentScore = 0;
-                UIManager.Instance.InStage(true);
+                stagecontroller.uiManager.InStage(true);
                 SceneManager.LoadScene(input);
             }
         }
