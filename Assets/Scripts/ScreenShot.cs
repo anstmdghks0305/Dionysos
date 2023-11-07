@@ -15,15 +15,7 @@ public class ScreenShot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            ScreenCapture.CaptureScreenshot("Gstar.png");
-            if (Time.timeScale > 0)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
+            ScreenCapture.CaptureScreenshot("Capture.png");
         }
     }
 }

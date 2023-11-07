@@ -17,12 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RhythmSync.unity
     guid: 0fd9a4d83694eb74a8a09f30b6aebecc
-  - enabled: 0
-    path: Assets/Scenes/Prototype.unity
-    guid: 1587a2ec8893fdf4c82446ac50ea4601
-  - enabled: 0
-    path: "Assets/Scenes/\uC6B0\uB9AC\uC758 \uAFC8.unity"
-    guid: 3f2532c5839858e4887d92c2437a880d
   - enabled: 1
     path: "Assets/Scenes/\uC2E4\uC81C \uBE4C\uB4DC/map1.unity"
     guid: e68481421b706d24aab271f31adb38fd

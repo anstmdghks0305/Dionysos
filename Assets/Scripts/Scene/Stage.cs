@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Manager;
 
 namespace StageSelect
 {
@@ -41,6 +41,7 @@ namespace StageSelect
                 GameManager.Instance.CurrentStage = GameManager.Instance.Stages[stageData.StageName];
                 GameManager.Instance.CurrentStage.CurrentScore = 0;
                 stagecontroller.uiManager.InStage(true);
+                SoundManager.Instance.PlayBGMSound(GameManager.Instance.CurrentStage.StageName);
                 SceneManager.LoadScene(input);
             }
         }
