@@ -7,7 +7,6 @@ public class BossSpawn : MonoBehaviour
 {
     public int Boss_Serial_Num;
     private EventController boss_Hp;
-    public Text text;
     public int Score;
     public bool First = false;
     void Start()
@@ -25,8 +24,7 @@ public class BossSpawn : MonoBehaviour
                 GameObject temp = EnemyController.Instance.EnemyPooling(this.transform.position, Boss_Serial_Num);
                 boss_Hp = temp.GetComponent<Enemy>().eventcontroller;
                 temp.GetComponent<Enemy>().isBoss = true;
-                text = boss_Hp.transform.GetChild(1).GetComponent<Text>();
-                text.text= temp.GetComponent<Enemy>().name;
+                boss_Hp.transform.GetChild(1).GetComponent<Text>().text= temp.GetComponent<Enemy>().name;
                 First = true;
             }
         }
