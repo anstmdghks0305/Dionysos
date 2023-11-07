@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17654443, g: 0.2209756, b: 0.30328584, a: 1}
+  m_IndirectSpecularColor: {r: 0.17654441, g: 0.2209756, b: 0.30328584, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2394,7 +2394,7 @@ GameObject:
   - component: {fileID: 8618848873681370561}
   m_Layer: 0
   m_Name: Greek Block 07 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2445,7 +2445,7 @@ GameObject:
   - component: {fileID: 1340448406740644376}
   m_Layer: 0
   m_Name: Greek Tree 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6468,7 +6468,7 @@ GameObject:
   - component: {fileID: 6035991674770175203}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (22)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6486,7 +6486,7 @@ GameObject:
   - component: {fileID: 6035991674432473430}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6504,7 +6504,7 @@ GameObject:
   - component: {fileID: 6035991674209933045}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (25)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6522,7 +6522,7 @@ GameObject:
   - component: {fileID: 6035991674205414236}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6540,7 +6540,7 @@ GameObject:
   - component: {fileID: 6035991674073836758}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6558,7 +6558,7 @@ GameObject:
   - component: {fileID: 6035991674142002400}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6576,7 +6576,7 @@ GameObject:
   - component: {fileID: 6035991674146964291}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6594,7 +6594,7 @@ GameObject:
   - component: {fileID: 6035991674177557363}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6612,7 +6612,7 @@ GameObject:
   - component: {fileID: 6035991674025737656}
   m_Layer: 0
   m_Name: Greek Bush Plant 02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6630,7 +6630,7 @@ GameObject:
   - component: {fileID: 6035991673850504920}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (21)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6648,7 +6648,7 @@ GameObject:
   - component: {fileID: 6035991675875479662}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (19)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6666,7 +6666,7 @@ GameObject:
   - component: {fileID: 6035991675662748209}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6684,7 +6684,7 @@ GameObject:
   - component: {fileID: 6035991675496143584}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6702,7 +6702,7 @@ GameObject:
   - component: {fileID: 6035991675327447016}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6720,7 +6720,7 @@ GameObject:
   - component: {fileID: 6035991675168852225}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (24)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6738,7 +6738,7 @@ GameObject:
   - component: {fileID: 6035991675149757374}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6756,7 +6756,7 @@ GameObject:
   - component: {fileID: 6035991674947505466}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (20)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6774,7 +6774,7 @@ GameObject:
   - component: {fileID: 6035991674978526898}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (23)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7469,7 +7469,7 @@ GameObject:
   - component: {fileID: 7680460834362577726}
   m_Layer: 0
   m_Name: Greek Wooden Plank 03 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7488,7 +7488,7 @@ GameObject:
   - component: {fileID: 7680460834500576781}
   m_Layer: 0
   m_Name: Greek Wooden Plank 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7507,7 +7507,7 @@ GameObject:
   - component: {fileID: 7680460834991214211}
   m_Layer: 0
   m_Name: Greek Wooden Plank 03 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7526,7 +7526,7 @@ GameObject:
   - component: {fileID: 7680460835368340693}
   m_Layer: 0
   m_Name: Greek Wooden Plank 03 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7545,7 +7545,7 @@ GameObject:
   - component: {fileID: 1362177247664798865}
   m_Layer: 0
   m_Name: Greek Block 12 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7564,7 +7564,7 @@ GameObject:
   - component: {fileID: 1362177247675518988}
   m_Layer: 0
   m_Name: Greek Block 12 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7583,7 +7583,7 @@ GameObject:
   - component: {fileID: 1362177248035545079}
   m_Layer: 0
   m_Name: Greek Block 12
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7602,7 +7602,7 @@ GameObject:
   - component: {fileID: 1362177246422460043}
   m_Layer: 0
   m_Name: Greek Block 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7621,7 +7621,7 @@ GameObject:
   - component: {fileID: 1362177246257718047}
   m_Layer: 0
   m_Name: Greek Block 03 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7640,7 +7640,7 @@ GameObject:
   - component: {fileID: 1362177246294152823}
   m_Layer: 0
   m_Name: Greek Block 12 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7659,7 +7659,7 @@ GameObject:
   - component: {fileID: 1362177247136809894}
   m_Layer: 0
   m_Name: Greek Block 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7678,7 +7678,7 @@ GameObject:
   - component: {fileID: 1362177246800919317}
   m_Layer: 0
   m_Name: Greek Block 12 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7697,7 +7697,7 @@ GameObject:
   - component: {fileID: 1076441005562598307}
   m_Layer: 0
   m_Name: Greek Pilar 06 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7729,7 +7729,7 @@ GameObject:
   - component: {fileID: 1076441005652788025}
   m_Layer: 0
   m_Name: Greek Pilar 06 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8021,7 +8021,7 @@ GameObject:
   - component: {fileID: 1951497862453540651}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01 (22)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8040,7 +8040,7 @@ GameObject:
   - component: {fileID: 1951497861656004075}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01 (23)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8058,7 +8058,7 @@ GameObject:
   - component: {fileID: 8652994807352959186}
   m_Layer: 0
   m_Name: Greek Stone 11
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8076,7 +8076,7 @@ GameObject:
   - component: {fileID: 8652994808011172400}
   m_Layer: 0
   m_Name: Greek Stone 04
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8106,7 +8106,7 @@ GameObject:
   - component: {fileID: 1340448405524977526}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8443,7 +8443,7 @@ GameObject:
   - component: {fileID: 1340448405729654800}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (23)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8538,7 +8538,7 @@ GameObject:
   - component: {fileID: 1340448405749426551}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (20)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8605,7 +8605,7 @@ GameObject:
   - component: {fileID: 1340448405877470618}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (26)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8686,7 +8686,7 @@ GameObject:
   - component: {fileID: 1340448405890388682}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (29)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8748,7 +8748,7 @@ GameObject:
   - component: {fileID: 1340448406013393794}
   m_Layer: 0
   m_Name: Post-process Volume
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8829,7 +8829,7 @@ GameObject:
   - component: {fileID: 1340448406377063836}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (21)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8910,7 +8910,7 @@ GameObject:
   - component: {fileID: 1340448406419556538}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (30)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9005,7 +9005,7 @@ GameObject:
   - component: {fileID: 1340448406585221428}
   m_Layer: 0
   m_Name: Greek Stone 06 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9065,7 +9065,7 @@ GameObject:
   - component: {fileID: 1340448406887333327}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (19)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9195,7 +9195,7 @@ GameObject:
   - component: {fileID: 1340448406912222130}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (28)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9276,7 +9276,7 @@ GameObject:
   - component: {fileID: 1340448406917365144}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (22)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9371,7 +9371,7 @@ GameObject:
   - component: {fileID: 1340448407000276873}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (25)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9444,7 +9444,7 @@ GameObject:
   - component: {fileID: 1340448407167657297}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (24)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9482,7 +9482,7 @@ GameObject:
   - component: {fileID: 1340448407332119984}
   m_Layer: 0
   m_Name: Scene 06 Gameobjects
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9563,7 +9563,7 @@ GameObject:
   - component: {fileID: 1340448407400502503}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (31)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 1340448407441315367}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (27)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9831,7 +9831,7 @@ GameObject:
   - component: {fileID: 5250939576755978025}
   m_Layer: 0
   m_Name: Greek Block 04 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9850,7 +9850,7 @@ GameObject:
   - component: {fileID: 5250939575660690950}
   m_Layer: 0
   m_Name: Greek Block 04
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11771,7 +11771,7 @@ GameObject:
   - component: {fileID: 1705346481857185514}
   m_Layer: 0
   m_Name: Greek Stone 09
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12312,7 +12312,7 @@ GameObject:
   - component: {fileID: 2145264948108500919}
   m_Layer: 0
   m_Name: Greek Stone 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12359,7 +12359,7 @@ GameObject:
   - component: {fileID: 2145264948238940096}
   m_Layer: 0
   m_Name: Greek Stone 08
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12377,7 +12377,7 @@ GameObject:
   - component: {fileID: 487936232133067699}
   m_Layer: 0
   m_Name: Greek Stone 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12616,7 +12616,7 @@ GameObject:
   - component: {fileID: 386094712926072329}
   m_Layer: 0
   m_Name: Greek Tree 01 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12634,7 +12634,7 @@ GameObject:
   - component: {fileID: 386094712864968558}
   m_Layer: 0
   m_Name: Greek Tree 01 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12652,7 +12652,7 @@ GameObject:
   - component: {fileID: 386094712850820760}
   m_Layer: 0
   m_Name: Greek Tree 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12670,7 +12670,7 @@ GameObject:
   - component: {fileID: 386094714514910711}
   m_Layer: 0
   m_Name: Greek Tree 01 (14)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12688,7 +12688,7 @@ GameObject:
   - component: {fileID: 386094714133459996}
   m_Layer: 0
   m_Name: Greek Tree 01 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12706,7 +12706,7 @@ GameObject:
   - component: {fileID: 7951747620925218541}
   m_Layer: 0
   m_Name: Greek Block 09 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12724,7 +12724,7 @@ GameObject:
   - component: {fileID: 7951747620168351246}
   m_Layer: 0
   m_Name: Greek Block 09 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12742,7 +12742,7 @@ GameObject:
   - component: {fileID: 7951747620582768265}
   m_Layer: 0
   m_Name: Greek Block 09
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12760,7 +12760,7 @@ GameObject:
   - component: {fileID: 7951747620585303783}
   m_Layer: 0
   m_Name: Greek Block 09 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12778,7 +12778,7 @@ GameObject:
   - component: {fileID: 7951747620642044636}
   m_Layer: 0
   m_Name: Greek Block 09 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12805,7 +12805,7 @@ GameObject:
   - component: {fileID: 3995257103277637879}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (27)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12824,7 +12824,7 @@ GameObject:
   - component: {fileID: 3995257103202313991}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12843,7 +12843,7 @@ GameObject:
   - component: {fileID: 3995257103603705716}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (30)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12862,7 +12862,7 @@ GameObject:
   - component: {fileID: 3995257103505860982}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12881,7 +12881,7 @@ GameObject:
   - component: {fileID: 3995257103477833586}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (29)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12900,7 +12900,7 @@ GameObject:
   - component: {fileID: 3995257103441237510}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12919,7 +12919,7 @@ GameObject:
   - component: {fileID: 3995257103414463363}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12938,7 +12938,7 @@ GameObject:
   - component: {fileID: 3995257103362323074}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12957,7 +12957,7 @@ GameObject:
   - component: {fileID: 3995257102798061377}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (26)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12976,7 +12976,7 @@ GameObject:
   - component: {fileID: 3995257102771107263}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (28)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12995,7 +12995,7 @@ GameObject:
   - component: {fileID: 3995257102708318781}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13014,7 +13014,7 @@ GameObject:
   - component: {fileID: 3995257102663399909}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13033,7 +13033,7 @@ GameObject:
   - component: {fileID: 3995257102889314807}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13052,7 +13052,7 @@ GameObject:
   - component: {fileID: 3995257102868535213}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13071,7 +13071,7 @@ GameObject:
   - component: {fileID: 3995257102841390560}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (14)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13090,7 +13090,7 @@ GameObject:
   - component: {fileID: 3995257102252392197}
   m_Layer: 0
   m_Name: Greek Rock Wall 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13109,7 +13109,7 @@ GameObject:
   - component: {fileID: 3995257102196698882}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13128,7 +13128,7 @@ GameObject:
   - component: {fileID: 3995257102128387079}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13147,7 +13147,7 @@ GameObject:
   - component: {fileID: 3995257102548941158}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13166,7 +13166,7 @@ GameObject:
   - component: {fileID: 3995257102463472910}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (25)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13185,7 +13185,7 @@ GameObject:
   - component: {fileID: 3995257102312131857}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13204,7 +13204,7 @@ GameObject:
   - component: {fileID: 3995257101658631053}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (15)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13223,7 +13223,7 @@ GameObject:
   - component: {fileID: 3995257101622677928}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13242,7 +13242,7 @@ GameObject:
   - component: {fileID: 3995257101642349177}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13261,7 +13261,7 @@ GameObject:
   - component: {fileID: 3995257101956162362}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13280,7 +13280,7 @@ GameObject:
   - component: {fileID: 3995257101942761864}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13299,7 +13299,7 @@ GameObject:
   - component: {fileID: 3995257101836481085}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13318,7 +13318,7 @@ GameObject:
   - component: {fileID: 3995257101766517209}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13808,7 +13808,7 @@ GameObject:
   - component: {fileID: 1198321211224956117}
   m_Layer: 0
   m_Name: Greek Stone 06 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13826,7 +13826,7 @@ GameObject:
   - component: {fileID: 1198321211077127202}
   m_Layer: 0
   m_Name: Greek Stone 06 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13844,7 +13844,7 @@ GameObject:
   - component: {fileID: 1198321210882930603}
   m_Layer: 0
   m_Name: Greek Stone 06 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13862,7 +13862,7 @@ GameObject:
   - component: {fileID: 1198321210298118649}
   m_Layer: 0
   m_Name: Greek Stone 06 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13880,7 +13880,7 @@ GameObject:
   - component: {fileID: 1198321210003455866}
   m_Layer: 0
   m_Name: Greek Stone 06
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13898,7 +13898,7 @@ GameObject:
   - component: {fileID: 1198321209878123485}
   m_Layer: 0
   m_Name: Greek Stone 06
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14141,7 +14141,7 @@ GameObject:
   - component: {fileID: 2491308342316832638}
   m_Layer: 0
   m_Name: Greek Stone 07 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14174,7 +14174,7 @@ GameObject:
   - component: {fileID: 5199950122728190454}
   m_Layer: 0
   m_Name: Greek Wooden Ladder 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14232,7 +14232,7 @@ GameObject:
   - component: {fileID: 7766643294440812781}
   m_Layer: 0
   m_Name: Greek Vase 03 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14250,7 +14250,7 @@ GameObject:
   - component: {fileID: 7766643294061218298}
   m_Layer: 0
   m_Name: Greek Vase 03 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14268,7 +14268,7 @@ GameObject:
   - component: {fileID: 7766643293448788677}
   m_Layer: 0
   m_Name: Greek Vase 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14286,7 +14286,7 @@ GameObject:
   - component: {fileID: 7766643293540195963}
   m_Layer: 0
   m_Name: Greek Vase 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14313,7 +14313,7 @@ GameObject:
   - component: {fileID: 695969958559812898}
   m_Layer: 0
   m_Name: Greek Wooden Plank 02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14402,7 +14402,7 @@ GameObject:
   - component: {fileID: 1883173723679823184}
   m_Layer: 0
   m_Name: Greek Wooden Fence 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15261,7 +15261,7 @@ GameObject:
   - component: {fileID: 8533527211021772056}
   m_Layer: 0
   m_Name: Greek Block 17 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15279,7 +15279,7 @@ GameObject:
   - component: {fileID: 8533527210580805698}
   m_Layer: 0
   m_Name: Greek Block 17
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15297,7 +15297,7 @@ GameObject:
   - component: {fileID: 8533527210687320006}
   m_Layer: 0
   m_Name: Greek Block 17 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15315,7 +15315,7 @@ GameObject:
   - component: {fileID: 5417067122667111512}
   m_Layer: 0
   m_Name: Greek Stone 03 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15348,7 +15348,7 @@ GameObject:
   - component: {fileID: 3759771375464693690}
   m_Layer: 0
   m_Name: Greek Stone 03 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15381,7 +15381,7 @@ GameObject:
   - component: {fileID: 3759771375757252354}
   m_Layer: 0
   m_Name: Greek Stone 03 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15456,7 +15456,7 @@ GameObject:
   - component: {fileID: 7710786317382419613}
   m_Layer: 0
   m_Name: Greek Corner Pilar 02 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15475,7 +15475,7 @@ GameObject:
   - component: {fileID: 7710786316804730094}
   m_Layer: 0
   m_Name: Greek Corner Pilar 02 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -17654,7 +17654,7 @@ GameObject:
   - component: {fileID: 1996412674983156917}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (62)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -17672,7 +17672,7 @@ GameObject:
   - component: {fileID: 1996412676547304106}
   m_Layer: 0
   m_Name: Greek Bush Plant 02 (61)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18027,7 +18027,7 @@ GameObject:
   - component: {fileID: 195315390875592837}
   m_Layer: 0
   m_Name: Greek Ground Plane 01 Sand
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18787,7 +18787,7 @@ GameObject:
   - component: {fileID: 4797167849658544515}
   m_Layer: 0
   m_Name: Greek Block 15 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18806,7 +18806,7 @@ GameObject:
   - component: {fileID: 4797167850046477770}
   m_Layer: 0
   m_Name: Greek Block 06
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18825,7 +18825,7 @@ GameObject:
   - component: {fileID: 4797167849904297427}
   m_Layer: 0
   m_Name: Greek Block 15 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18844,7 +18844,7 @@ GameObject:
   - component: {fileID: 4797167849925301133}
   m_Layer: 0
   m_Name: Greek Block 15
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18863,7 +18863,7 @@ GameObject:
   - component: {fileID: 4797167849841851041}
   m_Layer: 0
   m_Name: Greek Block 06 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18882,7 +18882,7 @@ GameObject:
   - component: {fileID: 4797167849506945931}
   m_Layer: 0
   m_Name: Greek Block 15 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18901,7 +18901,7 @@ GameObject:
   - component: {fileID: 4797167851081976884}
   m_Layer: 0
   m_Name: Greek Block 06 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18920,7 +18920,7 @@ GameObject:
   - component: {fileID: 4797167850358434007}
   m_Layer: 0
   m_Name: Greek Block 06 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19119,7 +19119,7 @@ GameObject:
   - component: {fileID: 6506643684424667601}
   m_Layer: 0
   m_Name: Greek Block 05
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19138,7 +19138,7 @@ GameObject:
   - component: {fileID: 6506643685138934338}
   m_Layer: 0
   m_Name: Greek Block 14
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19157,7 +19157,7 @@ GameObject:
   - component: {fileID: 6506643684969720899}
   m_Layer: 0
   m_Name: Greek Block 05 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19176,7 +19176,7 @@ GameObject:
   - component: {fileID: 6506643685597758282}
   m_Layer: 0
   m_Name: Greek Block 05 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19195,7 +19195,7 @@ GameObject:
   - component: {fileID: 6506643685588052573}
   m_Layer: 0
   m_Name: Greek Block 05 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19214,7 +19214,7 @@ GameObject:
   - component: {fileID: 6506643685348295593}
   m_Layer: 0
   m_Name: Greek Block 05 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19579,7 +19579,7 @@ GameObject:
   - component: {fileID: 4606274017055692499}
   m_Layer: 0
   m_Name: Greek Block 07
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19598,7 +19598,7 @@ GameObject:
   - component: {fileID: 4606274016729646765}
   m_Layer: 0
   m_Name: Greek Block 07 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19617,7 +19617,7 @@ GameObject:
   - component: {fileID: 4606274016706802447}
   m_Layer: 0
   m_Name: Greek Block 07 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19636,7 +19636,7 @@ GameObject:
   - component: {fileID: 4606274016486705686}
   m_Layer: 0
   m_Name: Greek Block 07 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19655,7 +19655,7 @@ GameObject:
   - component: {fileID: 4606274016385387587}
   m_Layer: 0
   m_Name: Greek Block 07 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19674,7 +19674,7 @@ GameObject:
   - component: {fileID: 4606274016388901756}
   m_Layer: 0
   m_Name: Greek Block 07
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19693,7 +19693,7 @@ GameObject:
   - component: {fileID: 4606274016350996162}
   m_Layer: 0
   m_Name: Greek Block 07 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19712,7 +19712,7 @@ GameObject:
   - component: {fileID: 4606274016340384987}
   m_Layer: 0
   m_Name: Greek Block 07 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19731,7 +19731,7 @@ GameObject:
   - component: {fileID: 4606274016116538818}
   m_Layer: 0
   m_Name: Greek Block 07 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19750,7 +19750,7 @@ GameObject:
   - component: {fileID: 4606274016044789238}
   m_Layer: 0
   m_Name: Greek Block 07 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19769,7 +19769,7 @@ GameObject:
   - component: {fileID: 4606274017783673236}
   m_Layer: 0
   m_Name: Greek Block 07 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19788,7 +19788,7 @@ GameObject:
   - component: {fileID: 4606274017760407910}
   m_Layer: 0
   m_Name: Greek Block 07 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19807,7 +19807,7 @@ GameObject:
   - component: {fileID: 4606274017711079438}
   m_Layer: 0
   m_Name: Greek Block 07 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19826,7 +19826,7 @@ GameObject:
   - component: {fileID: 4606274017658307172}
   m_Layer: 0
   m_Name: Greek Block 07 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19845,7 +19845,7 @@ GameObject:
   - component: {fileID: 4606274017655288078}
   m_Layer: 0
   m_Name: Greek Block 07 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19864,7 +19864,7 @@ GameObject:
   - component: {fileID: 4606274017298079471}
   m_Layer: 0
   m_Name: Greek Block 07 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19883,7 +19883,7 @@ GameObject:
   - component: {fileID: 4606274017274187597}
   m_Layer: 0
   m_Name: Greek Block 07 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19902,7 +19902,7 @@ GameObject:
   - component: {fileID: 4606274017174716713}
   m_Layer: 0
   m_Name: Greek Block 07 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19921,7 +19921,7 @@ GameObject:
   - component: {fileID: 4606274017125602161}
   m_Layer: 0
   m_Name: Greek Block 07 (14)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22776,7 +22776,7 @@ GameObject:
   - component: {fileID: 388932637887089327}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22794,7 +22794,7 @@ GameObject:
   - component: {fileID: 388932637847690989}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22812,7 +22812,7 @@ GameObject:
   - component: {fileID: 388932638148406868}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22830,7 +22830,7 @@ GameObject:
   - component: {fileID: 388932637226171718}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (15)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22848,7 +22848,7 @@ GameObject:
   - component: {fileID: 388932637215213282}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (14)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22866,7 +22866,7 @@ GameObject:
   - component: {fileID: 388932637416966160}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22884,7 +22884,7 @@ GameObject:
   - component: {fileID: 388932637398188762}
   m_Layer: 0
   m_Name: Greek Bush Plant 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22902,7 +22902,7 @@ GameObject:
   - component: {fileID: 388932637438996123}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22920,7 +22920,7 @@ GameObject:
   - component: {fileID: 388932636819381188}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (18)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22938,7 +22938,7 @@ GameObject:
   - component: {fileID: 388932636981920029}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (17)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22956,7 +22956,7 @@ GameObject:
   - component: {fileID: 388932636956276656}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22974,7 +22974,7 @@ GameObject:
   - component: {fileID: 388932637059783457}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22992,7 +22992,7 @@ GameObject:
   - component: {fileID: 388932637048478596}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23010,7 +23010,7 @@ GameObject:
   - component: {fileID: 388932636356085159}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (33)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23028,7 +23028,7 @@ GameObject:
   - component: {fileID: 388932636267955892}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23046,7 +23046,7 @@ GameObject:
   - component: {fileID: 388932636270021527}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23064,7 +23064,7 @@ GameObject:
   - component: {fileID: 388932636273217961}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23082,7 +23082,7 @@ GameObject:
   - component: {fileID: 388932636235100200}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (32)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23100,7 +23100,7 @@ GameObject:
   - component: {fileID: 388932636482901112}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (16)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23118,7 +23118,7 @@ GameObject:
   - component: {fileID: 388932636416397357}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23136,7 +23136,7 @@ GameObject:
   - component: {fileID: 388932636420858250}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (34)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23154,7 +23154,7 @@ GameObject:
   - component: {fileID: 388932636577664815}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23172,7 +23172,7 @@ GameObject:
   - component: {fileID: 388932636560755927}
   m_Layer: 0
   m_Name: Greek Bush Plant 01 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23517,7 +23517,7 @@ GameObject:
   - component: {fileID: 6448087333279442667}
   m_Layer: 0
   m_Name: Greek Gate 02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23533,7 +23533,7 @@ GameObject:
   - component: {fileID: 6448087334527391777}
   m_Layer: 0
   m_Name: Greek Gate 02 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24656,7 +24656,7 @@ GameObject:
   - component: {fileID: 5560581777085489474}
   m_Layer: 0
   m_Name: Greek Tree 01 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24674,7 +24674,7 @@ GameObject:
   - component: {fileID: 5560581777039993772}
   m_Layer: 0
   m_Name: Greek Tree 01 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24692,7 +24692,7 @@ GameObject:
   - component: {fileID: 5560581777710574542}
   m_Layer: 0
   m_Name: Greek Tree 01 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24710,7 +24710,7 @@ GameObject:
   - component: {fileID: 5560581777182017901}
   m_Layer: 0
   m_Name: Greek Tree 01 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24728,7 +24728,7 @@ GameObject:
   - component: {fileID: 5560581777179036543}
   m_Layer: 0
   m_Name: Greek Tree 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24747,7 +24747,7 @@ GameObject:
   - component: {fileID: 9152028679894637511}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (23)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24766,7 +24766,7 @@ GameObject:
   - component: {fileID: 9152028679895114888}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (22)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24785,7 +24785,7 @@ GameObject:
   - component: {fileID: 9152028680269475456}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (15)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24804,7 +24804,7 @@ GameObject:
   - component: {fileID: 9152028680232564307}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (18)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24823,7 +24823,7 @@ GameObject:
   - component: {fileID: 9152028680164583545}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (20)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24842,7 +24842,7 @@ GameObject:
   - component: {fileID: 9152028680093929693}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24861,7 +24861,7 @@ GameObject:
   - component: {fileID: 9152028679416498134}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (19)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24880,7 +24880,7 @@ GameObject:
   - component: {fileID: 9152028679737604834}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (14)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24899,7 +24899,7 @@ GameObject:
   - component: {fileID: 9152028678844973003}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24918,7 +24918,7 @@ GameObject:
   - component: {fileID: 9152028678827446009}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (17)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24937,7 +24937,7 @@ GameObject:
   - component: {fileID: 9152028679229172686}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (21)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24956,7 +24956,7 @@ GameObject:
   - component: {fileID: 9152028679174904958}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24975,7 +24975,7 @@ GameObject:
   - component: {fileID: 9152028679109866318}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24994,7 +24994,7 @@ GameObject:
   - component: {fileID: 9152028679061629807}
   m_Layer: 0
   m_Name: Greek Rock Wall 01 (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25490,7 +25490,7 @@ GameObject:
   - component: {fileID: 6009372305904216864}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25509,7 +25509,7 @@ GameObject:
   - component: {fileID: 6009372305922292692}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25528,7 +25528,7 @@ GameObject:
   - component: {fileID: 6009372305996035254}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25547,7 +25547,7 @@ GameObject:
   - component: {fileID: 6009372305331779610}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25566,7 +25566,7 @@ GameObject:
   - component: {fileID: 6009372304366027164}
   m_Layer: 0
   m_Name: Greek Corner Pilar 01 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25883,7 +25883,7 @@ GameObject:
   - component: {fileID: 6551244371067368839}
   m_Layer: 0
   m_Name: Scene 08 Gameobjects
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25941,7 +25941,7 @@ GameObject:
   - component: {fileID: 6551244371968493377}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25988,7 +25988,7 @@ GameObject:
   - component: {fileID: 2359792398304560276}
   m_Layer: 0
   m_Name: Greek Vase 02 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26007,7 +26007,7 @@ GameObject:
   - component: {fileID: 2359792398092085156}
   m_Layer: 0
   m_Name: Greek Vase 02 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26025,7 +26025,7 @@ GameObject:
   - component: {fileID: 6117167709942882561}
   m_Layer: 0
   m_Name: Greek Vase 02 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26043,7 +26043,7 @@ GameObject:
   - component: {fileID: 6117167709609490532}
   m_Layer: 0
   m_Name: Greek Vase 02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26466,7 +26466,7 @@ GameObject:
   - component: {fileID: 5089164738548612677}
   m_Layer: 0
   m_Name: Greek Tree 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26484,7 +26484,7 @@ GameObject:
   - component: {fileID: 5089164737854733422}
   m_Layer: 0
   m_Name: Greek Tree 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26503,7 +26503,7 @@ GameObject:
   - component: {fileID: 5864194673094455474}
   m_Layer: 0
   m_Name: Greek Tree 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29390,7 +29390,7 @@ GameObject:
   - component: {fileID: 7341588824657417932}
   m_Layer: 0
   m_Name: Greek Pilar 05
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29780,7 +29780,7 @@ GameObject:
   - component: {fileID: 4660884244523114137}
   m_Layer: 0
   m_Name: Greek Vase 01 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29798,7 +29798,7 @@ GameObject:
   - component: {fileID: 4660884244949985184}
   m_Layer: 0
   m_Name: Greek Vase 01 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29816,7 +29816,7 @@ GameObject:
   - component: {fileID: 4660884243894153418}
   m_Layer: 0
   m_Name: Greek Vase 01 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29834,7 +29834,7 @@ GameObject:
   - component: {fileID: 4660884244414857921}
   m_Layer: 0
   m_Name: Greek Vase 01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33280,7 +33280,7 @@ GameObject:
   - component: {fileID: 2162108093826452039}
   m_Layer: 0
   m_Name: Greek Block 02
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33299,7 +33299,7 @@ GameObject:
   - component: {fileID: 2162108094049305064}
   m_Layer: 0
   m_Name: Greek Block 11 (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33318,7 +33318,7 @@ GameObject:
   - component: {fileID: 2162108093515966878}
   m_Layer: 0
   m_Name: Greek Block 11 (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33337,7 +33337,7 @@ GameObject:
   - component: {fileID: 2162108095231622011}
   m_Layer: 0
   m_Name: Greek Block 11 (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33356,7 +33356,7 @@ GameObject:
   - component: {fileID: 2162108095214474666}
   m_Layer: 0
   m_Name: Greek Block 02 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33375,7 +33375,7 @@ GameObject:
   - component: {fileID: 2162108095170563256}
   m_Layer: 0
   m_Name: Greek Block 02 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33394,7 +33394,7 @@ GameObject:
   - component: {fileID: 2162108095129700161}
   m_Layer: 0
   m_Name: Greek Block 02 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33413,7 +33413,7 @@ GameObject:
   - component: {fileID: 2162108095131298446}
   m_Layer: 0
   m_Name: Greek Block 11
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33432,7 +33432,7 @@ GameObject:
   - component: {fileID: 2162108094920662761}
   m_Layer: 0
   m_Name: Greek Block 02 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33451,7 +33451,7 @@ GameObject:
   - component: {fileID: 2162108094601353767}
   m_Layer: 0
   m_Name: Greek Block 11 (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33470,7 +33470,7 @@ GameObject:
   - component: {fileID: 2162108094841333470}
   m_Layer: 0
   m_Name: Greek Block 11 (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33489,7 +33489,7 @@ GameObject:
   - component: {fileID: 2162108094740889586}
   m_Layer: 0
   m_Name: Greek Block 11 (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33508,7 +33508,7 @@ GameObject:
   - component: {fileID: 2162108094453450682}
   m_Layer: 0
   m_Name: Greek Block 11 (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33527,7 +33527,7 @@ GameObject:
   - component: {fileID: 2162108094368974303}
   m_Layer: 0
   m_Name: Greek Block 11 (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33546,7 +33546,7 @@ GameObject:
   - component: {fileID: 2162108094587711363}
   m_Layer: 0
   m_Name: Greek Block 11 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33565,7 +33565,7 @@ GameObject:
   - component: {fileID: 2162108094548068123}
   m_Layer: 0
   m_Name: Greek Block 11 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33584,7 +33584,7 @@ GameObject:
   - component: {fileID: 2162108094474917199}
   m_Layer: 0
   m_Name: Greek Block 11 (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33656,7 +33656,7 @@ GameObject:
   - component: {fileID: 2961656745245496388}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33674,7 +33674,7 @@ GameObject:
   - component: {fileID: 242562618041079399}
   m_Layer: 0
   m_Name: Greek Stone 03
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33692,7 +33692,7 @@ GameObject:
   - component: {fileID: 9116549326313986804}
   m_Layer: 0
   m_Name: Directional Light
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
