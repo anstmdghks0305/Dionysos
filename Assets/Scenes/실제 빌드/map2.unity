@@ -58047,17 +58047,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rhythmSyncValue: 0
---- !u!114 &1753197356 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2317003849978587189, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-  m_PrefabInstance: {fileID: 2026860977}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2061f3370fe6a004fa117af707394ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1794558838
 GameObject:
   m_ObjectHideFlags: 0
@@ -60070,7 +60059,7 @@ PrefabInstance:
     - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: feverUI
       value: 
-      objectReference: {fileID: 1753197356}
+      objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: maxHurtTime
       value: 1
@@ -60351,7 +60340,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &2052107257
 RectTransform:

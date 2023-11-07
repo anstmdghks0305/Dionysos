@@ -80,21 +80,27 @@ public class Slash : MonoBehaviour, ISkill
         {
             if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f�� ī�޶��� �����̴�
             {
-                transform.position = new Vector3(e[index].transform.position.x - 1, e[index].transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x - 1, transform.position.y, e[index].transform.position.z);
                 player.isFlip = true;
             }
             else
             {
-                transform.position = new Vector3(e[index].transform.position.x + 1, e[index].transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x + 1, transform.position.y, e[index].transform.position.z);
                 player.isFlip = false;
             }
             player.Attack();
             player.Effect.LightningEffect();
             player.Effect.NightEffect(true);
             if(powerUp)
+            {
+                Manager.SoundManager.Instance.PlaySFXSound("슉", 1);
                 player.Effect.AttackEffect("Perfect");
+            }
             else
+            {
+                Manager.SoundManager.Instance.PlaySFXSound("검격2", 1);
                 player.Effect.AttackEffect("Bad");
+            }
 
             if (index == player.slashMaxCount - 1 ||
                 index >= e.Count - 1)
