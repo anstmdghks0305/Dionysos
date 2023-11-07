@@ -683,12 +683,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5da5ee38590a43a66c2fdb9f5f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 100
+  isBoss: 0
   SerialNum: 2
   Died: 0
   eventcontroller: {fileID: 548938862606774360}
   AttackCoolTime: 3
   Projectile_SerialNum: -1
-  Score: 0
 --- !u!1 &941657689270855267
 GameObject:
   m_ObjectHideFlags: 0

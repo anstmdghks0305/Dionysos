@@ -9,7 +9,13 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < this.transform.childCount; i++)
+        BossSpawn temp = null;
+        this.transform.GetChild(0).TryGetComponent<BossSpawn>(out temp);
+        if (temp != null)
+        {
+            SpawnList.Add(temp.Boss_Serial_Num);
+        }
+        for (int i = 1; i < this.transform.childCount; i++)
         {
             for (int j = 0; j < this.transform.GetChild(i).transform.childCount; j++)
             {

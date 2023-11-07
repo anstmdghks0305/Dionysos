@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Cysharp.Threading.Tasks;
+using System.Collections;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
     public int Score;
+    public bool isBoss = false;
     public EnemyType Type { get; set; }
     public int SerialNum;
     public Data Hp { private set; get; }
@@ -59,7 +61,6 @@ public class Enemy : MonoBehaviour, IEnemy
         }
         runState = new RunState(Speed);
         IState = runState;
-
     }
 
     public void Revive(Vector3 Pos)
@@ -133,15 +134,20 @@ public class Enemy : MonoBehaviour, IEnemy
             Died = true;
             navMeshAgent.isStopped = true;
             animator.SetTrigger("Die");
-            Invoke("PoolingSkin", 0.5f);
+            StartCoroutine(PoolingSkin());
         }
     }
 
-    public void PoolingSkin()
+    IEnumerator  PoolingSkin()
     {
-        EnemyController.Instance.EnemyDiePooling(this);
+        yield return new WaitForSeconds(0.5f);
         this.gameObject.SetActive(false);
         GameManager.Instance.CurrentStage.CurrentScore += Score;
+        EnemyController.Instance.EnemyDiePooling(this);
+        if (isBoss)
+        {
+            GameManager.Instance.EndStage(true);
+        }
     }
 
     public Transform where()
@@ -167,7 +173,8 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        eventcontroller.Filp(isFlip);
+        if(!isBoss)
+            eventcontroller.Filp(isFlip);
     }
 
     public void Damaged(int Damage)
