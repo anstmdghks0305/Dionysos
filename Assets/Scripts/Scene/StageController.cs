@@ -10,8 +10,9 @@ using System.Linq;
 namespace StageSelect
 {
     public class StageController : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
-    {
+    { 
         [SerializeField] private Image select;
+        public UIManager uiManager;
         public ScrollRect scrollrect;
         public delegate void MyAction();
         public static Action<Stage> StageSelect;
@@ -36,6 +37,7 @@ namespace StageSelect
 
         private void Start()
         {
+            var mainUi = uiManager.transform.GetChild(0).GetComponent<MainUI>().stageController = this;
             SelectSize = Screen.width;
             Ratio = SelectSize / scaler.referenceResolution.x;
             First = GetComponent<RectTransform>().position.x;
