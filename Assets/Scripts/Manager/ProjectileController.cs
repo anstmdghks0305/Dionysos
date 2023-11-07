@@ -30,7 +30,7 @@ public class ProjectileController : Singleton<ProjectileController>
         return obj;
     }
 
-    public Projectile ProjectilePooling(Transform Pos, int _Projectile_SerialNum)
+    public void ProjectilePooling(Transform Pos, int _Projectile_SerialNum)
     {
         if (Usedprojectiles[_Projectile_SerialNum].Count > 0)
         {
@@ -39,16 +39,20 @@ public class ProjectileController : Singleton<ProjectileController>
             temp.ReUse(Pos);
             temp.DirectionControl(Target.transform);
             projectiles[_Projectile_SerialNum].Enqueue(temp);
-            return temp;
         }
         else
         {
-            Projectile obj = GameObject.Instantiate(ProjectileInputer.ProjectileList[_Projectile_SerialNum], Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
-            obj.name = ProjectileInputer.ProjectileList[_Projectile_SerialNum].name;
-            obj.transform.SetParent(projectileParent);
-            obj.DirectionControl(Target.transform);
-            projectiles[_Projectile_SerialNum].Enqueue(obj);
-            return obj;
+            foreach(GameObject temp in ProjectileInputer.ProjectileList)
+            {
+                if(temp.gameObject.GetComponent<Projectile>().SerialNum == _Projectile_SerialNum)
+                {
+                    Projectile obj = GameObject.Instantiate(temp, Pos.position + Vector3.up * 0.5f, Quaternion.Euler(90, 0, 0)).transform.GetComponent<Projectile>();
+                    obj.name = temp.name;
+                    obj.transform.SetParent(projectileParent);
+                    obj.DirectionControl(Target.transform);
+                    projectiles[_Projectile_SerialNum].Enqueue(obj);
+                }
+            }
         }
     }
 
