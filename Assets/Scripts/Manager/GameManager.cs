@@ -43,17 +43,7 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         if (BossData.Instance != null)
             BossData.Instance.Read();
-        Screen.SetResolution(1920, 1080, true);
-        //EnemyDataInputer.EnemyDataInput();
-        try
-        {
-            ProjectileInputer.ProjectileDataInput();
-        }
-        catch (NullReferenceException ie)
-        {
-
-        }
-        
+        Screen.SetResolution(1920, 1080, true);  
     }
     private void Update()
     {
