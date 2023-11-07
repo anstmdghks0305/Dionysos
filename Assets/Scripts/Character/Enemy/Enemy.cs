@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 
 public class Enemy : MonoBehaviour, IEnemy
 {
+    public int Score;
     public EnemyType Type { get; set; }
     public int SerialNum;
     public Data Hp { private set; get; }
@@ -176,7 +177,7 @@ public class Enemy : MonoBehaviour, IEnemy
             Hurt = true;
             HurtDelay().Forget();
             Hp -= Damage;
-            //GameManager.Instance.CurrentStage.Score += csv점수 변수;
+            GameManager.Instance.CurrentStage.CurrentScore += 10;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
             if (Hp.ShowCurrentHp() <= 0)
                 state = State.Die;

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Threading;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StageSelect
 {
@@ -14,7 +15,7 @@ namespace StageSelect
         public ScrollRect scrollrect;
         public delegate void MyAction();
         public static Action<Stage> StageSelect;
-        public static event Action<StagePlayer> StageUnlock;
+        public static event Action<StageData> StageUnlock;
         public static MyAction StageDraw;
         private CancellationTokenSource token;
         private int SelectSize;
@@ -30,7 +31,7 @@ namespace StageSelect
 
         private void OnDestroy()
         {
-            token.Cancel();
+            //token.Cancel();
         }
 
         private void Start()
@@ -40,9 +41,10 @@ namespace StageSelect
             First = GetComponent<RectTransform>().position.x;
             TargetPos = First;
             token = new CancellationTokenSource();
-            for (int i = 0; i < GameManager.Instance.StageP.Count; i++)
+            for (int i = 0; i < GameManager.Instance.Stages.Count; i++)
             {
-                StageUnlock(GameManager.Instance.StageP[i]);
+                var key = GameManager.Instance.Stages.FirstOrDefault(x => x.Value.stageIndex == i).Key;
+                StageUnlock(GameManager.Instance.Stages[key]);
             }
             StageDraw();
         }
