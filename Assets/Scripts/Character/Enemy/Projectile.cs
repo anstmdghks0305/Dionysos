@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        if(!GameManager.Instance.GameStop)
         this.gameObject.transform.position += Direction.normalized * Speed * Time.deltaTime;
     }
 

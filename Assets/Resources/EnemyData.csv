@@ -3,7 +3,8 @@ OrkWarrior,1,140,Near,5,5,1,3,-1,100
 OrkWarrior,2,300,Near,10,8,1,3,-1,100
 OrkArcher,3,100,Far,6,0,12,4,0,100
 OrkWizard,4,80,Far,3,0,7,7,3,100
-HumanWarrior,5,160,Near,6,8,1,4,-1,100
-HumanArcher,6,100,Far,7,0,15,4,1,100
-UnDeadWarrior,7,200,Near,3,4,1,3,-1,100
-UnDeadArcher,8,140,Far,5,0,8,3,0,100
+OrkLord,5,300,Near,7,0,2,0,300
+HumanWarrior,6,160,Near,6,8,1,4,-1,100
+HumanArcher,7,100,Far,7,0,15,4,1,100
+UnDeadWarrior,8,200,Near,3,4,1,3,-1,100
+UnDeadArcher,9,140,Far,5,0,8,3,0,100

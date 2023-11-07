@@ -42,6 +42,7 @@ public class EnemyController : Singleton<EnemyController>
         obj.name = enemy.name;
         obj.transform.SetParent(EnemyPool);
         AliveEnemyPool.Add(obj.GetComponent<Enemy>());
+        
         return obj;
     }
 
