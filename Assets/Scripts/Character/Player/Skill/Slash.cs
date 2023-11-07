@@ -92,9 +92,15 @@ public class Slash : MonoBehaviour, ISkill
             player.Effect.LightningEffect();
             player.Effect.NightEffect(true);
             if(powerUp)
+            {
+                Manager.SoundManager.Instance.PlaySFXSound("슉", 1);
                 player.Effect.AttackEffect("Perfect");
+            }
             else
+            {
+                Manager.SoundManager.Instance.PlaySFXSound("검격2", 1);
                 player.Effect.AttackEffect("Bad");
+            }
 
             if (index == player.slashMaxCount - 1 ||
                 index >= e.Count - 1)

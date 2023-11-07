@@ -73,9 +73,10 @@ public class Dash : MonoBehaviour, ISkill
         while (elapseTime < 1)
         {
             elapseTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 2);
+            if(player.dash)
+                transform.position = Vector3.Lerp(transform.position, player.target, elapseTime / 2);
 
-            if (Vector3.Distance(player.target, transform.position) < 0.01f)
+            if (!player.dash || Vector3.Distance(player.target, transform.position) < 0.01f)
             {
                 CanUse = false;
                 player.dash = false;

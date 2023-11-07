@@ -55,6 +55,8 @@ public class Player : MonoBehaviour, ICharacterData
     float feverT;
     float feverT2;
     bool feverInit;
+    bool isCollision;
+    bool isFireball;
 
 
     private void Awake()
@@ -137,6 +139,7 @@ public class Player : MonoBehaviour, ICharacterData
         IfDash();
         IfFever();
     }
+    bool init2 = false;
     void InputKey()
     {
         Move();
@@ -145,6 +148,7 @@ public class Player : MonoBehaviour, ICharacterData
             if (Input.GetKeyDown(KeyCode.X))
             {
                 attack = true;
+                isFireball = false;
 
                 if (fever)
                     attackPowerUp = true;
@@ -153,18 +157,19 @@ public class Player : MonoBehaviour, ICharacterData
                     PlayerRhythm.InputAction("Attack");
 
                 }
-
-                if(attackPowerUp)
+                if (attackPowerUp)
                 {
                     weapon.Damage = 70; 
                     Effect.AttackEffect("Perfect");
                     attackScale.localScale = newScale;
+                    Manager.SoundManager.Instance.PlaySFXSound("슉", 1);
                 }
                 else
                 {
                     weapon.Damage = defaultDamage;
                     Effect.AttackEffect("Bad");
                     attackScale.localScale = scale;
+                    Manager.SoundManager.Instance.PlaySFXSound("검격2", 1);
                 }
 
                 //if 퍼펙트 == true => attackPowerUp = true;
@@ -172,7 +177,9 @@ public class Player : MonoBehaviour, ICharacterData
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                Manager.SoundManager.Instance.PlaySFXSound("화염구", 1);
                 attack = true;
+                isFireball = true;
 
                 if (fever)
                     fireBallPowerUP = true;
@@ -186,13 +193,13 @@ public class Player : MonoBehaviour, ICharacterData
                 {
                     ball.transform.localScale = new Vector3(transform.localScale.x + 3, transform.localScale.y + 3, transform.localScale.z + 3); 
                     ball.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-                    ball.GetComponent<FireBall>().damage = 50;
+                    ball.GetComponent<FireBall>().damage = 20;
                 }
                 else
                 {
                     ball.transform.position =
                         new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
-                    ball.GetComponent<FireBall>().damage = defaultDamage;
+                    ball.GetComponent<FireBall>().damage = 20;
                 }
 
 
@@ -224,11 +231,12 @@ public class Player : MonoBehaviour, ICharacterData
             }
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                dash = true;
                 SkillInterface = DashSkill;
 
                 if (fever || SkillInterface.coolTime >= DashSkill._coolTime)
                 {
+                    Manager.SoundManager.Instance.PlaySFXSound("대쉬2", 1);
+                    dash = true;
                     SkillInterface.CanUse = true;
 
                     if (fever)
@@ -298,11 +306,10 @@ public class Player : MonoBehaviour, ICharacterData
             if(!dashInit)
             {
                 //effect
-
                 dashInit = true;
             }
 
-            Collider[] Colliders = Physics.OverlapBox(transform.position, transform.localScale, Quaternion.identity);
+            Collider[] Colliders = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity);
 
             for (int i = 0; i < Colliders.Length; i++)
             {
@@ -318,7 +325,11 @@ public class Player : MonoBehaviour, ICharacterData
                     else
                         Colliders[i].GetComponent<ICharacterData>().Damaged(30);
                 }
-
+                else if (Colliders[i].CompareTag("Respawn"))
+                {
+                    dash = false;
+                    break;
+                }
             }
         }
         else
@@ -333,12 +344,10 @@ public class Player : MonoBehaviour, ICharacterData
         {
             feverT += Time.deltaTime;
             feverT2 += Time.deltaTime;
-            AttackSpeed = 0.1f;
+            AttackSpeed = 0.3f;
             Speed = 15;
             DashDistance = 5;
             Damage = 50;
-
-
 
             if (feverT >= maxFeverT)
             {
@@ -393,6 +402,7 @@ public class Player : MonoBehaviour, ICharacterData
     {
         if (state == State.Move) //뛰기
         {
+            GetComponent<Rigidbody>().isKinematic = false;
             anim.SetTrigger("IdleToRun");
         }
         else if (state == State.Attack) //공격
@@ -401,6 +411,8 @@ public class Player : MonoBehaviour, ICharacterData
         }
         else if (state == State.Idle) //쉬기
         {
+            GetComponent<Rigidbody>().isKinematic = true;
+
             anim.SetTrigger("RunToIdle");
             anim.SetTrigger("AttackToIdle");
             anim.ResetTrigger("IdleToRun");
@@ -470,25 +482,13 @@ public class Player : MonoBehaviour, ICharacterData
             Debug.Log(Fever.ShowCurrentHp());
         }
     }
-
-    //private void OnTriggerEnter(Collider collision)
-    //{
-    //    if (dash)
-    //    {
-    //        if (collision.CompareTag("enemy"))
-    //        {
-    //            Debug.Log("gh");
-    //            //collision.GetComponent<Enemy>().Stun();
-    //            collision.GetComponent<ICharacterData>().Damaged(Damage);
-    //        }
-    //        else if (collision.tag == "?")
-    //        {
-    //            Destroy(collision.gameObject);
-    //        }
-    //        if (attackPowerUp)
-    //        {
-
-    //        }
-    //    }
-    //}
+    public void PlusHP(int value)
+    {
+        if (Hp.ShowCurrentHp() < 100)
+        {
+            Hp += value;
+            eventcontroller.DoEvent(new EventData("Hp", Hp));
+            Debug.Log(Hp.ShowCurrentHp());
+        }
+    }
 }
