@@ -56541,10 +56541,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1361632481, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1622471298, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -56597,37 +56593,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: feverUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: maxHurtTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: dashDistance
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: defaultSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223049, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: slashMaxCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003849828223050, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: _coolTime
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2317003849828223052, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
       propertyPath: m_Name
       value: Unit002
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317003850427741216, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71c7f9751bb82f34aac5bc5e106b3f21, type: 3}
