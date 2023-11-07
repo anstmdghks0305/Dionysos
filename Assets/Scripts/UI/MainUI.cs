@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using StageSelect;
 
 public class MainUI : MonoBehaviour
 {
+    [SerializeField] public StageController stageController;
     SoundControlUI soundControlUI;
     [SerializeField] private GameObject RetryButton;
 
-    public void Awake()
+    void Awake()
     {
         soundControlUI = transform.GetChild(1).GetComponent<SoundControlUI>();
         soundControlUI.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+
     }
     public void SoundUIOpen()
     {
@@ -22,9 +29,10 @@ public class MainUI : MonoBehaviour
     {
         soundControlUI.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-        UIManager.Instance.Active = false;
+        stageController.uiManager.Active = false;
         GameManager.Instance.GameStop = false;
-        UIManager.Instance.InStage(false);
+        if(stageController != null)
+            stageController.uiManager.InStage(false);
         SceneManager.LoadScene(input);
     }
 
@@ -32,7 +40,8 @@ public class MainUI : MonoBehaviour
     {
         soundControlUI.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-        UIManager.Instance.Active = false;
+        if (stageController != null)
+            stageController.uiManager.Active = false;
         GameManager.Instance.GameStop = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -44,7 +53,8 @@ public class MainUI : MonoBehaviour
 
     public void ExitButtonDown()
     {
-        UIManager.Instance.Active = false;
+        if (stageController != null)
+            stageController.uiManager.Active = false;
         this.gameObject.SetActive(false);
         GameManager.Instance.GameStop = false;
     }

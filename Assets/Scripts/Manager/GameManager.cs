@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            StartCoroutine(gotoInputScene("StageSelect"));
+            SceneManager.LoadScene("EndingScene");
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -59,7 +59,10 @@ public class GameManager : Singleton<GameManager>
         {
             if(Input.anyKeyDown)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if (SceneManager.GetActiveScene().name == "EndingScene")
+                    Application.Quit();
+                else
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
     }
@@ -74,7 +77,6 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator gotoInputScene(string input)
     {
-        Debug.Log("그러지 말아다오");
         Fade.Active(1);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(input);

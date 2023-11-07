@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
-    MainUI mainUI;
+    [SerializeField] MainUI mainUI;
     public bool Active;
     // Start is called before the first frame update
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     void Start()
     {
-        DontDestroyOnLoad(this);
         Active = false;
         transform.GetChild(0).gameObject.SetActive(true);
         mainUI = transform.GetComponentInChildren<MainUI>();
         mainUI.gameObject.SetActive(Active);
+
+        if (SceneManager.GetActiveScene().name == "StageSelect")
+        {
+            InStage(false);
+        }
+        else
+        {
+            InStage(true);
+        }
     }
 
     // Update is called once per frame
