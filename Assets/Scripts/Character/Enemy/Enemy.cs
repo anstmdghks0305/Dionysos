@@ -173,7 +173,8 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        eventcontroller.Filp(isFlip);
+        if(!isBoss)
+            eventcontroller.Filp(isFlip);
     }
 
     public void Damaged(int Damage)
