@@ -80,12 +80,12 @@ public class Slash : MonoBehaviour, ISkill
         {
             if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f�� ī�޶��� �����̴�
             {
-                transform.position = new Vector3(e[index].transform.position.x - 1, e[index].transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x - 1, transform.position.y, e[index].transform.position.z);
                 player.isFlip = true;
             }
             else
             {
-                transform.position = new Vector3(e[index].transform.position.x + 1, e[index].transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x + 1, transform.position.y, e[index].transform.position.z);
                 player.isFlip = false;
             }
             player.Attack();
