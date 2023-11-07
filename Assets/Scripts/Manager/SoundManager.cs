@@ -55,6 +55,7 @@ namespace Manager
         private void Update()
         {
             BGMPlayer.volume = VolumeBGM;
+            SFXPlayer.volume = VolumeSFX;
             if(Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log(VolumeBGM);

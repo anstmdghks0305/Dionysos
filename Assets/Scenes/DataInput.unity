@@ -1468,7 +1468,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: dffc0ce1555aed4418816331190c337c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: b5d3100144a0a2a47ba9e7801b386c9b, type: 2}
 --- !u!4 &1591423513
 Transform:
   m_ObjectHideFlags: 0
@@ -1594,8 +1594,8 @@ Canvas:
   m_GameObject: {fileID: 1639788140}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 721890740}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
