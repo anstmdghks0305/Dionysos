@@ -29,10 +29,13 @@ public class MainUI : MonoBehaviour
     {
         soundControlUI.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-        stageController.uiManager.Active = false;
+
         GameManager.Instance.GameStop = false;
         if(stageController != null)
+        {
+            stageController.uiManager.Active = false;
             stageController.uiManager.InStage(false);
+        }
         SceneManager.LoadScene(input);
     }
 
@@ -43,6 +46,7 @@ public class MainUI : MonoBehaviour
         if (stageController != null)
             stageController.uiManager.Active = false;
         GameManager.Instance.GameStop = false;
+        GameManager.Instance.CurrentStage.CurrentScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
