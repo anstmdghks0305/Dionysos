@@ -35,13 +35,13 @@ public class Slash : MonoBehaviour, ISkill
 
             if (powerUp)
             {
-                player.weapon.Damage = 100;
+                player.weapon.Damage = player.slashPowerUpDamage;
                 player.attackScale.localScale = player.scale;
             }
 
             else
             {
-                player.weapon.Damage = 50;
+                player.weapon.Damage = player.slashDefaultDamage;
                 player.attackScale.localScale = player.scale;
             }
 
@@ -51,8 +51,10 @@ public class Slash : MonoBehaviour, ISkill
     IEnumerator SlashLogic(Player player)
     {
         int index = 0;
+        int index2 = 0;
         List<Enemy> pool = EnemyController.Instance.AliveEnemyPool;
         List<Enemy> e = new List<Enemy>();
+        Enemy boss = null;
 
         if (pool.Count > 0)
         {
@@ -61,7 +63,16 @@ public class Slash : MonoBehaviour, ISkill
                 Vector3 enemyPoints = GameManager.Instance.MainCam.WorldToViewportPoint(pool[i].transform.position);
 
                 if (enemyPoints.x > 0 && enemyPoints.x < 1 && enemyPoints.y > 0 && enemyPoints.y < 1)
-                    e.Add(pool[i]);
+                {
+                    if(pool[i].isBoss)
+                        boss = pool[i];
+                    else
+                        e.Add(pool[i]);
+                }
+            }
+            if(boss != null)
+            {
+                e.Add(boss);
             }
         }
 
@@ -80,12 +91,12 @@ public class Slash : MonoBehaviour, ISkill
         {
             if (GameManager.Instance.MainCam.WorldToViewportPoint(e[index].transform.position).x > 0.5f) //0.5f�� ī�޶��� �����̴�
             {
-                transform.position = new Vector3(e[index].transform.position.x - 1, transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x - 0.3f, transform.position.y, e[index].transform.position.z);
                 player.isFlip = true;
             }
             else
             {
-                transform.position = new Vector3(e[index].transform.position.x + 1, transform.position.y, e[index].transform.position.z);
+                transform.position = new Vector3(e[index].transform.position.x + 0.3f, transform.position.y, e[index].transform.position.z);
                 player.isFlip = false;
             }
             player.Attack();
@@ -102,21 +113,27 @@ public class Slash : MonoBehaviour, ISkill
                 player.Effect.AttackEffect("Bad");
             }
 
-            if (index == player.slashMaxCount - 1 ||
-                index >= e.Count - 1)
-            {
-                Debug.Log("end");
-                coolTime = 0;
-                player.slash = false;
-                player.AttackSpeed = player.defaultAttackSpeed;
-                powerUp = false;
-                CanUse = false;
-                player.Effect.NightEffect(false);
-                yield break;
-            }
-            else if (index < e.Count - 1)
+            if (index < e.Count - 1)
             {
                 index++;
+                index2++;
+            }
+            else if(index == e.Count - 1 )
+            {
+                if(e[index] != boss || index2 == player.slashMaxCount - 1)
+                {
+                    coolTime = 0;
+                    player.slash = false;
+                    player.AttackSpeed = player.defaultAttackSpeed;
+                    powerUp = false;
+                    CanUse = false;
+                    player.Effect.NightEffect(false);
+                    yield break;
+                }
+                else
+                {
+                    index2++;
+                }
             }
             yield return new WaitForSeconds(0.25f);
         }
@@ -125,4 +142,5 @@ public class Slash : MonoBehaviour, ISkill
     //{
     //    maxTime = 0;
     //}
+
 }
