@@ -169,7 +169,6 @@ MonoBehaviour:
   Boss_Serial_Num: 5
   Score: 3000
   First: 0
-  BossWarning: {fileID: 0}
 --- !u!1 &162866300
 GameObject:
   m_ObjectHideFlags: 0

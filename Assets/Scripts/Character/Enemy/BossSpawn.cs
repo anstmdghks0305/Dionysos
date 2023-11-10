@@ -9,7 +9,7 @@ public class BossSpawn : MonoBehaviour
     private EventController boss_Hp;
     public int Score;
     public bool First = false;
-    public GameObject BossWarning;
+    //public GameObject BossWarning;
     
     void Start()
     {
@@ -31,9 +31,9 @@ public class BossSpawn : MonoBehaviour
     IEnumerator BossActive()
     {
         First = true;
-        BossWarning.gameObject.SetActive(true);
+        //BossWarning.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        BossWarning.gameObject.SetActive(false);
+       // BossWarning.gameObject.SetActive(false);
         GameObject temp = EnemyController.Instance.EnemyPooling(this.transform.position, Boss_Serial_Num);
         boss_Hp = temp.GetComponent<Enemy>().eventcontroller;
         temp.GetComponent<Enemy>().isBoss = true;
