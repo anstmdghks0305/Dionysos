@@ -7,9 +7,9 @@ using UnityEngine;
 public class ExplosionProjectile : Projectile
 {
     private ParticleSystem particle;
-    public int ExplosionDamage = 3;
+    private int ExplosionDamage = 3;
     private bool Explosioned = false;
-    private float EffectDestroyTime = 1f;
+    public float EffectDestroyTime = 1f;
     // Start is called before the first frame update
     public override void Copy(Projectile value)
     {
