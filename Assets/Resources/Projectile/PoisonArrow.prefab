@@ -33360,7 +33360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: Player
-  SerialNum: 1
+  SerialNum: 3
   ExplosionDamage: 3
 --- !u!1 &8323485728532572208
 GameObject:
