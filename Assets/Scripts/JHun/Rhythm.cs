@@ -32,7 +32,10 @@ public class Rhythm : MonoBehaviour
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
     }
 
-
+    private void Start()
+    {
+        Manager.SoundManager.Instance.ring = gameObject.GetComponent<ParticleSystem>();
+    }
     void Update()
     {
         EffectTime = RhythmEffect.time;

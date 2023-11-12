@@ -8,6 +8,24 @@ using System.Linq;
 using UnityEngine.UI;
 
 [Serializable]
+public class User
+{
+    public string name;
+    public int score;
+}
+
+[Serializable]
+public class UserData
+{
+    public List<User> datas = new List<User>();
+
+    public void Copy(string _name, int _score)
+    {
+
+    }
+}
+
+[Serializable]
 public struct StagePlayer
 {
     public string Name;
@@ -22,6 +40,7 @@ public struct StagePlayer
 };
 public class GameManager : Singleton<GameManager>
 {
+    public UserData saveData;
     public Fade Fade;
     public StageData CurrentStage;
     public bool NotBuild;
@@ -33,13 +52,14 @@ public class GameManager : Singleton<GameManager>
     {
         Stages.Add(_StageName, new StageData(_stageIndex, _bpm, _progress, _maxScore, _StageName, _Difficult));
     }
-    public List<StagePlayer> UserData = new List<StagePlayer>();
     protected override void Awake()
     {
         base.Awake();
     }
     private void Start()
     {
+        saveData = new UserData();
+        saveData = RankData.RankLoad();
         DontDestroyOnLoad(gameObject);
         if (BossData.Instance != null)
             BossData.Instance.Read();
@@ -73,6 +93,7 @@ public class GameManager : Singleton<GameManager>
     {
         if(Stages[CurrentStage.StageName].ResultScore < Stages[CurrentStage.StageName].CurrentScore)
             Stages[CurrentStage.StageName].ResultScore = Stages[CurrentStage.StageName].CurrentScore;
+        saveData.datas[saveData.datas.Count - 1].score = Stages[CurrentStage.StageName].ResultScore;
         Stages[CurrentStage.StageName].Clear = clear;
         StartCoroutine(gotoInputScene("StageSelect"));
     }

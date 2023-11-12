@@ -13,7 +13,7 @@ public class ScreenShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             ScreenCapture.CaptureScreenshot("Capture.png");
         }

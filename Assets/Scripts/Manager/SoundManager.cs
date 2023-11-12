@@ -18,7 +18,7 @@ namespace Manager
         //Dictionary<key, value>로 오디오를 불러온다
         Dictionary<string, AudioClip> BGMaudioclipdic = new Dictionary<string, AudioClip>();
         Dictionary<string, AudioClip> SFXaudioclipdic = new Dictionary<string, AudioClip>();
-        
+        public ParticleSystem ring;
         private void Awake()
         {
             base.Awake();
@@ -52,6 +52,10 @@ namespace Manager
 
         public void PlayBGMSound(string name)
         {
+            if (ring != null)
+            {
+                //ring.Play();
+            }
             BGMPlayer.clip = BGMaudioclipdic[name];
             BGMPlayer.loop = true;
             BGMPlayer.Play();
