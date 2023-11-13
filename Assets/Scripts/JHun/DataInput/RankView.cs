@@ -41,18 +41,7 @@ public class RankView : MonoBehaviour
             rankscore += $"|            {sortData.datas[i].score}";
             rankscore += "\n";
         }
-        /*        RankText.text = @$"1등  {sortData.datas[0].name}
-        2등  {sortData.datas[1].name}
-        3등  {sortData.datas[2].name}
-        4등  {sortData.datas[3].name}
-        5등  {sortData.datas[4].name}";*/
         RankName.text = rankname;
         RankScore.text = rankscore;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

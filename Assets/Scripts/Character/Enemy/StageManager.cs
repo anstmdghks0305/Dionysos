@@ -21,7 +21,7 @@ public class StageManager : MonoBehaviour
             {
                 SpawnList.AddRange(this.transform.GetChild(i).transform.GetChild(j).GetComponent<EnemySpawn>().enemies.Distinct<int>().ToList<int>());
                 SpawnList = SpawnList.Distinct<int>().ToList<int>();
-                Debug.Log(SpawnList.Count);
+                //Debug.Log(SpawnList.Count);
             }
         }
         EnemyDataInputer.EnemyDataInput(SpawnList);

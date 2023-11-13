@@ -11,7 +11,7 @@ public class Rhythm : MonoBehaviour
     [SerializeField] private Material[] RythmMaterial; // 이펙트 매테리얼
     [SerializeField] float bpm;
     public float Speed; // 이펙트 속도
-    private float EffectTime; // 현재 이펙트의 시간
+    [SerializeField] private float EffectTime; // 현재 이펙트의 시간
     [SerializeField] private float Sync; // 리듬 싱크
     [SerializeField] float Range; // 퍼펙트 체크 범위
     [SerializeField] private Player player;
@@ -29,9 +29,9 @@ public class Rhythm : MonoBehaviour
         }
         Speed = bpm / 60f;
         RhythmEffect.playbackSpeed = Speed;
+        //RhythmEffect.startDelay = 1f - RhythmManager.Instance.RhythmSyncValue;
         RhythmRenderer = RhythmEffect.GetComponent<ParticleSystemRenderer>();
     }
-
     private void Start()
     {
         Manager.SoundManager.Instance.ring = gameObject.GetComponent<ParticleSystem>();
@@ -47,7 +47,7 @@ public class Rhythm : MonoBehaviour
     }
     public void InputAction(string input)
     {
-        if (EffectTime < Sync + Speed * Range && EffectTime > Sync - Speed * Range)
+        if (EffectTime <= Sync + (Speed * Range) && EffectTime >= Sync - (Speed * Range))
         {
             Perfect(input);
         }

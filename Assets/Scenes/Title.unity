@@ -442,8 +442,9 @@ GameObject:
   m_Component:
   - component: {fileID: 705172000}
   - component: {fileID: 705171998}
+  - component: {fileID: 705171999}
   m_Layer: 0
-  m_Name: StageData
+  m_Name: DataRead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,6 +460,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4e64ac04ea4b604fbb0ecec7c1765ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &705171999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705171997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1566e8ce3f69ef4e80c5c192e349441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &705172000
@@ -847,6 +860,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a25184fedbbdba046942a31dd3ab8560, type: 3}
   - {fileID: 8300000, guid: bf4fb41b4b6591b4e946b25bce5ffa33, type: 3}
   - {fileID: 8300000, guid: d586e9510d4c31146a0430a57c458816, type: 3}
+  ring: {fileID: 0}
 --- !u!4 &881555342
 Transform:
   m_ObjectHideFlags: 0
@@ -1257,6 +1271,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5759bc70da4a0ac48be6bd4d1f12c3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData:
+    hp: 0
+    fever: 0
+    speed: 0
+    attackSpeed: 0
+    dashDistance: 0
+    attackDamage: 0
+    powerAttackDamage: 0
+    dashDamage: 0
+    powerDashDamage: 0
+    dashCoolTime: 0
+    slashDamage: 0
+    powerSlashDamage: 0
+    slashCoolTime: 0
+    slashCount: 0
+    fireballDamage: 0
+    powerFireballDamage: 0
+    fireballCoolTime: 0
+    hurtTime: 0
+    feverTime: 0
+    powerAttackRange: 0
+  saveData:
+    datas: []
   Fade: {fileID: 0}
   CurrentStage:
     progress: 0
@@ -1270,11 +1307,10 @@ MonoBehaviour:
     StageName: 
     Difficult: 
     Active: 0
-  NotBuild: 1
+  NotBuild: 0
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
-  UserData: []
 --- !u!4 &1005633718
 Transform:
   m_ObjectHideFlags: 0
