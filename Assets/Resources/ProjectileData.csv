@@ -1,7 +1,7 @@
 ProjectileName,SerialNum,Type,Speed,Damage,SecondDamage
 Arrow,0,,5,5,0
 ExplosionArrow,1,Explosion,5,4,5
-PosionArrow,2,Explosion,5,3,4
+PoisonArrow,2,Explosion,5,3,4
 ThrustArrow,3,Thrust,5,3,2
 FireBall,4,Explosion,7,7,7
 FireBall,5,Explosion,9,20,13
