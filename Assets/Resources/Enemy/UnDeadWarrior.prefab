@@ -3182,7 +3182,7 @@ GameObject:
   - component: {fileID: 1028030574233947042}
   m_Layer: 5
   m_Name: UnDeadWarrior
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3248,7 +3248,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.04
-  m_Speed: 10
+  m_Speed: 3
   m_Acceleration: 40
   avoidancePriority: 1
   m_AngularSpeed: 0
@@ -3272,13 +3272,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5da5ee38590a43a66c2fdb9f5f897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
+  Score: 100
   isBoss: 0
-  SerialNum: 2
+  SerialNum: 10
   Died: 0
-  eventcontroller: {fileID: 0}
+  eventcontroller: {fileID: 5375423084109923614}
   AttackCoolTime: 3
   Projectile_SerialNum: -1
+  poolingTime: 0
+  poolingBool: 0
 --- !u!1 &8038961569015899400
 GameObject:
   m_ObjectHideFlags: 0

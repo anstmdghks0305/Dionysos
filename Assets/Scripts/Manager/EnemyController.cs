@@ -13,8 +13,9 @@ public class EnemyController : Singleton<EnemyController>
     public Player player;
     CancellationTokenSource token = new CancellationTokenSource();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         EnemyPool = this.transform.GetChild(0);
         DiedEnemy = this.transform.GetChild(1);
     }
