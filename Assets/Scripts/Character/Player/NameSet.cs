@@ -10,7 +10,7 @@ public class NameSet : MonoBehaviour
     void Start()
     {
         nameText = gameObject.GetComponent<Text>();
-        name = GameManager.Instance.UserData[GameManager.Instance.UserData.Count - 1].Name;
+        name = GameManager.Instance.saveData.datas[GameManager.Instance.saveData.datas.Count - 1].name;
         nameText.text = name;  
     }
 }

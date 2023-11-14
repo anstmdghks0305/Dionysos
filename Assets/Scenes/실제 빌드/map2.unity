@@ -264,7 +264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c973785c394574a9f29f7e2273ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0
+  Damage: 0
+  AttackSpeed: 0
+  DashDistance: 0
   Died: 0
+  Attacking: 0
   PlayerRhythm: {fileID: 0}
   eventcontroller: {fileID: 0}
   Effect: {fileID: 1233533080}
@@ -274,13 +279,19 @@ MonoBehaviour:
   anim: {fileID: 5568536303028399340}
   defaultSpeed: 0
   feverSpeed: 10
+  dashDefaultDamage: 30
+  dashPowerUpDamage: 70
   dashDistance: 3
   defaultAttackSpeed: 0
-  defaultDamage: 30
+  defaultWeaponDamage: 30
+  powerUpWeaponDamage: 70
+  slashDefaultDamage: 50
+  slashPowerUpDamage: 100
   slashMaxCount: 5
-  feverSlashMaxCount: 8
+  defaultFireBallDamage: 30
+  powerUpFireBallDamage: 70
   maxHurtTime: 0
-  maxFeverT: 3
+  maxFeverTime: 10
   target: {x: 0, y: 0, z: 0}
   horizontal: 0
   vertical: 0
@@ -288,7 +299,6 @@ MonoBehaviour:
   attack: 0
   scale: {x: 0, y: 0, z: 0}
   newScale: {x: 0, y: 0, z: 0}
-  attackScale: {fileID: 0}
   attackPowerUp: 0
   fireBallPowerUP: 0
   weapon: {fileID: 0}
@@ -296,6 +306,8 @@ MonoBehaviour:
   dashPowerUp: 0
   fever: 0
   feverUI: {fileID: 0}
+  fireBallTime: 0
+  fireBallCoolTime: 0
 --- !u!114 &108687463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +377,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5759bc70da4a0ac48be6bd4d1f12c3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData:
+    hp: 0
+    fever: 0
+    speed: 0
+    attackSpeed: 0
+    dashDistance: 0
+    attackDamage: 0
+    powerAttackDamage: 0
+    dashDamage: 0
+    powerDashDamage: 0
+    dashCoolTime: 0
+    slashDamage: 0
+    powerSlashDamage: 0
+    slashCoolTime: 0
+    slashCount: 0
+    fireballDamage: 0
+    powerFireballDamage: 0
+    fireballCoolTime: 0
+    hurtTime: 0
+    feverTime: 0
+    powerAttackRange: 0
+  saveData:
+    datas: []
   Fade: {fileID: 0}
   CurrentStage:
     progress: 0
@@ -382,7 +417,6 @@ MonoBehaviour:
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
-  UserData: []
 --- !u!1 &185988610
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0600000006000000
+  enemies: 08000000080000000800000008000000
   CoolTime: 2000
 --- !u!1 &217368797
 GameObject:
@@ -19784,6 +19818,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ba57f625cbb7f5744b517182e93b3953, type: 2}
   bpm: 0
   Speed: 0
+  EffectTime: 0
   Sync: 0
   Range: 0.1
   player: {fileID: 108687461}
@@ -44662,7 +44697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0700000008000000
+  enemies: 07000000080000000800000007000000
   CoolTime: 2000
 --- !u!1 &1117437956
 GameObject:
@@ -51952,7 +51987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0600000006000000
+  enemies: 06000000060000000700000007000000
   CoolTime: 2000
 --- !u!4 &1670606471
 Transform:
@@ -56301,7 +56336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0600000006000000
+  enemies: 06000000060000000800000008000000
   CoolTime: 2000
 --- !u!1 &1741814006
 GameObject:
@@ -56391,7 +56426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss_Serial_Num: 9
-  Score: 500
+  Score: 2400
   First: 0
 --- !u!1 &1833723897
 GameObject:
@@ -56422,7 +56457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0600000007000000
+  enemies: 06000000070000000700000006000000
   CoolTime: 2000
 --- !u!4 &1833723899
 Transform:
@@ -56481,7 +56516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 0600000007000000
+  enemies: 06000000070000000700000006000000
   CoolTime: 2000
 --- !u!1 &1972491237
 GameObject:

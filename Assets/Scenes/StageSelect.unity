@@ -1222,6 +1222,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4621b8b5acac44046be0475f63c52b4c, type: 3}
   - {fileID: 8300000, guid: 37ac05889c9b3614ca4102b4e55367e7, type: 3}
   SFXAudioClips: []
+  ring: {fileID: 0}
 --- !u!1 &621379834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ GameObject:
   - component: {fileID: 1000364035}
   - component: {fileID: 1000364036}
   m_Layer: 5
-  m_Name: CopyRightButton
+  m_Name: CopyrightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2179,6 +2180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5759bc70da4a0ac48be6bd4d1f12c3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData:
+    datas: []
   Fade: {fileID: 0}
   CurrentStage:
     progress: 0
@@ -2196,7 +2199,6 @@ MonoBehaviour:
   MainCam: {fileID: 0}
   GameClearData: 
   GameStop: 0
-  UserData: []
 --- !u!4 &1522059506
 Transform:
   m_ObjectHideFlags: 0

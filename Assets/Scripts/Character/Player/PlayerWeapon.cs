@@ -10,14 +10,14 @@ public class PlayerWeapon : MonoBehaviour
     public Player _player;
     private void Start()
     {
-        player.GetComponent<ICharacterData>().Attacking = false;
         _player = player.GetComponent<Player>();
+        _player.Attacking = false;
     }
     private void Update()
     {
-        if (player.GetComponent<ICharacterData>().Attacking)
+        if (_player.Attacking)
             transform.GetComponent<BoxCollider>().enabled = true;
-        else if (!player.GetComponent<ICharacterData>().Attacking)
+        else if (!_player.Attacking)
         {
             init = false;
             transform.GetComponent<BoxCollider>().enabled = false;
@@ -28,7 +28,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (other.CompareTag("enemy"))
         {
-            other.GetComponent<ICharacterData>().Damaged(Damage);
+            other.GetComponent<Enemy>().Damaged(Damage);
             //other.GetComponent<Boss.BossController>().GetDamange(Damage);
             Debug.Log("check");
             if(!init && !_player.slash &&(player.GetComponent<Player>().attackPowerUp || player.GetComponent<Player>().dashPowerUp || player.GetComponent<Player>().SlashSkill.powerUp))

@@ -36,13 +36,13 @@ public class Slash : MonoBehaviour, ISkill
             if (powerUp)
             {
                 player.weapon.Damage = player.slashPowerUpDamage;
-                player.attackScale.localScale = player.scale;
+                player.weapon.transform.localScale = player.newScale;
             }
 
             else
             {
                 player.weapon.Damage = player.slashDefaultDamage;
-                player.attackScale.localScale = player.scale;
+                player.weapon.transform.localScale = player.scale;
             }
 
             StartCoroutine(SlashLogic(player));

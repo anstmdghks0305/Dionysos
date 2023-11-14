@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
-public class Player : MonoBehaviour, ICharacterData
+public class Player : MonoBehaviour
 {
     public Data Hp { private set; get; }
     public Data Fever { private set; get; }
-    public int Speed { set; get; }
-    public int Damage { set; get; }
-    public float AttackSpeed { set; get; }
-    public float DashDistance { set; get; }
+    public int Speed;
+    public int Damage;
+    public float AttackSpeed;
+    public float DashDistance;
     public Animator animator { set; get; }
     public bool isFlip { get; set; }
     public bool Died;
     public State state { set; get; }
     public IState IState { get; set; }
-    public bool Attacking { get; set; }
+    public bool Attacking;
     public Rhythm PlayerRhythm;
     public EventController eventcontroller;
     public EffectManager Effect;
@@ -47,7 +47,6 @@ public class Player : MonoBehaviour, ICharacterData
     public bool attack;
     float attackT;
     public Vector3 scale, newScale;
-    public Transform attackScale;
     public bool attackPowerUp;
     public bool fireBallPowerUP;
     public PlayerWeapon weapon;
@@ -63,7 +62,8 @@ public class Player : MonoBehaviour, ICharacterData
     bool feverInit;
     bool isFireball;
     Rigidbody r;
-
+    public float fireBallTime;
+    public float fireBallCoolTime;
 
     private void Awake()
     {
@@ -77,19 +77,34 @@ public class Player : MonoBehaviour, ICharacterData
 
     public void Start()
     {
-        Hp = new Data(100);
+        PlayerData data = GameManager.Instance.playerData;
+        Hp = new Data(data.hp);
         eventcontroller.DoEvent(new EventData("Hp", Hp));
-        Fever = new Data(100);
-        Fever -= 100;
-        Speed = defaultSpeed;
+        Fever = new Data(data.fever);
+        Fever -= data.fever;
+        Speed = data.speed;
         state = State.Idle;
-        attackScale = transform.GetChild(0).GetChild(3);
         scale = transform.GetChild(0).GetChild(3).localScale;
-        newScale = new Vector3(scale.x + 1, scale.y + 1, scale.z + 1);
-        Damage = defaultWeaponDamage;
-        DashDistance = dashDistance;
-        AttackSpeed = defaultAttackSpeed;
+        defaultWeaponDamage = data.attackDamage;
+        DashDistance = data.dashDistance;
+        AttackSpeed = data.attackSpeed;
+        defaultAttackSpeed = data.attackSpeed;
+        powerUpWeaponDamage = data.powerAttackDamage;
+        dashDefaultDamage = data.dashDamage;
+        dashPowerUpDamage = data.powerDashDamage;
+        slashDefaultDamage = data.slashDamage;
+        slashPowerUpDamage = data.powerSlashDamage;
+        slashMaxCount = data.slashCount;
+        defaultFireBallDamage = data.fireballDamage;
+        powerUpFireBallDamage = data.powerFireballDamage;
+        hurtTime = data.hurtTime;
+        maxFeverTime = data.feverTime;
+        newScale = new Vector3(scale.x + data.powerAttackRange, scale.y + data.powerAttackRange, scale.z + data.powerAttackRange);
         r = GetComponent<Rigidbody>();
+        fireBallCoolTime = data.fireballCoolTime;
+        fireBallTime = fireBallCoolTime;
+        DashSkill._coolTime = data.dashCoolTime;
+        SlashSkill._coolTime = data.slashCoolTime;
     }
 
     public void Attack()
@@ -137,6 +152,11 @@ public class Player : MonoBehaviour, ICharacterData
         PlayerAnim();
         HurtTime();
 
+        if(fireBallTime <= fireBallCoolTime)
+        {
+            fireBallTime += Time.deltaTime;
+        }
+
         if (Hp.ShowCurrentHp() > 0 && 
             //!hurt && 
             !GameManager.Instance.GameStop)
@@ -175,22 +195,23 @@ public class Player : MonoBehaviour, ICharacterData
                 {
                     weapon.Damage = powerUpWeaponDamage; 
                     Effect.AttackEffect("Perfect");
-                    attackScale.localScale = newScale;
+                    weapon.transform.localScale = newScale;
                     Manager.SoundManager.Instance.PlaySFXSound("슉", 1);
                 }
                 else
                 {
                     weapon.Damage = defaultWeaponDamage;
                     Effect.AttackEffect("Bad");
-                    attackScale.localScale = scale;
+                    weapon.transform.localScale = scale;
                     Manager.SoundManager.Instance.PlaySFXSound("검격2", 1);
                 }
 
                 //if 퍼펙트 == true => attackPowerUp = true;
 
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && fireBallTime >= fireBallCoolTime)
             {
+                fireBallTime = 0;
                 Manager.SoundManager.Instance.PlaySFXSound("화염구", 1);
                 attack = true;
                 isFireball = true;
@@ -205,7 +226,7 @@ public class Player : MonoBehaviour, ICharacterData
                 ball.AddComponent<FireBall>();
                 if (fireBallPowerUP)
                 {
-                    ball.transform.localScale = new Vector3(transform.localScale.x + 3, transform.localScale.y + 3, transform.localScale.z + 3); 
+                    ball.transform.localScale = new Vector3(transform.localScale.x + 3, transform.localScale.y + 3, transform.localScale.z + 3);
                     ball.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
                     ball.GetComponent<FireBall>().damage = powerUpFireBallDamage;
                 }
@@ -221,6 +242,9 @@ public class Player : MonoBehaviour, ICharacterData
                     ball.GetComponent<FireBall>().dir = Vector3.right;
                 else
                     ball.GetComponent<FireBall>().dir = Vector3.left;
+
+
+
 
             }
             if (Input.GetKeyDown(KeyCode.E))
@@ -289,7 +313,7 @@ public class Player : MonoBehaviour, ICharacterData
             if (attackT < AttackSpeed)
             {
                 state = State.Attack;
-                GetComponent<ICharacterData>().Attacking = true;
+                Attacking = true;
                 
             }
             else if (attackT >= AttackSpeed)
@@ -301,7 +325,7 @@ public class Player : MonoBehaviour, ICharacterData
                 state = State.Idle;
                 attack = false;
                 attackT = 0;
-                GetComponent<ICharacterData>().Attacking = false;
+                Attacking = false;
             }
         }
     }
@@ -327,9 +351,9 @@ public class Player : MonoBehaviour, ICharacterData
                 else if (Colliders[i].CompareTag("enemy"))
                 {
                     if (dashPowerUp)
-                        Colliders[i].GetComponent<ICharacterData>().Damaged(dashPowerUpDamage);
+                        Colliders[i].GetComponent<Enemy>().Damaged(dashPowerUpDamage);
                     else
-                        Colliders[i].GetComponent<ICharacterData>().Damaged(dashDefaultDamage);
+                        Colliders[i].GetComponent<Enemy>().Damaged(dashDefaultDamage);
                 }
                 else if (Colliders[i].CompareTag("Respawn"))
                 {
@@ -384,6 +408,7 @@ public class Player : MonoBehaviour, ICharacterData
             }
         }
     }
+
     void Flip()
     {
         if (isFlip)

@@ -12,12 +12,22 @@ public class DataInput : MonoBehaviour
     [SerializeField] private Text NameResult;
     [SerializeField] private Color passibleColor;
     [SerializeField] private Color duplicationColor;
+    public List<string> dist = new List<string>();
     private bool passible;
+
+    private void Start()
+    {
+        for(int i=0; i< GameManager.Instance.saveData.datas.Count; i++)
+        {
+            dist.Add(GameManager.Instance.saveData.datas[i].name);
+        }
+    }
     public void UserNameSet()
     {
         userName = inputText.text;
-        GameManager.Instance.UserData.Add(new StagePlayer(userName));
-        if (GameManager.Instance.UserData.Count != GameManager.Instance.UserData.Distinct().Count())
+        
+        dist.Add(userName);
+        if (dist.Count != dist.Distinct().Count())
         {
             DuplicationName();
         }
@@ -32,7 +42,8 @@ public class DataInput : MonoBehaviour
         NameResult.text = "닉네임이 이미 존재합니다.";
         NameResult.color = duplicationColor;
         passible = false;
-        GameManager.Instance.UserData.RemoveAt(GameManager.Instance.UserData.Count-1);
+        //GameManager.Instance.saveData.name.RemoveAt(GameManager.Instance.saveData.name.Count-1);
+        dist.RemoveAt(dist.Count - 1);
     }
 
     void PassibleName()
@@ -40,14 +51,18 @@ public class DataInput : MonoBehaviour
         NameResult.text = "닉네임을 사용할 수 있습니다.";
         NameResult.color = passibleColor;
         passible = true;
-        GameManager.Instance.UserData.RemoveAt(GameManager.Instance.UserData.Count - 1);
+        //GameManager.Instance.saveData.name.RemoveAt(GameManager.Instance.saveData.name.Count - 1);
+        dist.RemoveAt(dist.Count - 1);
     }
 
     public void NameFinal()
     {
         if(passible)
         {
-            GameManager.Instance.UserData.Add(new StagePlayer(userName));
+            User user = new User();
+            user.name = userName;
+            user.score = 0;
+            GameManager.Instance.saveData.datas.Add(user);
             SceneManager.LoadScene("StageSelect");
         }
     }

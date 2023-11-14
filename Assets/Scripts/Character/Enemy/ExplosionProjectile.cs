@@ -58,14 +58,14 @@ public class ExplosionProjectile : Projectile
                 transform.GetChild(0).gameObject.SetActive(false);
                 if (other.gameObject.CompareTag(Target))
                 {
-                    other.GetComponent<ICharacterData>().Damaged(base.Damage + ExplosionDamage);
+                    other.GetComponent<Player>().Damaged(base.Damage + ExplosionDamage);
                 }
                 Collider[] cols = Physics.OverlapBox(this.gameObject.transform.position, new Vector3(1, 1, 1));
                 foreach (Collider col in cols)
                 {
                     if (col.gameObject.CompareTag(Target))
                     {
-                        col.GetComponent<ICharacterData>().Damaged(ExplosionDamage);
+                        col.GetComponent<Player>().Damaged(ExplosionDamage);
 
                     }
 

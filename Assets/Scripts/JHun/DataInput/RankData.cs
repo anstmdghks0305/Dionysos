@@ -3,22 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.IO;
 
-public class RankData : MonoBehaviour
+public static class RankData
 {
-    [SerializeField] private string name;
-    [SerializeField] private int score;
-    public Text nameText;
-    public Text scoreText;
-    private void Start()
+    private static string _path = Directory.GetCurrentDirectory() + "/" + "Data";
+    [SerializeField] private static string name;
+    [SerializeField] private static int score;
+
+    public static void RankSave(UserData saveData)
     {
-        name = GameManager.Instance.UserData[GameManager.Instance.UserData.Count - 1].Name;
-        for (int i = 0; i < GameManager.Instance.Stages.Count; i++)
+        if(!Directory.Exists(_path))
         {
-            var key = GameManager.Instance.Stages.FirstOrDefault(x => x.Value.stageIndex == i).Key;
-            score += GameManager.Instance.Stages[key].ResultScore;
+            Directory.CreateDirectory(_path);
         }
-        nameText.text = "닉네임 : " + name;
-        scoreText.text = "최종 점수 : " + score.ToString();
+
+        string data = JsonUtility.ToJson(saveData);
+        Debug.Log(data);
+        File.WriteAllText(_path + "/"+ "RankData" + ".json", data);
+        Debug.Log("저장 성공");
+    }
+
+    public static UserData RankLoad()
+    {
+        UserData saveData = new UserData();
+        string _filePath = _path + "/RankData.json";
+
+        if (!File.Exists(_filePath))
+        {
+            Debug.LogError($"해당 파일이 {_filePath}에 존재하지 않습니다.");
+            return saveData;
+        }
+
+        string readData = File.ReadAllText(_filePath);
+        saveData = JsonUtility.FromJson<UserData>(readData);
+        Debug.Log("유저 데이터 로드 성공!");
+        return saveData;
     }
 }

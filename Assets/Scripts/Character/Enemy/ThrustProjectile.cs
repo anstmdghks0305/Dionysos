@@ -63,7 +63,7 @@ public class ThrustProjectile : Projectile
                 transform.GetChild(0).gameObject.SetActive(false);
                 if (other.gameObject.CompareTag(Target))
                 {
-                    other.GetComponent<ICharacterData>().Damaged(base.Damage);
+                    other.GetComponent<Player>().Damaged(base.Damage);
                     
                 }
             }
@@ -71,7 +71,7 @@ public class ThrustProjectile : Projectile
             {
                 if (other.gameObject.CompareTag(Target))
                 {
-                    other.GetComponent<ICharacterData>().Damaged(ThrustDamage);
+                    other.GetComponent<Player>().Damaged(ThrustDamage);
                 }
                 StartCoroutine(Destroy(EffectDestroyTime));
             }
