@@ -66,8 +66,9 @@ public class ProjectileController : Singleton<ProjectileController>
 
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         projectileParent = this.transform.GetChild(0).transform;
         usedprojectileParent = this.transform.GetChild(1).transform;
     }

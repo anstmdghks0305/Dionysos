@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 112561357733699657}
   - component: {fileID: 753536307115364918}
   m_Layer: 5
-  m_Name: UndeadElite
+  m_Name: UnDeadElite
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

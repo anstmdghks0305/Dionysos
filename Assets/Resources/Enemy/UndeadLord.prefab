@@ -3366,7 +3366,7 @@ GameObject:
   - component: {fileID: 515223299940547428}
   - component: {fileID: 5939945950165978467}
   m_Layer: 5
-  m_Name: UndeadLord
+  m_Name: UnDeadLord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
