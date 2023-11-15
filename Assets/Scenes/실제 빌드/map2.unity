@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coolTime: 0
+  boss: {fileID: 0}
 --- !u!1 &162866300
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2958a054b3410004c8defd6dba282ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: 08000000080000000800000008000000
+  enemies: 08000000080000000700000007000000
   CoolTime: 2000
 --- !u!1 &217368797
 GameObject:
@@ -56528,7 +56529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss_Serial_Num: 9
-  Score: 2400
+  Score: 3000
   First: 0
   BossWarning: {fileID: 1113682077}
 --- !u!1 &1833723897

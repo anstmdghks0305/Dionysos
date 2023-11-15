@@ -6,17 +6,31 @@ using UnityEngine.UI;
 public class SkillUI : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] GameObject _fever;
     [SerializeField] Image slashPanel;
     [SerializeField] Image dashPanel;
     [SerializeField] Image fireballPanel;
+    Player _player;
     bool slashInit;
     bool dashInit;
     bool fireballInit;
 
     // Update is called once per frame
+    private void Start()
+    {
+        _player = player.GetComponent<Player>();
+    }
     void Update()
     {
-        if (player.GetComponent<Player>().fever)
+        if(_player.Fever.Current >= _player.Fever.Max)
+        {
+            _fever.SetActive(false);
+        }
+        else
+        {
+            _fever.SetActive(true);
+        }
+        if (_player.fever)
         {
             slashPanel.fillAmount = 0;
             dashPanel.fillAmount = 0;
