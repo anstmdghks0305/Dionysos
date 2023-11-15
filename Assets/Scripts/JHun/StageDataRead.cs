@@ -22,5 +22,7 @@ public class StageDataRead : MonoBehaviour
             GameManager.Instance.StageSet(index, bpm, progress, maxScore, StageName, Difficult);
             Debug.Log($"로드 성공!{Difficult}");
         }
+
+        string asdf = "K";
     }
 }

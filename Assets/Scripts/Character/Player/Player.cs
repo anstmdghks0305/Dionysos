@@ -209,7 +209,7 @@ public class Player : MonoBehaviour
                 //if 퍼펙트 == true => attackPowerUp = true;
 
             }
-            if (Input.GetKeyDown(KeyCode.Q) && fireBallTime >= fireBallCoolTime)
+            if (Input.GetKeyDown(KeyCode.C) && fireBallTime >= fireBallCoolTime)
             {
                 fireBallTime = 0;
                 Manager.SoundManager.Instance.PlaySFXSound("화염구", 1);
@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
 
 
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 slash = true;
                 SkillInterface = SlashSkill;
@@ -289,7 +289,7 @@ public class Player : MonoBehaviour
                 else
                     dash = false;
             }
-            if (Input.GetKeyDown(KeyCode.CapsLock))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 if(Fever.ShowCurrentHp() >= 100)
                     fever = true;

@@ -854,6 +854,7 @@ MonoBehaviour:
   BGMAudioClip:
   - {fileID: 8300000, guid: 4621b8b5acac44046be0475f63c52b4c, type: 3}
   - {fileID: 8300000, guid: 37ac05889c9b3614ca4102b4e55367e7, type: 3}
+  - {fileID: 8300000, guid: bc862a9363c2d504d978ca45ac703f0c, type: 3}
   SFXAudioClips:
   - {fileID: 8300000, guid: 5231c76d00b744a4bbadaca439f4bd7e, type: 3}
   - {fileID: 8300000, guid: fe24e962f66667d40bd7c691bbbebdc8, type: 3}

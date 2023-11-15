@@ -15,7 +15,12 @@ public class RhythmManager : Singleton<RhythmManager>
             rhythmSyncValue = (float)Math.Round(Mathf.Clamp(value, 0.1f, 1f), 3);
         }
     }
-    private void Awake()
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void Start()
     {
         DontDestroyOnLoad(gameObject);
         RhythmSyncValue = 0.75f;

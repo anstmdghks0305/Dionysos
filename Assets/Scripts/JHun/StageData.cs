@@ -7,7 +7,7 @@ using System.Linq;
 public class StageData
 {
     [SerializeField]private int progress;
-    [SerializeField]private int maxScore;
+    [SerializeField]public int maxScore;
     [SerializeField]private int currentProgress;
     [SerializeField]private int currentScore;
     [SerializeField]private bool clear;
