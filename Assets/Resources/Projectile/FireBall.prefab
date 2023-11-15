@@ -18929,7 +18929,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520973320144273632}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f5c978ab5f436be48882cd620ac3dcc3, type: 3}
@@ -19096,7 +19096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: Player
   SerialNum: 1
-  ExplosionDamage: 3
+  EffectDestroyTime: 1
 --- !u!1 &4079433963587107087
 GameObject:
   m_ObjectHideFlags: 0
@@ -47645,7 +47645,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8897811322151545928}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eec08500f8e731e4988815a75a3ee2de, type: 3}

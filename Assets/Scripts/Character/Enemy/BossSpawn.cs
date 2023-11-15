@@ -13,7 +13,7 @@ public class BossSpawn : MonoBehaviour
     
     void Start()
     {
-        
+        BossWarning.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,9 +31,11 @@ public class BossSpawn : MonoBehaviour
     IEnumerator BossActive()
     {
         First = true;
-        BossWarning.gameObject.SetActive(true);
+        if (GameManager.Instance.CurrentStage.maxScore != 999999)
+            BossWarning.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        BossWarning.gameObject.SetActive(false);
+        if (GameManager.Instance.CurrentStage.maxScore != 999999)
+            BossWarning.gameObject.SetActive(false);
         GameObject temp = EnemyController.Instance.EnemyPooling(this.transform.position, Boss_Serial_Num);
         boss_Hp = temp.GetComponent<Enemy>().eventcontroller;
         temp.GetComponent<Enemy>().isBoss = true;

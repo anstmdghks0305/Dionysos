@@ -14,12 +14,13 @@ namespace StageSelect
         public bool active = false;
         public bool Locked = true;
         public StageData stageData;
+        public Image Lock;
         // Start is called before the first frame update
         private void Awake()
         {
             StageController.StageSelect += this.ReceiveActive;
             StageController.StageUnlock += this.ReceiveUnlocked;
-            gameObject.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f); //락걸린 이미지
+            //Lock.color = new Color(0.6f, 0.6f, 0.6f); //락걸린 이미지
         }
         private void Start()
         {
@@ -51,9 +52,14 @@ namespace StageSelect
             if (Locked == true)
                 return;
             if (stage == this)
+            {
                 active = true;
+            }    
             else
+            {
                 active = false;
+            }
+                
         }
 
         public void ReceiveUnlocked(StageData temp)
@@ -65,6 +71,7 @@ namespace StageSelect
             if (stageData.Active)
             {
                 Locked = false;
+                Lock.gameObject.SetActive(false);
                 StageController.StageDraw += this.Draw;
             }
         }
@@ -81,7 +88,7 @@ namespace StageSelect
             }
             else
             {
-                this.GetComponent<Image>().color = new Color(1f, 1f, 1f); // 선택 안된 놈의 애니메이션등
+                //this.GetComponent<Image>().color = new Color(1f, 1f, 1f); // 선택 안된 놈의 애니메이션등
             }
         }
 

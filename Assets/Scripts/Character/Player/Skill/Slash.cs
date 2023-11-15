@@ -48,13 +48,14 @@ public class Slash : MonoBehaviour, ISkill
             StartCoroutine(SlashLogic(player));
         }
     }
+    public Enemy boss = null;
     IEnumerator SlashLogic(Player player)
     {
         int index = 0;
         int index2 = 0;
         List<Enemy> pool = EnemyController.Instance.AliveEnemyPool;
         List<Enemy> e = new List<Enemy>();
-        Enemy boss = null;
+        
 
         if (pool.Count > 0)
         {
