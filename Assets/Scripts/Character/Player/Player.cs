@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     Rigidbody r;
     public float fireBallTime;
     public float fireBallCoolTime;
+    public PlayerData data;
 
     private void Awake()
     {
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
-        PlayerData data = GameManager.Instance.playerData;
+        data = GameManager.Instance.playerData;
         Hp = new Data(data.hp);
         eventcontroller.DoEvent(new EventData("Hp", Hp));
         Fever = new Data(data.fever);
@@ -520,7 +521,7 @@ public class Player : MonoBehaviour
     }
     public void PlusHP(int value)
     {
-        if (Hp.ShowCurrentHp() < 100)
+        if (Hp.ShowCurrentHp() < data.hp)
         {
             Hp += value;
             eventcontroller.DoEvent(new EventData("Hp", Hp));
