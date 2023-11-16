@@ -118,9 +118,22 @@ public class Slash : MonoBehaviour, ISkill
             {
                 index++;
                 index2++;
+
+                if (index2 == player.slashMaxCount)
+                {
+
+                    coolTime = 0;
+                    player.slash = false;
+                    player.AttackSpeed = player.defaultAttackSpeed;
+                    powerUp = false;
+                    CanUse = false;
+                    player.Effect.NightEffect(false);
+                    yield break;
+                }
             }
-            else if(index == e.Count - 1 )
+            else if(index == e.Count - 1 ) //맨끝에 도달
             {
+                
                 if(e[index] != boss || index2 == player.slashMaxCount - 1)
                 {
                     coolTime = 0;
@@ -135,6 +148,7 @@ public class Slash : MonoBehaviour, ISkill
                 {
                     index2++;
                 }
+
             }
             yield return new WaitForSeconds(0.25f);
         }
