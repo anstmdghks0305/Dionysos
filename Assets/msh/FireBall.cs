@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBall : MonoBehaviour
@@ -20,9 +18,13 @@ public class FireBall : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("enemy"))
+        if (other.CompareTag("enemy"))
         {
             other.GetComponent<ICharacterData>().Damaged(damage);
+        }
+        else if (other.CompareTag("Obstacle"))
+        {
+            Destroy(this.gameObject.gameObject);
         }
     }
 }
