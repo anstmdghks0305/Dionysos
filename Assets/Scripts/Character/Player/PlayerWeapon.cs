@@ -33,9 +33,9 @@ public class PlayerWeapon : MonoBehaviour
             Debug.Log("check");
             if(!init && !_player.slash &&(player.GetComponent<Player>().attackPowerUp || player.GetComponent<Player>().dashPowerUp || player.GetComponent<Player>().SlashSkill.powerUp))
             {
-                if(_player.Hp.ShowCurrentHp() > 90)
+                if(_player.Hp.ShowCurrentHp() > (_player.data.hp - 10))
                 {
-                    int a = 100 - _player.Hp.ShowCurrentHp();
+                    int a = _player.data.hp - _player.Hp.ShowCurrentHp();
                     _player.PlusHP(a);
                 }
                 else
