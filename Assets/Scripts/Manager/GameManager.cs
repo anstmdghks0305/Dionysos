@@ -147,6 +147,7 @@ public class GameManager : Singleton<GameManager>
     {
         if(Stages[CurrentStage.StageName].ResultScore < Stages[CurrentStage.StageName].CurrentScore)
         {
+            saveData.datas[saveData.datas.Count - 1].score -= Stages[CurrentStage.StageName].ResultScore;
             Stages[CurrentStage.StageName].ResultScore = Stages[CurrentStage.StageName].CurrentScore;
             saveData.datas[saveData.datas.Count - 1].score += Stages[CurrentStage.StageName].ResultScore;
         }

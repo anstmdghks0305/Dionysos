@@ -13,6 +13,7 @@ public class BossSpawn : MonoBehaviour
     
     void Start()
     {
+        First = false;
         BossWarning.SetActive(false);
     }
 
