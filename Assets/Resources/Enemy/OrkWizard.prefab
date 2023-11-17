@@ -378,7 +378,7 @@ RectTransform:
   m_GameObject: {fileID: 122841078535798363}
   m_LocalRotation: {x: -0, y: -0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.66673434, y: 0.6666667, z: 0.99984765}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 122841077776041444}
   m_Father: {fileID: 4079949729493639358}
@@ -2799,6 +2799,8 @@ MonoBehaviour:
   eventcontroller: {fileID: 122841078535798361}
   AttackCoolTime: 7
   Projectile_SerialNum: 1
+  poolingTime: 0
+  poolingBool: 0
 --- !u!1 &5541898766821404232
 GameObject:
   m_ObjectHideFlags: 0

@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2285503707173423237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3635,6 +3635,8 @@ MonoBehaviour:
   eventcontroller: {fileID: 0}
   AttackCoolTime: 4
   Projectile_SerialNum: 0
+  poolingTime: 0
+  poolingBool: 0
 --- !u!1 &6853997148192832033
 GameObject:
   m_ObjectHideFlags: 0

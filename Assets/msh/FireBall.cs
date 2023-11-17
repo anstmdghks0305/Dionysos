@@ -24,7 +24,7 @@ public class FireBall : MonoBehaviour
         }
         else if (other.CompareTag("Obstacle"))
         {
-            Destroy(this.gameObject.gameObject);
+            Destroy(this.gameObject.gameObject,0.3f);
         }
     }
 }
