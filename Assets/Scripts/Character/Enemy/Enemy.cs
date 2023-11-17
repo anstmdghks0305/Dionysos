@@ -234,7 +234,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     async UniTask HurtDelay()
     {
-        await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
+        await UniTask.Delay(400, cancellationToken: this.GetCancellationTokenOnDestroy());
         Hurt = false;
     }
 }
