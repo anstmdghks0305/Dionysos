@@ -11,13 +11,12 @@ public class PlayerWeapon : MonoBehaviour
     private void Start()
     {
         _player = player.GetComponent<Player>();
-        _player.Attacking = false;
     }
     private void Update()
     {
-        if (_player.Attacking)
+        if (_player.attack)
             transform.GetComponent<BoxCollider>().enabled = true;
-        else if (!_player.Attacking)
+        else if (!_player.attack)
         {
             init = false;
             transform.GetComponent<BoxCollider>().enabled = false;
